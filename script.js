@@ -373,3 +373,153 @@ function initStatsCounter() {
     
     window.addEventListener('scroll', countStats);
 }
+
+
+
+// ===== SYSTÈME DE COMPTAGE AVEC CONSENTEMENT =====
+(function() {
+    // Clés pour le stockage
+    const VISITOR_KEY = 'luc_kat_visitors';
+    const ACCEPT_KEY = 'luc_kat_accepts';
+    const CONSENT_KEY = 'luc_kat_consent';
+    
+    // ===== FONCTIONS DE COMPTAGE =====
+    function getVisitors() {
+        return parseInt(localStorage.getItem(VISITOR_KEY) || '0');
+    }
+    
+    function getAccepts() {
+        return parseInt(localStorage.getItem(ACCEPT_KEY) || '0');
+    }
+    
+    function addVisitor() {
+        let visitors = getVisitors() + 1;
+        localStorage.setItem(VISITOR_KEY, visitors);
+        return visitors;
+    }
+    
+    function addAccept() {
+        let accepts = getAccepts() + 1;
+        localStorage.setItem(ACCEPT_KEY, accepts);
+        return accepts;
+    }
+    
+    // ===== COMPTER LE VISITEUR UNIQUEMENT À LA PREMIÈRE VISITE =====
+    if (!localStorage.getItem(CONSENT_KEY) && !sessionStorage.getItem('visitor_counted')) {
+        addVisitor();
+        sessionStorage.setItem('visitor_counted', 'true');
+        console.log('✅ Nouveau visiteur compté ! Total:', getVisitors());
+    }
+    
+    // ===== GESTION DU MESSAGE DE CONSENTEMENT =====
+    function showConsentMessage() {
+        const overlay = document.getElementById('consentOverlay');
+        const banner = document.getElementById('consentBanner');
+        
+        if (overlay && banner) {
+            overlay.style.display = 'block';
+            banner.style.display = 'block';
+        }
+    }
+    
+    function hideConsentMessage() {
+        const overlay = document.getElementById('consentOverlay');
+        const banner = document.getElementById('consentBanner');
+        
+        if (overlay && banner) {
+            overlay.style.display = 'none';
+            banner.style.display = 'none';
+        }
+    }
+    
+    // ===== VÉRIFIER LE CONSENTEMENT AU CHARGEMENT =====
+    document.addEventListener('DOMContentLoaded', function() {
+        const consent = localStorage.getItem(CONSENT_KEY);
+        const yesBtn = document.getElementById('consentYes');
+        const noBtn = document.getElementById('consentNo');
+        
+        console.log('📝 Consentement actuel:', consent);
+        
+        if (consent === 'accepted') {
+            hideConsentMessage();
+        }
+        else if (consent === 'refused') {
+            window.location.href = 'https://www.google.com';
+        }
+        else {
+            // Nouveau visiteur : afficher le message
+            showConsentMessage();
+        }
+        
+        // Bouton OUI
+        if (yesBtn) {
+            yesBtn.addEventListener('click', function() {
+                localStorage.setItem(CONSENT_KEY, 'accepted');
+                addAccept(); // ← INC RÉMENTE LE COMPTEUR !
+                hideConsentMessage();
+                updateStatsDisplay();
+                console.log('👍 Accepté ! Total des acceptations:', getAccepts());
+            });
+        }
+        
+        // Bouton NON
+        if (noBtn) {
+            noBtn.addEventListener('click', function() {
+                localStorage.setItem(CONSENT_KEY, 'refused');
+                alert('Redirection...');
+                window.location.href = 'https://www.google.com';
+            });
+        }
+    });
+    
+    // ===== METTRE À JOUR L'AFFICHAGE =====
+    function updateStatsDisplay() {
+        const visitorsEl = document.getElementById('statVisitors');
+        const acceptsEl = document.getElementById('statAccepts');
+        const rateEl = document.getElementById('statRate');
+        const updateEl = document.getElementById('statUpdate');
+        const badgeEl = document.getElementById('liveCount');
+        
+        const visitors = getVisitors();
+        const accepts = getAccepts();
+        const rate = visitors > 0 ? Math.round((accepts / visitors) * 100) : 0;
+        
+        if (visitorsEl) visitorsEl.textContent = visitors;
+        if (acceptsEl) acceptsEl.textContent = accepts;
+        if (rateEl) rateEl.textContent = rate + '%';
+        if (updateEl) updateEl.textContent = new Date().toLocaleTimeString();
+        if (badgeEl) badgeEl.textContent = visitors;
+    }
+    
+    // ===== FONCTIONS GLOBALES =====
+    window.refreshStats = function() {
+        updateStatsDisplay();
+    };
+    
+    window.resetStats = function() {
+        const pwd = prompt('🔐 Mot de passe pour réinitialiser:');
+        if (pwd === 'LucKat2026') {
+            localStorage.removeItem(VISITOR_KEY);
+            localStorage.removeItem(ACCEPT_KEY);
+            localStorage.removeItem(CONSENT_KEY);
+            sessionStorage.removeItem('visitor_counted');
+            updateStatsDisplay();
+            alert('✅ Statistiques réinitialisées !');
+            location.reload();
+        } else if (pwd !== null) {
+            alert('❌ Mot de passe incorrect !');
+        }
+    };
+    
+    window.showStats = function() {
+        console.log('📊 STATISTIQUES:');
+        console.log(`   👥 Visiteurs: ${getVisitors()}`);
+        console.log(`   ✅ Acceptations: ${getAccepts()}`);
+        console.log(`   📈 Taux: ${getVisitors() > 0 ? Math.round((getAccepts() / getVisitors()) * 100) : 0}%`);
+    };
+    
+    // Mise à jour automatique
+    setInterval(updateStatsDisplay, 2000);
+    
+    console.log('✅ Système de comptage prêt ! Tapez showStats()');
+})();

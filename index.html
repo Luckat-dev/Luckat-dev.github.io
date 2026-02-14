@@ -760,90 +760,229 @@
                 </div>
             </div>
         </div>
-       <!-- BOUTON STATISTIQUE SIMPLE -->
+       <!-- BOUTON STATISTIQUE AVEC VRAI COMPTEUR -->
 <div style="position: fixed; bottom: 20px; left: 20px; z-index: 99999;">
-    <button id="statsButton" class="stats-btn-compact">
+    <button onclick="toggleStatsPanel()" class="stats-button">
         <i class="fas fa-chart-line"></i>
-        <span>Stats</span>
+        <span>Statistiques</span>
+        <span class="stats-badge" id="liveCount">0</span>
     </button>
 </div>
 
+<!-- PANEL STATISTIQUE -->
+<div id="statsPanel" class="stats-panel">
+    <div class="stats-header">
+        <i class="fas fa-crown"></i>
+        <h3>Statistiques en direct</h3>
+        <button onclick="closeStatsPanel()" class="stats-close">&times;</button>
+    </div>
+    
+    <div class="stats-content">
+        <div class="stats-row">
+            <span><i class="fas fa-users"></i> Visiteurs uniques</span>
+            <span class="stats-value" id="statVisitors">0</span>
+        </div>
+        <div class="stats-row">
+            <span><i class="fas fa-check-circle" style="color:#10b981;"></i> Ont accepté</span>
+            <span class="stats-value" id="statAccepts">0</span>
+        </div>
+        <div class="stats-row">
+            <span><i class="fas fa-percent"></i> Taux d'acceptation</span>
+            <span class="stats-value" id="statRate">0%</span>
+        </div>
+    </div>
+    
+    <div class="stats-actions">
+        <button onclick="refreshStats()" class="stats-btn refresh">
+            <i class="fas fa-sync-alt"></i> Actualiser
+        </button>
+        <button onclick="resetStats()" class="stats-btn reset">
+            <i class="fas fa-trash"></i> Réinitialiser
+        </button>
+    </div>
+    
+    <div class="stats-footer">
+        <i class="fas fa-clock"></i> Dernière mise à jour: <span id="statUpdate"></span>
+    </div>
+</div>
+
 <style>
-.stats-btn-compact {
-    background: #1e293b;
+.stats-button {
+    background: linear-gradient(135deg, #6366f1, #8b5cf6);
     color: white;
     border: none;
-    border-radius: 50px;
-    padding: 8px 18px 8px 12px;
-    font-size: 14px;
-    font-weight: 500;
+    border-radius: 60px;
+    padding: 12px 25px;
+    font-size: 16px;
+    font-weight: 600;
     cursor: pointer;
     display: flex;
     align-items: center;
-    gap: 8px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    gap: 12px;
+    box-shadow: 0 10px 25px rgba(99, 102, 241, 0.4);
     transition: all 0.3s ease;
-    border: 1px solid #334155;
+    border: 2px solid rgba(255, 255, 255, 0.2);
 }
 
-.stats-btn-compact i {
-    background: linear-gradient(135deg, #6366f1, #8b5cf6);
-    padding: 8px;
-    border-radius: 50%;
+.stats-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 35px rgba(99, 102, 241, 0.6);
+}
+
+.stats-badge {
+    background: #ef4444;
+    color: white;
+    border-radius: 30px;
+    padding: 3px 10px;
+    font-size: 12px;
+    font-weight: 700;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.6; }
+}
+
+.stats-panel {
+    position: fixed;
+    bottom: 90px;
+    left: 20px;
+    width: 320px;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+    z-index: 99999;
+    display: none;
+    overflow: hidden;
+    border: 1px solid #e2e8f0;
+}
+
+.stats-header {
+    background: linear-gradient(135deg, #1e293b, #0f172a);
+    color: white;
+    padding: 15px 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.stats-header i {
+    color: #fbbf24;
+    font-size: 1.3rem;
+}
+
+.stats-header h3 {
+    flex: 1;
+    margin: 0;
+    font-size: 1.1rem;
+}
+
+.stats-close {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.8rem;
+    cursor: pointer;
+    line-height: 1;
+}
+
+.stats-content {
+    padding: 20px;
+}
+
+.stats-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.stats-row:last-child {
+    border-bottom: none;
+}
+
+.stats-row i {
+    width: 20px;
+    color: #6366f1;
+}
+
+.stats-value {
+    font-weight: 700;
+    font-size: 1.3rem;
+    color: #1e293b;
+    background: #f1f5f9;
+    padding: 4px 12px;
+    border-radius: 30px;
+}
+
+.stats-actions {
+    display: flex;
+    gap: 10px;
+    padding: 20px;
+    background: #f8fafc;
+    border-top: 1px solid #e2e8f0;
+}
+
+.stats-btn {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
     font-size: 0.9rem;
-    width: 28px;
-    height: 28px;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-right: 5px;
+    gap: 5px;
+    font-weight: 500;
 }
 
-.stats-btn-compact:hover {
-    background: #0f172a;
-    transform: scale(1.05);
-    box-shadow: 0 10px 20px rgba(99, 102, 241, 0.3);
-    border-color: #6366f1;
+.stats-btn.refresh {
+    background: #e2e8f0;
+    color: #1e293b;
 }
 
-.stats-btn-compact:hover i {
-    animation: spin 1s ease;
+.stats-btn.reset {
+    background: #fee2e2;
+    color: #dc2626;
 }
 
-@keyframes spin {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
+.stats-footer {
+    padding: 15px;
+    background: #f1f5f9;
+    text-align: center;
+    font-size: 0.8rem;
+    color: #64748b;
+    border-top: 1px solid #e2e8f0;
 }
 </style>
 
-<!-- PANEL STATISTIQUE -->
-<div id="statsPanel" style="position:fixed; bottom:90px; left:20px; width:300px; background:white; border-radius:20px; padding:20px; box-shadow:0 20px 40px rgba(0,0,0,0.2); z-index:99999; display:none;">
-    <h4 style="margin:0 0 20px 0; color:#1e293b;">📊 Statistiques</h4>
-    
-    <div style="margin-bottom:20px;">
-        <div style="display:flex; justify-content:space-between; padding:10px 0; border-bottom:1px solid #e2e8f0;">
-            <span><i class="fas fa-users" style="color:#6366f1;"></i> Visiteurs</span>
-            <span id="statVisitors" style="font-weight:bold;">0</span>
-        </div>
-        <div style="display:flex; justify-content:space-between; padding:10px 0; border-bottom:1px solid #e2e8f0;">
-            <span><i class="fas fa-check-circle" style="color:#6366f1;"></i> Acceptations</span>
-            <span id="statClicks" style="font-weight:bold;">0</span>
-        </div>
-        <div style="display:flex; justify-content:space-between; padding:10px 0;">
-            <span><i class="fas fa-percent" style="color:#6366f1;"></i> Taux</span>
-            <span id="statRate" style="font-weight:bold;">0%</span>
-        </div>
-    </div>
-    
-    <div style="display:flex; gap:10px;">
-        <button id="refreshStats" style="flex:1; background:#e2e8f0; border:none; padding:10px; border-radius:10px; cursor:pointer;">Rafraîchir</button>
-        <button id="resetStats" style="flex:1; background:#fee2e2; color:#dc2626; border:none; padding:10px; border-radius:10px; cursor:pointer;">Réinitialiser</button>
-    </div>
-    
-    <div style="text-align:center; margin-top:15px; font-size:0.8rem; color:#94a3b8;">
-        <span id="statUpdate"></span>
-    </div>
-</div>
+<script>
+// Fonctions pour le panneau
+function toggleStatsPanel() {
+    const panel = document.getElementById('statsPanel');
+    if (panel.style.display === 'none' || panel.style.display === '') {
+        panel.style.display = 'block';
+        refreshStats();
+    } else {
+        panel.style.display = 'none';
+    }
+}
+
+function closeStatsPanel() {
+    document.getElementById('statsPanel').style.display = 'none';
+}
+
+// Mise à jour automatique du badge
+setInterval(function() {
+    const badge = document.getElementById('liveCount');
+    if (badge) {
+        badge.textContent = localStorage.getItem('luc_kat_visitors') || '0';
+    }
+}, 1000);
+</script>
 
 </footer>
 <style>
