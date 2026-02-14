@@ -4,8 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Luc Kat | Développeur Web Créatif</title>
+    
     <!-- EmailJS -->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -19,11 +21,440 @@
     
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="img/accueil.jpg">
+    
+    <style>
+        /* Styles pour la bannière de consentement */
+        .consent-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(5px);
+            z-index: 999998;
+            display: none;
+        }
+        
+        .consent-banner {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 90%;
+            max-width: 500px;
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
+            z-index: 999999;
+            display: none;
+            text-align: center;
+        }
+        
+        .consent-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2rem;
+            margin: 0 auto 20px;
+        }
+        
+        .consent-text {
+            font-size: 1.1rem;
+            color: #1e293b;
+            margin-bottom: 25px;
+            line-height: 1.6;
+        }
+        
+        .consent-text a {
+            color: #6366f1;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        
+        .consent-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+        }
+        
+        .consent-btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .consent-yes {
+            background: #6366f1;
+            color: white;
+        }
+        
+        .consent-yes:hover {
+            background: #4f46e5;
+            transform: translateY(-2px);
+        }
+        
+        .consent-no {
+            background: #fee2e2;
+            color: #dc2626;
+        }
+        
+        .consent-no:hover {
+            background: #fecaca;
+            transform: translateY(-2px);
+        }
+        
+        @media (max-width: 768px) {
+            .consent-banner {
+                padding: 20px;
+            }
+            .consent-buttons {
+                flex-direction: column;
+            }
+            .consent-btn {
+                width: 100%;
+            }
+        }
+        
+        /* Styles pour le bouton CV */
+        .btn-remarkable {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: linear-gradient(135deg, #1e293b, #0f172a);
+            color: white;
+            padding: 16px 35px;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-decoration: none;
+            box-shadow: 0 20px 35px -5px rgba(0, 0, 0, 0.3);
+            transition: all 0.4s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-remarkable::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            z-index: 1;
+        }
+
+        .btn-remarkable:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 30px 45px -5px rgba(102, 126, 234, 0.5);
+        }
+
+        .btn-remarkable:hover::before {
+            opacity: 1;
+        }
+
+        .btn-remarkable i, 
+        .btn-remarkable span {
+            position: relative;
+            z-index: 2;
+            transition: all 0.3s ease;
+        }
+
+        .btn-remarkable i:first-child {
+            font-size: 1.3rem;
+            filter: drop-shadow(0 2px 5px rgba(255,255,255,0.2));
+        }
+
+        .btn-remarkable i:last-child {
+            transition: transform 0.3s ease;
+        }
+
+        .btn-remarkable:hover i:last-child {
+            transform: translateX(5px);
+        }
+
+        .btn-badge {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 4px 8px;
+            border-radius: 30px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            margin-left: 5px;
+        }
+
+        .btn-remarkable:hover .btn-badge {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.05);
+        }
+        
+        /* Styles pour les icônes sociales */
+        .footer-social {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .footer-social-link {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.3rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .footer-social-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(255,255,255,0.2), transparent);
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+
+        .footer-social-link:hover::before {
+            transform: translateY(0);
+        }
+
+        .footer-social-link:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .footer-social-link.github {
+            background: #333;
+        }
+
+        .footer-social-link.github:hover {
+            background: #24292e;
+        }
+
+        .footer-social-link.linkedin {
+            background: #0077b5;
+        }
+
+        .footer-social-link.linkedin:hover {
+            background: #0a66c2;
+        }
+
+        .footer-social-link.twitter {
+            background: #1da1f2;
+        }
+
+        .footer-social-link.twitter:hover {
+            background: #000000;
+        }
+
+        .footer-social-link.instagram {
+            background: linear-gradient(45deg, #f09433, #d62976, #962fbf, #4f5bd5);
+        }
+
+        .footer-social-link.instagram:hover {
+            background: linear-gradient(45deg, #f09433, #d62976, #962fbf, #4f5bd5);
+            background-size: 200% 200%;
+            animation: gradient 2s ease infinite;
+        }
+
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .footer-social-link i {
+            position: relative;
+            z-index: 2;
+            transition: transform 0.3s ease;
+        }
+
+        .footer-social-link:hover i {
+            transform: scale(1.1);
+        }
+        
+        /* Styles pour le bouton statistique */
+        .stats-button {
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            color: white;
+            border: none;
+            border-radius: 60px;
+            padding: 12px 25px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            box-shadow: 0 10px 25px rgba(99, 102, 241, 0.4);
+            transition: all 0.3s ease;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            z-index: 99999;
+        }
+
+        .stats-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(99, 102, 241, 0.6);
+        }
+
+        .stats-badge {
+            background: #ef4444;
+            color: white;
+            border-radius: 30px;
+            padding: 3px 10px;
+            font-size: 12px;
+            font-weight: 700;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.6; }
+        }
+
+        .stats-panel {
+            position: fixed;
+            bottom: 90px;
+            left: 20px;
+            width: 320px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            z-index: 99999;
+            display: none;
+            overflow: hidden;
+            border: 1px solid #e2e8f0;
+        }
+
+        .stats-header {
+            background: linear-gradient(135deg, #1e293b, #0f172a);
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .stats-header i {
+            color: #fbbf24;
+            font-size: 1.3rem;
+        }
+
+        .stats-header h3 {
+            flex: 1;
+            margin: 0;
+            font-size: 1.1rem;
+        }
+
+        .stats-close {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.8rem;
+            cursor: pointer;
+            line-height: 1;
+        }
+
+        .stats-content {
+            padding: 20px;
+        }
+
+        .stats-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .stats-row:last-child {
+            border-bottom: none;
+        }
+
+        .stats-row i {
+            width: 20px;
+            color: #6366f1;
+        }
+
+        .stats-value {
+            font-weight: 700;
+            font-size: 1.3rem;
+            color: #1e293b;
+            background: #f1f5f9;
+            padding: 4px 12px;
+            border-radius: 30px;
+        }
+
+        .stats-actions {
+            display: flex;
+            gap: 10px;
+            padding: 20px;
+            background: #f8fafc;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .stats-btn {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            font-weight: 500;
+        }
+
+        .stats-btn.refresh {
+            background: #e2e8f0;
+            color: #1e293b;
+        }
+
+        .stats-btn.reset {
+            background: #fee2e2;
+            color: #dc2626;
+        }
+
+        .stats-footer {
+            padding: 15px;
+            background: #f1f5f9;
+            text-align: center;
+            font-size: 0.8rem;
+            color: #64748b;
+            border-top: 1px solid #e2e8f0;
+        }
+    </style>
 </head>
 <body>
-    <body>
-   <body>
-    <!-- BANNIÈRE DE CONSENTEMENT (doit être ici) -->
+    <!-- BANNIÈRE DE CONSENTEMENT -->
     <div id="consentOverlay" class="consent-overlay"></div>
     <div id="consentBanner" class="consent-banner">
         <div class="consent-content">
@@ -47,7 +478,6 @@
         </div>
     </div>
 
-  
     <!-- Navigation -->
     <nav class="navbar">
         <div class="container">
@@ -186,89 +616,10 @@
                     </div>
                     
                     <a href="cv.html" class="btn-remarkable" target="_blank">
-    <i class="fas fa-file-pdf"></i>
-    <span>Voir mon CV</span>
-    <i class="fas fa-arrow-right"></i>
-    <span class="btn-badge">PDF</span>
-</a>
-
-<style>
-.btn-remarkable {
-    display: inline-flex;
-    align-items: center;
-    gap: 12px;
-    background: linear-gradient(135deg, #1e293b, #0f172a);
-    color: white;
-    padding: 16px 35px;
-    border-radius: 50px;
-    font-size: 1.1rem;
-    font-weight: 600;
-    text-decoration: none;
-    box-shadow: 0 20px 35px -5px rgba(0, 0, 0, 0.3);
-    transition: all 0.4s ease;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    position: relative;
-    overflow: hidden;
-}
-
-.btn-remarkable::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(135deg, #667eea, #764ba2);
-    opacity: 0;
-    transition: opacity 0.4s ease;
-    z-index: 1;
-}
-
-.btn-remarkable:hover {
-    transform: translateY(-5px) scale(1.02);
-    box-shadow: 0 30px 45px -5px rgba(102, 126, 234, 0.5);
-}
-
-.btn-remarkable:hover::before {
-    opacity: 1;
-}
-
-.btn-remarkable i, 
-.btn-remarkable span {
-    position: relative;
-    z-index: 2;
-    transition: all 0.3s ease;
-}
-
-.btn-remarkable i:first-child {
-    font-size: 1.3rem;
-    filter: drop-shadow(0 2px 5px rgba(255,255,255,0.2));
-}
-
-.btn-remarkable i:last-child {
-    transition: transform 0.3s ease;
-}
-
-.btn-remarkable:hover i:last-child {
-    transform: translateX(5px);
-}
-
-.btn-badge {
-    background: rgba(255, 255, 255, 0.2);
-    padding: 4px 8px;
-    border-radius: 30px;
-    font-size: 0.7rem;
-    font-weight: 600;
-    letter-spacing: 0.5px;
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    margin-left: 5px;
-}
-
-.btn-remarkable:hover .btn-badge {
-    background: rgba(255, 255, 255, 0.3);
-    transform: scale(1.05);
-}
-</style>
+                        <i class="fas fa-file-pdf"></i>
+                        <span>Voir mon CV</span>
+                        <i class="fas fa-arrow-right"></i>
+                        <span class="btn-badge">PDF</span>
                     </a>
                 </div>
                 
@@ -290,88 +641,41 @@
             </div>
             
             <div class="skills-grid">
-                <!-- Compétence 1 -->
                 <div class="skill-card">
-                    <div class="skill-icon">
-                        <i class="fab fa-html5"></i>
-                    </div>
+                    <div class="skill-icon"><i class="fab fa-html5"></i></div>
                     <h3>HTML5</h3>
                     <p>Structure sémantique et accessible</p>
-                    <div class="skill-bar">
-                        <div class="skill-progress" data-width="95">
-                            <span class="skill-percent">95%</span>
-                        </div>
-                    </div>
+                    <div class="skill-bar"><div class="skill-progress" data-width="95"><span class="skill-percent">95%</span></div></div>
                 </div>
-                
-                <!-- Compétence 2 -->
                 <div class="skill-card">
-                    <div class="skill-icon">
-                        <i class="fab fa-css3-alt"></i>
-                    </div>
+                    <div class="skill-icon"><i class="fab fa-css3-alt"></i></div>
                     <h3>CSS3</h3>
                     <p>Design responsive et animations</p>
-                    <div class="skill-bar">
-                        <div class="skill-progress" data-width="90">
-                            <span class="skill-percent">90%</span>
-                        </div>
-                    </div>
+                    <div class="skill-bar"><div class="skill-progress" data-width="90"><span class="skill-percent">90%</span></div></div>
                 </div>
-                
-                <!-- Compétence 3 -->
                 <div class="skill-card">
-                    <div class="skill-icon">
-                        <i class="fab fa-js"></i>
-                    </div>
+                    <div class="skill-icon"><i class="fab fa-js"></i></div>
                     <h3>JavaScript</h3>
                     <p>Interactivité et logique métier</p>
-                    <div class="skill-bar">
-                        <div class="skill-progress" data-width="85">
-                            <span class="skill-percent">85%</span>
-                        </div>
-                    </div>
+                    <div class="skill-bar"><div class="skill-progress" data-width="85"><span class="skill-percent">85%</span></div></div>
                 </div>
-                
-                <!-- Compétence 4 -->
                 <div class="skill-card">
-                    <div class="skill-icon">
-                        <i class="fab fa-react"></i>
-                    </div>
+                    <div class="skill-icon"><i class="fab fa-react"></i></div>
                     <h3>React.js</h3>
                     <p>Applications web modernes</p>
-                    <div class="skill-bar">
-                        <div class="skill-progress" data-width="80">
-                            <span class="skill-percent">80%</span>
-                        </div>
-                    </div>
+                    <div class="skill-bar"><div class="skill-progress" data-width="80"><span class="skill-percent">80%</span></div></div>
                 </div>
-                
-                <!-- Compétence 5 -->
                 <div class="skill-card">
-                    <div class="skill-icon">
-                        <i class="fab fa-git-alt"></i>
-                    </div>
+                    <div class="skill-icon"><i class="fab fa-git-alt"></i></div>
                     <h3>Git & GitHub</h3>
                     <p>Versionning et collaboration</p>
-                    <div class="skill-bar">
-                        <div class="skill-progress" data-width="85">
-                            <span class="skill-percent">85%</span>
-                        </div>
-                    </div>
+                    <div class="skill-bar"><div class="skill-progress" data-width="85"><span class="skill-percent">85%</span></div></div>
                 </div>
-                
-                <!-- Compétence 6 -->
                 <div class="skill-card">
-                    <div class="skill-icon">
-                        <i class="fas fa-mobile-alt"></i>
-                    </div>
+                    <div class="skill-icon"><i class="fas fa-mobile-alt"></i></div>
                     <h3>Responsive Design</h3>
                     <p>Adaptation tous écrans</p>
-                    <div class="skill-bar">
-                        <div class="skill-progress" data-width="90">
-                            <span class="skill-percent">90%</span>
-                        </div>
-                    </div>
+                    <div class="skill-bar"><div class="skill-progress" data-width="90"><span class="skill-percent">90%</span></div></div>
                 </div>
             </div>
         </div>
@@ -386,14 +690,11 @@
             </div>
             
             <div class="projects-grid">
-                <!-- Projet 1 -->
                 <article class="project-card">
                     <div class="project-image">
                         <img src="img/mlearning.jpg" alt="Site E-commerce">
                         <div class="project-overlay">
-                            <a href="#" class="project-link">
-                                <i class="fas fa-external-link-alt"></i>
-                            </a>
+                            <a href="#" class="project-link"><i class="fas fa-external-link-alt"></i></a>
                         </div>
                     </div>
                     <div class="project-content">
@@ -407,14 +708,11 @@
                     </div>
                 </article>
                 
-                <!-- Projet 2 -->
                 <article class="project-card">
                     <div class="project-image">
                         <img src="img/writer.jpg" alt="Dashboard Analytics">
                         <div class="project-overlay">
-                            <a href="#" class="project-link">
-                                <i class="fas fa-external-link-alt"></i>
-                            </a>
+                            <a href="#" class="project-link"><i class="fas fa-external-link-alt"></i></a>
                         </div>
                     </div>
                     <div class="project-content">
@@ -429,14 +727,11 @@
                     </div>
                 </article>
                 
-                <!-- Projet 3 -->
                 <article class="project-card">
                     <div class="project-image">
                         <img src="img/balise.jpg" alt="Application Mobile">
                         <div class="project-overlay">
-                            <a href="#" class="project-link">
-                                <i class="fas fa-external-link-alt"></i>
-                            </a>
+                            <a href="#" class="project-link"><i class="fas fa-external-link-alt"></i></a>
                         </div>
                     </div>
                     <div class="project-content">
@@ -471,36 +766,25 @@
             <div class="contact-content">
                 <div class="contact-info">
                     <h3>Parlons de votre projet</h3>
-                    <p>
-                        Vous avez un projet en tête ? Discutons-en ! 
-                        Je suis toujours ouvert à de nouvelles collaborations.
-                    </p>
+                    <p>Vous avez un projet en tête ? Discutons-en ! Je suis toujours ouvert à de nouvelles collaborations.</p>
                     
                     <div class="contact-details">
                         <div class="contact-item">
-                            <div class="contact-icon">
-                                <i class="fas fa-envelope"></i>
-                            </div>
+                            <div class="contact-icon"><i class="fas fa-envelope"></i></div>
                             <div>
                                 <h4>Email</h4>
                                 <a href="mailto:luckatagondwa6@gmail.com">luckatagondwa6@gmail.com</a>
                             </div>
                         </div>
-                        
                         <div class="contact-item">
-                            <div class="contact-icon">
-                                <i class="fas fa-phone"></i>
-                            </div>
+                            <div class="contact-icon"><i class="fas fa-phone"></i></div>
                             <div>
                                 <h4>Téléphone</h4>
                                 <a href="tel:+243845759419">+243 845 759 419</a>
                             </div>
                         </div>
-                        
                         <div class="contact-item">
-                            <div class="contact-icon">
-                                <i class="fas fa-map-marker-alt"></i>
-                            </div>
+                            <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
                             <div>
                                 <h4>Localisation</h4>
                                 <span>Bukavu, RD Congo</span>
@@ -509,50 +793,37 @@
                     </div>
                     
                     <div class="social-links">
-                        <a href="https://github.com/Luckat-dev" class="social-link" aria-label="GitHub">
-                            <i class="fab fa-github"></i>
-                        </a>
-                        <a href="https://www.linkedin.com/in/luc-katagondwa-558083388/" class="social-link" aria-label="LinkedIn">
-                            <i class="fab fa-linkedin-in"></i>
-                        </a>
-                        <a href="https://x.com/Luckat83" class="social-link" aria-label="Twitter">
-                            <i class="fab fa-twitter"></i>
-                        </a>
-                        <a href="https://www.instagram.com/luckatagondwa/" class="social-link" aria-label="Instagram">
-                            <i class="fab fa-instagram"></i>
-                        </a>
+                        <a href="https://github.com/Luckat-dev" class="social-link" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                        <a href="https://www.linkedin.com/in/luc-katagondwa-558083388/" class="social-link" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="https://x.com/Luckat83" class="social-link" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="https://www.instagram.com/luckatagondwa/" class="social-link" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
                     </div>
                 </div>
                 
-                <form class="contact-form" id="contactForm" action="send-message.php" method="POST">
+                <form class="contact-form" id="contactForm">
                     <div class="form-group">
                         <input type="text" name="name" placeholder="Votre nom" required>
                     </div>
-                    
                     <div class="form-group">
                         <input type="email" name="email" placeholder="Votre email" required>
                     </div>
-                    
                     <div class="form-group">
                         <input type="text" name="subject" placeholder="Sujet">
                     </div>
-                    
                     <div class="form-group">
                         <textarea name="message" placeholder="Votre message" rows="5" required></textarea>
                     </div>
-                    
                     <button type="submit" class="btn btn-primary" id="submitBtn">
                         <span>Envoyer le message</span>
                         <i class="fas fa-paper-plane"></i>
                     </button>
-                    
                     <div class="form-message" id="formMessage"></div>
                 </form>
             </div>
         </div>
     </section>
 
-    <!-- Footer Amélioré -->
+    <!-- Footer -->
     <footer class="footer">
         <div class="footer-wave">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
@@ -563,131 +834,19 @@
         <div class="footer-main">
             <div class="container">
                 <div class="footer-grid">
-                    <!-- Colonne 1: Présentation -->
                     <div class="footer-col footer-about">
                         <a href="#" class="footer-logo">Luc<span class="logo-accent">.</span>Kat</a>
                         <p class="footer-description">
                             Développeur web passionné basé à Bukavu, je transforme vos idées en expériences numériques exceptionnelles.
                         </p>
                         <div class="footer-social">
-    <!-- GitHub -->
-    <a href="https://github.com/Luckat-dev" target="_blank" rel="noopener noreferrer" class="footer-social-link github" aria-label="GitHub">
-        <i class="fab fa-github"></i>
-    </a>
-    
-    <!-- LinkedIn -->
-    <a href="https://www.linkedin.com/in/luc-katagondwa-558083388/" target="_blank" rel="noopener noreferrer" class="footer-social-link linkedin" aria-label="LinkedIn">
-        <i class="fab fa-linkedin-in"></i>
-    </a>
-    
-    <!-- Twitter -->
-    <a href="https://x.com/Luckat83" target="_blank" rel="noopener noreferrer" class="footer-social-link twitter" aria-label="Twitter">
-        <i class="fab fa-twitter"></i>
-    </a>
-    
-    <!-- Instagram -->
-    <a href="https://www.instagram.com/luckatagondwa/" target="_blank" rel="noopener noreferrer" class="footer-social-link instagram" aria-label="Instagram">
-        <i class="fab fa-instagram"></i>
-    </a>
-</div>
-
-<style>
-.footer-social {
-    display: flex;
-    gap: 15px;
-    justify-content: center;
-    margin-top: 20px;
-}
-
-.footer-social-link {
-    width: 45px;
-    height: 45px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    font-size: 1.3rem;
-    transition: all 0.3s ease;
-    position: relative;
-    overflow: hidden;
-}
-
-.footer-social-link::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(135deg, rgba(255,255,255,0.2), transparent);
-    transform: translateY(100%);
-    transition: transform 0.3s ease;
-}
-
-.footer-social-link:hover::before {
-    transform: translateY(0);
-}
-
-.footer-social-link:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-}
-
-/* Couleurs spécifiques */
-.footer-social-link.github {
-    background: #333;
-}
-
-.footer-social-link.github:hover {
-    background: #24292e;
-}
-
-.footer-social-link.linkedin {
-    background: #0077b5;
-}
-
-.footer-social-link.linkedin:hover {
-    background: #0a66c2;
-}
-
-.footer-social-link.twitter {
-    background: #1da1f2;
-}
-
-.footer-social-link.twitter:hover {
-    background: #000000;
-}
-
-.footer-social-link.instagram {
-    background: linear-gradient(45deg, #f09433, #d62976, #962fbf, #4f5bd5);
-}
-
-.footer-social-link.instagram:hover {
-    background: linear-gradient(45deg, #f09433, #d62976, #962fbf, #4f5bd5);
-    background-size: 200% 200%;
-    animation: gradient 2s ease infinite;
-}
-
-@keyframes gradient {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-}
-
-.footer-social-link i {
-    position: relative;
-    z-index: 2;
-    transition: transform 0.3s ease;
-}
-
-.footer-social-link:hover i {
-    transform: scale(1.1);
-}
-</style>
+                            <a href="https://github.com/Luckat-dev" target="_blank" class="footer-social-link github" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                            <a href="https://www.linkedin.com/in/luc-katagondwa-558083388/" target="_blank" class="footer-social-link linkedin" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="https://x.com/Luckat83" target="_blank" class="footer-social-link twitter" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                            <a href="https://www.instagram.com/luckatagondwa/" target="_blank" class="footer-social-link instagram" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        </div>
                     </div>
                     
-                    <!-- Colonne 2: Liens rapides -->
                     <div class="footer-col">
                         <h4 class="footer-title">Liens rapides</h4>
                         <ul class="footer-list">
@@ -699,7 +858,6 @@
                         </ul>
                     </div>
                     
-                    <!-- Colonne 3: Services -->
                     <div class="footer-col">
                         <h4 class="footer-title">Services</h4>
                         <ul class="footer-list">
@@ -710,32 +868,19 @@
                         </ul>
                     </div>
                     
-                    <!-- Colonne 4: Contact -->
                     <div class="footer-col">
                         <h4 class="footer-title">Contactez-moi</h4>
                         <ul class="footer-list footer-contact">
-                            <li>
-                                <i class="fas fa-map-marker-alt"></i>
-                                <span>Bukavu, RD Congo</span>
-                            </li>
-                            <li>
-                                <i class="fas fa-envelope"></i>
-                                <a href="mailto:luckatagondwa6@gmail.com">luckatagondwa6@gmail.com</a>
-                            </li>
-                            <li>
-                                <i class="fas fa-phone"></i>
-                                <a href="tel:+243845759419">+243 845 759 419</a>
-                            </li>
+                            <li><i class="fas fa-map-marker-alt"></i> <span>Bukavu, RD Congo</span></li>
+                            <li><i class="fas fa-envelope"></i> <a href="mailto:luckatagondwa6@gmail.com">luckatagondwa6@gmail.com</a></li>
+                            <li><i class="fas fa-phone"></i> <a href="tel:+243845759419">+243 845 759 419</a></li>
                         </ul>
                         
-                        <!-- Mini newsletter -->
                         <div class="footer-newsletter">
                             <p>Recevez mes actualités</p>
                             <form class="footer-newsletter-form" id="footerNewsletter">
                                 <input type="email" placeholder="Votre email" required>
-                                <button type="submit" aria-label="S'abonner">
-                                    <i class="fas fa-paper-plane"></i>
-                                </button>
+                                <button type="submit" aria-label="S'abonner"><i class="fas fa-paper-plane"></i></button>
                             </form>
                         </div>
                     </div>
@@ -746,586 +891,94 @@
         <div class="footer-bottom">
             <div class="container">
                 <div class="footer-bottom-content">
-                            <p>
-                                &copy; 2026 
-                                <a href="https://web.facebook.com/luc.katagondwa.5" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: inherit; font-weight: bold;">
-                                    Luc Kat
-                                </a>
-                                . Tous droits réservés.
-                            </p>
-                   <div class="footer-bottom-links">
+                    <p>
+                        &copy; 2026 
+                        <a href="https://web.facebook.com/luc.katagondwa.5" target="_blank" style="text-decoration: none; color: inherit; font-weight: bold;">
+                            Luc Kat
+                        </a>
+                        . Tous droits réservés.
+                    </p>
+                    <div class="footer-bottom-links">
                         <a href="mentions-legales.html">Mentions légales</a>
                         <a href="confidentialite.html">Politique de confidentialité</a>
                     </div>
                 </div>
             </div>
         </div>
-       <!-- BOUTON STATISTIQUE AVEC VRAI COMPTEUR -->
-<div style="position: fixed; bottom: 20px; left: 20px; z-index: 99999;">
-    <button onclick="toggleStatsPanel()" class="stats-button">
-        <i class="fas fa-chart-line"></i>
-        <span>Statistiques</span>
-        <span class="stats-badge" id="liveCount">0</span>
-    </button>
-</div>
-
-<!-- PANEL STATISTIQUE -->
-<div id="statsPanel" class="stats-panel">
-    <div class="stats-header">
-        <i class="fas fa-crown"></i>
-        <h3>Statistiques en direct</h3>
-        <button onclick="closeStatsPanel()" class="stats-close">&times;</button>
-    </div>
-    
-    <div class="stats-content">
-        <div class="stats-row">
-            <span><i class="fas fa-users"></i> Visiteurs uniques</span>
-            <span class="stats-value" id="statVisitors">0</span>
-        </div>
-        <div class="stats-row">
-            <span><i class="fas fa-check-circle" style="color:#10b981;"></i> Ont accepté</span>
-            <span class="stats-value" id="statAccepts">0</span>
-        </div>
-        <div class="stats-row">
-            <span><i class="fas fa-percent"></i> Taux d'acceptation</span>
-            <span class="stats-value" id="statRate">0%</span>
-        </div>
-    </div>
-    
-    <div class="stats-actions">
-        <button onclick="refreshStats()" class="stats-btn refresh">
-            <i class="fas fa-sync-alt"></i> Actualiser
-        </button>
-        <button onclick="resetStats()" class="stats-btn reset">
-            <i class="fas fa-trash"></i> Réinitialiser
-        </button>
-    </div>
-    
-    <div class="stats-footer">
-        <i class="fas fa-clock"></i> Dernière mise à jour: <span id="statUpdate"></span>
-    </div>
-</div>
-
-<style>
-.stats-button {
-    background: linear-gradient(135deg, #6366f1, #8b5cf6);
-    color: white;
-    border: none;
-    border-radius: 60px;
-    padding: 12px 25px;
-    font-size: 16px;
-    font-weight: 600;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    box-shadow: 0 10px 25px rgba(99, 102, 241, 0.4);
-    transition: all 0.3s ease;
-    border: 2px solid rgba(255, 255, 255, 0.2);
-}
-
-.stats-button:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 15px 35px rgba(99, 102, 241, 0.6);
-}
-
-.stats-badge {
-    background: #ef4444;
-    color: white;
-    border-radius: 30px;
-    padding: 3px 10px;
-    font-size: 12px;
-    font-weight: 700;
-    animation: pulse 2s infinite;
-}
-
-@keyframes pulse {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.6; }
-}
-
-.stats-panel {
-    position: fixed;
-    bottom: 90px;
-    left: 20px;
-    width: 320px;
-    background: white;
-    border-radius: 20px;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
-    z-index: 99999;
-    display: none;
-    overflow: hidden;
-    border: 1px solid #e2e8f0;
-}
-
-.stats-header {
-    background: linear-gradient(135deg, #1e293b, #0f172a);
-    color: white;
-    padding: 15px 20px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.stats-header i {
-    color: #fbbf24;
-    font-size: 1.3rem;
-}
-
-.stats-header h3 {
-    flex: 1;
-    margin: 0;
-    font-size: 1.1rem;
-}
-
-.stats-close {
-    background: none;
-    border: none;
-    color: white;
-    font-size: 1.8rem;
-    cursor: pointer;
-    line-height: 1;
-}
-
-.stats-content {
-    padding: 20px;
-}
-
-.stats-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 12px 0;
-    border-bottom: 1px solid #e2e8f0;
-}
-
-.stats-row:last-child {
-    border-bottom: none;
-}
-
-.stats-row i {
-    width: 20px;
-    color: #6366f1;
-}
-
-.stats-value {
-    font-weight: 700;
-    font-size: 1.3rem;
-    color: #1e293b;
-    background: #f1f5f9;
-    padding: 4px 12px;
-    border-radius: 30px;
-}
-
-.stats-actions {
-    display: flex;
-    gap: 10px;
-    padding: 20px;
-    background: #f8fafc;
-    border-top: 1px solid #e2e8f0;
-}
-
-.stats-btn {
-    flex: 1;
-    padding: 10px;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    font-size: 0.9rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 5px;
-    font-weight: 500;
-}
-
-.stats-btn.refresh {
-    background: #e2e8f0;
-    color: #1e293b;
-}
-
-.stats-btn.reset {
-    background: #fee2e2;
-    color: #dc2626;
-}
-
-.stats-footer {
-    padding: 15px;
-    background: #f1f5f9;
-    text-align: center;
-    font-size: 0.8rem;
-    color: #64748b;
-    border-top: 1px solid #e2e8f0;
-}
-</style>
-
-<script>
-// Fonctions pour le panneau
-function toggleStatsPanel() {
-    const panel = document.getElementById('statsPanel');
-    if (panel.style.display === 'none' || panel.style.display === '') {
-        panel.style.display = 'block';
-        refreshStats();
-    } else {
-        panel.style.display = 'none';
-    }
-}
-
-function closeStatsPanel() {
-    document.getElementById('statsPanel').style.display = 'none';
-}
-
-// Mise à jour automatique du badge
-setInterval(function() {
-    const badge = document.getElementById('liveCount');
-    if (badge) {
-        badge.textContent = localStorage.getItem('luc_kat_visitors') || '0';
-    }
-}, 1000);
-</script>
-
-</footer>
-<style>
-.stats-dashboard {
-    position: fixed;
-    bottom: 20px;
-    left: 20px;
-    z-index: 9999;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
-.stats-toggle {
-    width: 50px;
-    height: 50px;
-    background: linear-gradient(135deg, #6366f1, #4f46e5);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    font-size: 1.5rem;
-    cursor: pointer;
-    box-shadow: 0 5px 20px rgba(99, 102, 241, 0.4);
-    transition: all 0.3s ease;
-}
-
-.stats-toggle:hover {
-    transform: scale(1.1) rotate(90deg);
-}
-
-.stats-panel {
-    position: absolute;
-    bottom: 70px;
-    left: 0;
-    width: 280px;
-    background: white;
-    border-radius: 16px;
-    padding: 20px;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.15);
-    display: none;
-    border: 1px solid rgba(99, 102, 241, 0.2);
-}
-
-.stats-panel.active {
-    display: block;
-    animation: slideIn 0.3s ease;
-}
-
-@keyframes slideIn {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-.stats-panel h4 {
-    margin: 0 0 15px 0;
-    color: #1e293b;
-    font-size: 1.1rem;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    border-bottom: 1px solid #e2e8f0;
-    padding-bottom: 10px;
-}
-
-.stats-panel h4 i {
-    color: #6366f1;
-}
-
-.stats-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 0;
-    border-bottom: 1px dashed #e2e8f0;
-}
-
-.stats-item:last-child {
-    border-bottom: none;
-}
-
-.stats-label {
-    color: #64748b;
-    font-size: 0.95rem;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.stats-label i {
-    width: 20px;
-    color: #6366f1;
-}
-
-.stats-value {
-    font-weight: 700;
-    font-size: 1.2rem;
-    color: #1e293b;
-}
-
-.stats-actions {
-    display: flex;
-    gap: 10px;
-    margin: 15px 0 10px;
-}
-
-.stats-btn {
-    flex: 1;
-    padding: 8px 0;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 0.85rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 5px;
-    transition: all 0.3s ease;
-}
-
-.stats-btn.refresh {
-    background: #e2e8f0;
-    color: #1e293b;
-}
-
-.stats-btn.refresh:hover {
-    background: #cbd5e1;
-}
-
-.stats-btn.reset {
-    background: #fee2e2;
-    color: #dc2626;
-}
-
-.stats-btn.reset:hover {
-    background: #fecaca;
-}
-
-.stats-footer {
-    font-size: 0.75rem;
-    color: #94a3b8;
-    text-align: center;
-    margin-top: 10px;
-    padding-top: 10px;
-    border-top: 1px solid #e2e8f0;
-}
-</style>
-
-<script>
-function toggleStats() {
-    document.getElementById('statsPanel').classList.toggle('active');
-    refreshStats();
-}
-
-function refreshStats() {
-    const visitors = localStorage.getItem('luc_kat_site') || '0';
-    const clicks = localStorage.getItem('luc_kat_clicks') || '0';
-    const rate = visitors > 0 ? Math.round((clicks / visitors) * 100) : 0;
-    
-    document.getElementById('visitorCount').textContent = visitors;
-    document.getElementById('clickCount').textContent = clicks;
-    document.getElementById('acceptRate').textContent = rate + '%';
-    document.getElementById('lastUpdate').textContent = new Date().toLocaleTimeString();
-}
-
-// Rafraîchir toutes les 30 secondes
-setInterval(refreshStats, 30000);
-</script>
     </footer>
 
-    <script src="script.js"></script>
+    <!-- BOUTON STATISTIQUE (UN SEUL !) -->
+    <div style="position: fixed; bottom: 20px; left: 20px; z-index: 99999;">
+        <button onclick="toggleStatsPanel()" class="stats-button">
+            <i class="fas fa-chart-line"></i>
+            <span>Statistiques</span>
+            <span class="stats-badge" id="liveCount">0</span>
+        </button>
+    </div>
 
-        <!-- Vos scripts existants -->
-    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <!-- PANEL STATISTIQUE -->
+    <div id="statsPanel" class="stats-panel">
+        <div class="stats-header">
+            <i class="fas fa-crown"></i>
+            <h3>Statistiques du site</h3>
+            <button onclick="closeStatsPanel()" class="stats-close">&times;</button>
+        </div>
+        
+        <div class="stats-content">
+            <div class="stats-row">
+                <span><i class="fas fa-users"></i> Visiteurs uniques</span>
+                <span class="stats-value" id="statVisitors">0</span>
+            </div>
+            <div class="stats-row">
+                <span><i class="fas fa-check-circle" style="color:#10b981;"></i> Ont accepté</span>
+                <span class="stats-value" id="statAccepts">0</span>
+            </div>
+            <div class="stats-row">
+                <span><i class="fas fa-percent"></i> Taux d'acceptation</span>
+                <span class="stats-value" id="statRate">0%</span>
+            </div>
+        </div>
+        
+        <div class="stats-actions">
+            <button onclick="refreshStats()" class="stats-btn refresh">
+                <i class="fas fa-sync-alt"></i> Actualiser
+            </button>
+            <button onclick="resetStats()" class="stats-btn reset">
+                <i class="fas fa-trash"></i> Réinitialiser
+            </button>
+        </div>
+        
+        <div class="stats-footer">
+            <i class="fas fa-clock"></i> Dernière mise à jour: <span id="statUpdate"></span>
+        </div>
+    </div>
+
+    <!-- Scripts (UN SEUL appel à script.js) -->
     <script src="script.js"></script>
     
-    <!-- SCRIPT ULTIME - SOLUTION FINALE -->
-<script>
-// ===== ATTENDRE QUE LA PAGE SOIT CHARGÉE =====
-window.onload = function() {
-    console.log('✅ Page chargée, initialisation...');
-    
-    // ===== CONFIGURATION =====
-    const SITE_KEY = 'luc_kat_site';
-    const CLICKS_KEY = 'luc_kat_clicks';
-    const CONSENT_KEY = 'luc_kat_consent';
-    const ADMIN_PWD = 'Luc2026';
-    
-    // ===== ÉLÉMENTS HTML =====
-    const overlay = document.getElementById('consentOverlay');
-    const banner = document.getElementById('consentBanner');
-    const yesBtn = document.getElementById('consentYes');
-    const noBtn = document.getElementById('consentNo');
-    const statsBtn = document.getElementById('statsButton');
-    const statsPanel = document.getElementById('statsPanel');
-    const refreshBtn = document.getElementById('refreshStats');
-    const resetBtn = document.getElementById('resetStats');
-    
-    // ===== FONCTIONS STATISTIQUES =====
-    function getVisitors() {
-        return parseInt(localStorage.getItem(SITE_KEY) || '0');
-    }
-    
-    function getClicks() {
-        return parseInt(localStorage.getItem(CLICKS_KEY) || '0');
-    }
-    
-    function updateStatsDisplay() {
-        const visitors = getVisitors();
-        const clicks = getClicks();
-        const rate = visitors > 0 ? Math.round((clicks / visitors) * 100) : 0;
-        
-        document.getElementById('statVisitors').textContent = visitors;
-        document.getElementById('statClicks').textContent = clicks;
-        document.getElementById('statRate').textContent = rate + '%';
-        document.getElementById('statUpdate').textContent = 'Dernière màj: ' + new Date().toLocaleTimeString();
-    }
-    
-    // ===== GESTION DU CONSENTEMENT =====
-    function checkConsent() {
-        const consent = localStorage.getItem(CONSENT_KEY);
-        console.log('Consentement actuel:', consent);
-        
-        if (consent === 'accepted') {
-            if (overlay) overlay.style.display = 'none';
-            if (banner) banner.style.display = 'none';
-            return;
-        }
-        
-        if (consent === 'refused') {
-            window.location.href = 'https://www.google.com';
-            return;
-        }
-        
-        // Nouveau visiteur
-        if (!consent) {
-            let visitors = getVisitors() + 1;
-            localStorage.setItem(SITE_KEY, visitors);
-            
-            if (overlay) overlay.style.display = 'block';
-            if (banner) banner.style.display = 'block';
-            
-            updateStatsDisplay();
-        }
-    }
-    
-    // ===== BOUTON STATISTIQUES =====
-    if (statsBtn) {
-        statsBtn.onclick = function(e) {
-            e.preventDefault();
-            e.stopPropagation();
-            
-            if (statsPanel.style.display === 'none' || statsPanel.style.display === '') {
-                statsPanel.style.display = 'block';
-                updateStatsDisplay();
+    <script>
+        // Fonctions pour le panneau statistique
+        function toggleStatsPanel() {
+            const panel = document.getElementById('statsPanel');
+            if (panel.style.display === 'none' || panel.style.display === '') {
+                panel.style.display = 'block';
+                if (typeof refreshStats === 'function') refreshStats();
             } else {
-                statsPanel.style.display = 'none';
-            }
-        };
-    }
-    
-    // ===== BOUTON RAFRAÎCHIR =====
-    if (refreshBtn) {
-        refreshBtn.onclick = function(e) {
-            e.preventDefault();
-            e.stopPropagation();
-            updateStatsDisplay();
-            alert('✅ Statistiques mises à jour');
-        };
-    }
-    
-    // ===== BOUTON RÉINITIALISER =====
-    if (resetBtn) {
-        resetBtn.onclick = function(e) {
-            e.preventDefault();
-            e.stopPropagation();
-            
-            const pwd = prompt('🔐 Mot de passe administrateur:');
-            if (pwd === ADMIN_PWD) {
-                if (confirm('⚠️ Réinitialiser toutes les statistiques ?')) {
-                    localStorage.removeItem(SITE_KEY);
-                    localStorage.removeItem(CLICKS_KEY);
-                    localStorage.removeItem(CONSENT_KEY);
-                    updateStatsDisplay();
-                    alert('✅ Statistiques réinitialisées');
-                    location.reload();
-                }
-            } else if (pwd !== null) {
-                alert('❌ Mot de passe incorrect');
-            }
-        };
-    }
-    
-    // ===== FERMER LE PANEL EN CLIQUANT DEHORS =====
-    document.addEventListener('click', function(e) {
-        if (statsPanel && statsPanel.style.display === 'block') {
-            if (!statsPanel.contains(e.target) && !statsBtn.contains(e.target)) {
-                statsPanel.style.display = 'none';
+                panel.style.display = 'none';
             }
         }
-    });
-    
-    // ===== BOUTONS CONSENTEMENT =====
-    if (yesBtn) {
-        yesBtn.onclick = function(e) {
-            e.preventDefault();
-            e.stopPropagation();
-            
-            localStorage.setItem(CONSENT_KEY, 'accepted');
-            
-            let clicks = getClicks() + 1;
-            localStorage.setItem(CLICKS_KEY, clicks);
-            
-            if (overlay) overlay.style.display = 'none';
-            if (banner) banner.style.display = 'none';
-            
-            updateStatsDisplay();
-        };
-    }
-    
-    if (noBtn) {
-        noBtn.onclick = function(e) {
-            e.preventDefault();
-            e.stopPropagation();
-            
-            localStorage.setItem(CONSENT_KEY, 'refused');
-            alert('Redirection en cours...');
-            window.location.href = 'https://www.google.com';
-        };
-    }
-    
-    // ===== INITIALISATION =====
-    checkConsent();
-    updateStatsDisplay();
-    
-    console.log('✅ Système prêt !');
-};
-</script>
-</body>
+
+        function closeStatsPanel() {
+            document.getElementById('statsPanel').style.display = 'none';
+        }
+
+        // Mise à jour automatique du badge
+        setInterval(function() {
+            const badge = document.getElementById('liveCount');
+            if (badge) {
+                badge.textContent = localStorage.getItem('luc_kat_visitors') || '0';
+            }
+        }, 1000);
+    </script>
 </body>
 </html>
