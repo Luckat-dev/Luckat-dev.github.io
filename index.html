@@ -1,0 +1,1192 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luc Kat | Développeur Web Créatif</title>
+    <!-- EmailJS -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@800;900&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="img/accueil.jpg">
+</head>
+<body>
+    <body>
+   <body>
+    <!-- BANNIÈRE DE CONSENTEMENT (doit être ici) -->
+    <div id="consentOverlay" class="consent-overlay"></div>
+    <div id="consentBanner" class="consent-banner">
+        <div class="consent-content">
+            <div class="consent-icon">
+                <i class="fas fa-shield-alt"></i>
+            </div>
+            <p class="consent-text">
+                En continuant votre navigation sur ce site, vous acceptez nos 
+                <a href="mentions-legales.html">mentions légales</a> 
+                et notre 
+                <a href="confidentialite.html">politique de confidentialité</a>.
+            </p>
+            <div class="consent-buttons">
+                <button id="consentYes" class="consent-btn consent-yes">
+                    <i class="fas fa-check"></i> Oui, j'accepte
+                </button>
+                <button id="consentNo" class="consent-btn consent-no">
+                    <i class="fas fa-times"></i> Non, je refuse
+                </button>
+            </div>
+        </div>
+    </div>
+
+  
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="#" class="logo">Luc<span class="logo-accent">.</span>Kat</a>
+            
+            <ul class="nav-links">
+                <li><a href="#accueil" class="nav-link active">Accueil</a></li>
+                <li><a href="#propos" class="nav-link">À Propos</a></li>
+                <li><a href="#competences" class="nav-link">Compétences</a></li>
+                <li><a href="#projets" class="nav-link">Projets</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+            
+            <button class="menu-toggle" aria-label="Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="accueil" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">
+                    <span class="title-line">Bonjour, je suis</span>
+                    <span class="title-line highlight">Luc Kat.</span>
+                    <span class="title-line">Développeur Web Passionné</span>
+                </h1>
+                
+                <p class="hero-subtitle">
+                    Je crée des expériences web <strong>élégantes</strong>, 
+                    <strong>performantes</strong> et <strong>mémorables</strong> 
+                    avec du code propre et moderne.
+                </p>
+                
+                <div class="hero-buttons">
+                    <a href="#projets" class="btn btn-primary">
+                        <span>Voir mes réalisations</span>
+                        <i class="fas fa-arrow-down"></i>
+                    </a>
+                    <a href="#contact" class="btn btn-outline">
+                        <span>Discutons projet</span>
+                        <i class="fas fa-comment"></i>
+                    </a>
+                </div>
+                
+                <div class="hero-stats">
+                    <div class="stat">
+                        <div class="stat-number" data-count="7">0</div>
+                        <div class="stat-label">Projets</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number" data-count="3">0</div>
+                        <div class="stat-label">Ans d'exp</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number" data-count="100">0</div>
+                        <div class="stat-label">% Satisfaction</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="hero-image">
+                <div class="image-container">
+                    <img src="img/koko.jpg" alt="Luc Kat">
+                </div>
+                
+                <div class="tech-icons">
+                    <div class="icon" style="--delay: 0s">
+                        <i class="fab fa-html5"></i>
+                        <span>HTML5</span>
+                    </div>
+                    <div class="icon" style="--delay: 0.2s">
+                        <i class="fab fa-css3-alt"></i>
+                        <span>CSS3</span>
+                    </div>
+                    <div class="icon" style="--delay: 0.4s">
+                        <i class="fab fa-js"></i>
+                        <span>JavaScript</span>
+                    </div>
+                    <div class="icon" style="--delay: 0.6s">
+                        <i class="fab fa-react"></i>
+                        <span>React</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="scroll-indicator">
+            <div class="mouse">
+                <div class="wheel"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- À Propos -->
+    <section id="propos" class="about">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-subtitle">Qui suis-je ?</span>
+                <h2 class="section-title">À Propos de <span class="accent">Moi</span></h2>
+            </div>
+            
+            <div class="about-content">
+                <div class="about-text">
+                    <p>
+                        Passionné par le <strong>développement web</strong> depuis plus de 2 ans, 
+                        je me spécialise dans la création d'interfaces <strong>modernes</strong> 
+                        et <strong>intuitives</strong>.
+                    </p>
+                    <p>
+                        Mon approche allie <strong>esthétique</strong> et <strong>performance</strong>, 
+                        avec un focus particulier sur l'<strong>expérience utilisateur</strong> 
+                        et les <strong>bonnes pratiques</strong> de développement.
+                    </p>
+                    
+                    <div class="about-info">
+                        <div class="info-item">
+                            <strong>Nom :</strong>
+                            <span>Luc Kat</span>
+                        </div>
+                        <div class="info-item">
+                            <strong>Email :</strong>
+                            <span>luckatagondwa6@gmail.com</span>
+                        </div>
+                        <div class="info-item">
+                            <strong>Localisation :</strong>
+                            <span>Bukavu, RD Congo</span>
+                        </div>
+                        <div class="info-item">
+                            <strong>Disponibilité :</strong>
+                            <span class="available">Disponible</span>
+                        </div>
+                    </div>
+                    
+                    <a href="cv.html" class="btn-remarkable" target="_blank">
+    <i class="fas fa-file-pdf"></i>
+    <span>Voir mon CV</span>
+    <i class="fas fa-arrow-right"></i>
+    <span class="btn-badge">PDF</span>
+</a>
+
+<style>
+.btn-remarkable {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    background: linear-gradient(135deg, #1e293b, #0f172a);
+    color: white;
+    padding: 16px 35px;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    text-decoration: none;
+    box-shadow: 0 20px 35px -5px rgba(0, 0, 0, 0.3);
+    transition: all 0.4s ease;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-remarkable::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    z-index: 1;
+}
+
+.btn-remarkable:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 30px 45px -5px rgba(102, 126, 234, 0.5);
+}
+
+.btn-remarkable:hover::before {
+    opacity: 1;
+}
+
+.btn-remarkable i, 
+.btn-remarkable span {
+    position: relative;
+    z-index: 2;
+    transition: all 0.3s ease;
+}
+
+.btn-remarkable i:first-child {
+    font-size: 1.3rem;
+    filter: drop-shadow(0 2px 5px rgba(255,255,255,0.2));
+}
+
+.btn-remarkable i:last-child {
+    transition: transform 0.3s ease;
+}
+
+.btn-remarkable:hover i:last-child {
+    transform: translateX(5px);
+}
+
+.btn-badge {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 4px 8px;
+    border-radius: 30px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    margin-left: 5px;
+}
+
+.btn-remarkable:hover .btn-badge {
+    background: rgba(255, 255, 255, 0.3);
+    transform: scale(1.05);
+}
+</style>
+                    </a>
+                </div>
+                
+                <div class="about-image">
+                    <div class="image-frame">
+                        <img src="img/programmation.jpg" alt="Luc Kat au travail">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Compétences -->
+    <section id="competences" class="skills">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-subtitle">Ce que je maîtrise</span>
+                <h2 class="section-title">Mes <span class="accent">Compétences</span></h2>
+            </div>
+            
+            <div class="skills-grid">
+                <!-- Compétence 1 -->
+                <div class="skill-card">
+                    <div class="skill-icon">
+                        <i class="fab fa-html5"></i>
+                    </div>
+                    <h3>HTML5</h3>
+                    <p>Structure sémantique et accessible</p>
+                    <div class="skill-bar">
+                        <div class="skill-progress" data-width="95">
+                            <span class="skill-percent">95%</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Compétence 2 -->
+                <div class="skill-card">
+                    <div class="skill-icon">
+                        <i class="fab fa-css3-alt"></i>
+                    </div>
+                    <h3>CSS3</h3>
+                    <p>Design responsive et animations</p>
+                    <div class="skill-bar">
+                        <div class="skill-progress" data-width="90">
+                            <span class="skill-percent">90%</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Compétence 3 -->
+                <div class="skill-card">
+                    <div class="skill-icon">
+                        <i class="fab fa-js"></i>
+                    </div>
+                    <h3>JavaScript</h3>
+                    <p>Interactivité et logique métier</p>
+                    <div class="skill-bar">
+                        <div class="skill-progress" data-width="85">
+                            <span class="skill-percent">85%</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Compétence 4 -->
+                <div class="skill-card">
+                    <div class="skill-icon">
+                        <i class="fab fa-react"></i>
+                    </div>
+                    <h3>React.js</h3>
+                    <p>Applications web modernes</p>
+                    <div class="skill-bar">
+                        <div class="skill-progress" data-width="80">
+                            <span class="skill-percent">80%</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Compétence 5 -->
+                <div class="skill-card">
+                    <div class="skill-icon">
+                        <i class="fab fa-git-alt"></i>
+                    </div>
+                    <h3>Git & GitHub</h3>
+                    <p>Versionning et collaboration</p>
+                    <div class="skill-bar">
+                        <div class="skill-progress" data-width="85">
+                            <span class="skill-percent">85%</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Compétence 6 -->
+                <div class="skill-card">
+                    <div class="skill-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3>Responsive Design</h3>
+                    <p>Adaptation tous écrans</p>
+                    <div class="skill-bar">
+                        <div class="skill-progress" data-width="90">
+                            <span class="skill-percent">90%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projets -->
+    <section id="projets" class="projects">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-subtitle">Mon travail</span>
+                <h2 class="section-title">Projets <span class="accent">Récents</span></h2>
+            </div>
+            
+            <div class="projects-grid">
+                <!-- Projet 1 -->
+                <article class="project-card">
+                    <div class="project-image">
+                        <img src="img/mlearning.jpg" alt="Site E-commerce">
+                        <div class="project-overlay">
+                            <a href="#" class="project-link">
+                                <i class="fas fa-external-link-alt"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <h3>Site Web familial: arbre généalogique intégré</h3>
+                        <p>Site intelligent, structuré, liens familiaux intégrés</p>
+                        <div class="project-tags">
+                            <span class="tag">React</span>
+                            <span class="tag">Node.js</span>
+                            <span class="tag">MongoDB</span>
+                        </div>
+                    </div>
+                </article>
+                
+                <!-- Projet 2 -->
+                <article class="project-card">
+                    <div class="project-image">
+                        <img src="img/writer.jpg" alt="Dashboard Analytics">
+                        <div class="project-overlay">
+                            <a href="#" class="project-link">
+                                <i class="fas fa-external-link-alt"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <h3>Site Web professionnel pour Ecrivain</h3>
+                        <p>Possibilité de tout gérer dans espace admin</p>
+                        <div class="project-tags">
+                            <span class="tag">Json</span>
+                            <span class="tag">Js</span>
+                            <span class="tag">Php</span>
+                            <span class="tag">MySQL</span>
+                        </div>
+                    </div>
+                </article>
+                
+                <!-- Projet 3 -->
+                <article class="project-card">
+                    <div class="project-image">
+                        <img src="img/balise.jpg" alt="Application Mobile">
+                        <div class="project-overlay">
+                            <a href="#" class="project-link">
+                                <i class="fas fa-external-link-alt"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <h3>App Mobile/Desktop</h3>
+                        <p>Applications webs adaptées à tout types d'écrans</p>
+                        <div class="project-tags">
+                            <span class="tag">React Native</span>
+                            <span class="tag">GraphQL</span>
+                            <span class="tag">AWS</span>
+                        </div>
+                    </div>
+                </article>
+            </div>
+            
+            <div class="projects-cta">
+                <a href="#" class="btn btn-outline">
+                    <span>Voir tous mes projets</span>
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-subtitle">Travaillons ensemble</span>
+                <h2 class="section-title">Contactez<span class="accent">-Moi</span></h2>
+            </div>
+            
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h3>Parlons de votre projet</h3>
+                    <p>
+                        Vous avez un projet en tête ? Discutons-en ! 
+                        Je suis toujours ouvert à de nouvelles collaborations.
+                    </p>
+                    
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div>
+                                <h4>Email</h4>
+                                <a href="mailto:luckatagondwa6@gmail.com">luckatagondwa6@gmail.com</a>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <div>
+                                <h4>Téléphone</h4>
+                                <a href="tel:+243845759419">+243 845 759 419</a>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div>
+                                <h4>Localisation</h4>
+                                <span>Bukavu, RD Congo</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="social-links">
+                        <a href="https://github.com/Luckat-dev" class="social-link" aria-label="GitHub">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/in/luc-katagondwa-558083388/" class="social-link" aria-label="LinkedIn">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="https://x.com/Luckat83" class="social-link" aria-label="Twitter">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="https://www.instagram.com/luckatagondwa/" class="social-link" aria-label="Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <form class="contact-form" id="contactForm" action="send-message.php" method="POST">
+                    <div class="form-group">
+                        <input type="text" name="name" placeholder="Votre nom" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <input type="email" name="email" placeholder="Votre email" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <input type="text" name="subject" placeholder="Sujet">
+                    </div>
+                    
+                    <div class="form-group">
+                        <textarea name="message" placeholder="Votre message" rows="5" required></textarea>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary" id="submitBtn">
+                        <span>Envoyer le message</span>
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                    
+                    <div class="form-message" id="formMessage"></div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Amélioré -->
+    <footer class="footer">
+        <div class="footer-wave">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+                <path fill="currentColor" fill-opacity="1" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,122.7C672,117,768,139,864,154.7C960,171,1056,181,1152,170.7C1248,160,1344,128,1392,112L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
+            </svg>
+        </div>
+        
+        <div class="footer-main">
+            <div class="container">
+                <div class="footer-grid">
+                    <!-- Colonne 1: Présentation -->
+                    <div class="footer-col footer-about">
+                        <a href="#" class="footer-logo">Luc<span class="logo-accent">.</span>Kat</a>
+                        <p class="footer-description">
+                            Développeur web passionné basé à Bukavu, je transforme vos idées en expériences numériques exceptionnelles.
+                        </p>
+                        <div class="footer-social">
+    <!-- GitHub -->
+    <a href="https://github.com/Luckat-dev" target="_blank" rel="noopener noreferrer" class="footer-social-link github" aria-label="GitHub">
+        <i class="fab fa-github"></i>
+    </a>
+    
+    <!-- LinkedIn -->
+    <a href="https://www.linkedin.com/in/luc-katagondwa-558083388/" target="_blank" rel="noopener noreferrer" class="footer-social-link linkedin" aria-label="LinkedIn">
+        <i class="fab fa-linkedin-in"></i>
+    </a>
+    
+    <!-- Twitter -->
+    <a href="https://x.com/Luckat83" target="_blank" rel="noopener noreferrer" class="footer-social-link twitter" aria-label="Twitter">
+        <i class="fab fa-twitter"></i>
+    </a>
+    
+    <!-- Instagram -->
+    <a href="https://www.instagram.com/luckatagondwa/" target="_blank" rel="noopener noreferrer" class="footer-social-link instagram" aria-label="Instagram">
+        <i class="fab fa-instagram"></i>
+    </a>
+</div>
+
+<style>
+.footer-social {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.footer-social-link {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.3rem;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.footer-social-link::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(255,255,255,0.2), transparent);
+    transform: translateY(100%);
+    transition: transform 0.3s ease;
+}
+
+.footer-social-link:hover::before {
+    transform: translateY(0);
+}
+
+.footer-social-link:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Couleurs spécifiques */
+.footer-social-link.github {
+    background: #333;
+}
+
+.footer-social-link.github:hover {
+    background: #24292e;
+}
+
+.footer-social-link.linkedin {
+    background: #0077b5;
+}
+
+.footer-social-link.linkedin:hover {
+    background: #0a66c2;
+}
+
+.footer-social-link.twitter {
+    background: #1da1f2;
+}
+
+.footer-social-link.twitter:hover {
+    background: #000000;
+}
+
+.footer-social-link.instagram {
+    background: linear-gradient(45deg, #f09433, #d62976, #962fbf, #4f5bd5);
+}
+
+.footer-social-link.instagram:hover {
+    background: linear-gradient(45deg, #f09433, #d62976, #962fbf, #4f5bd5);
+    background-size: 200% 200%;
+    animation: gradient 2s ease infinite;
+}
+
+@keyframes gradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.footer-social-link i {
+    position: relative;
+    z-index: 2;
+    transition: transform 0.3s ease;
+}
+
+.footer-social-link:hover i {
+    transform: scale(1.1);
+}
+</style>
+                    </div>
+                    
+                    <!-- Colonne 2: Liens rapides -->
+                    <div class="footer-col">
+                        <h4 class="footer-title">Liens rapides</h4>
+                        <ul class="footer-list">
+                            <li><a href="#accueil"><i class="fas fa-chevron-right"></i> Accueil</a></li>
+                            <li><a href="#propos"><i class="fas fa-chevron-right"></i> À propos</a></li>
+                            <li><a href="#competences"><i class="fas fa-chevron-right"></i> Compétences</a></li>
+                            <li><a href="#projets"><i class="fas fa-chevron-right"></i> Projets</a></li>
+                            <li><a href="#contact"><i class="fas fa-chevron-right"></i> Contact</a></li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Colonne 3: Services -->
+                    <div class="footer-col">
+                        <h4 class="footer-title">Services</h4>
+                        <ul class="footer-list">
+                            <li><i class="fas fa-code"></i> Développement web</li>
+                            <li><i class="fas fa-mobile-alt"></i> Applications responsive</li>
+                            <li><i class="fas fa-paint-brush"></i> UI/UX Design</li>
+                            <li><i class="fas fa-search"></i> SEO</li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Colonne 4: Contact -->
+                    <div class="footer-col">
+                        <h4 class="footer-title">Contactez-moi</h4>
+                        <ul class="footer-list footer-contact">
+                            <li>
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>Bukavu, RD Congo</span>
+                            </li>
+                            <li>
+                                <i class="fas fa-envelope"></i>
+                                <a href="mailto:luckatagondwa6@gmail.com">luckatagondwa6@gmail.com</a>
+                            </li>
+                            <li>
+                                <i class="fas fa-phone"></i>
+                                <a href="tel:+243845759419">+243 845 759 419</a>
+                            </li>
+                        </ul>
+                        
+                        <!-- Mini newsletter -->
+                        <div class="footer-newsletter">
+                            <p>Recevez mes actualités</p>
+                            <form class="footer-newsletter-form" id="footerNewsletter">
+                                <input type="email" placeholder="Votre email" required>
+                                <button type="submit" aria-label="S'abonner">
+                                    <i class="fas fa-paper-plane"></i>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <div class="container">
+                <div class="footer-bottom-content">
+                            <p>
+                                &copy; 2026 
+                                <a href="https://web.facebook.com/luc.katagondwa.5" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: inherit; font-weight: bold;">
+                                    Luc Kat
+                                </a>
+                                . Tous droits réservés.
+                            </p>
+                   <div class="footer-bottom-links">
+                        <a href="mentions-legales.html">Mentions légales</a>
+                        <a href="confidentialite.html">Politique de confidentialité</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+       <!-- BOUTON STATISTIQUE SIMPLE -->
+<div style="position: fixed; bottom: 20px; left: 20px; z-index: 99999;">
+    <button id="statsButton" class="stats-btn-compact">
+        <i class="fas fa-chart-line"></i>
+        <span>Stats</span>
+    </button>
+</div>
+
+<style>
+.stats-btn-compact {
+    background: #1e293b;
+    color: white;
+    border: none;
+    border-radius: 50px;
+    padding: 8px 18px 8px 12px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+    border: 1px solid #334155;
+}
+
+.stats-btn-compact i {
+    background: linear-gradient(135deg, #6366f1, #8b5cf6);
+    padding: 8px;
+    border-radius: 50%;
+    font-size: 0.9rem;
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 5px;
+}
+
+.stats-btn-compact:hover {
+    background: #0f172a;
+    transform: scale(1.05);
+    box-shadow: 0 10px 20px rgba(99, 102, 241, 0.3);
+    border-color: #6366f1;
+}
+
+.stats-btn-compact:hover i {
+    animation: spin 1s ease;
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+</style>
+
+<!-- PANEL STATISTIQUE -->
+<div id="statsPanel" style="position:fixed; bottom:90px; left:20px; width:300px; background:white; border-radius:20px; padding:20px; box-shadow:0 20px 40px rgba(0,0,0,0.2); z-index:99999; display:none;">
+    <h4 style="margin:0 0 20px 0; color:#1e293b;">📊 Statistiques</h4>
+    
+    <div style="margin-bottom:20px;">
+        <div style="display:flex; justify-content:space-between; padding:10px 0; border-bottom:1px solid #e2e8f0;">
+            <span><i class="fas fa-users" style="color:#6366f1;"></i> Visiteurs</span>
+            <span id="statVisitors" style="font-weight:bold;">0</span>
+        </div>
+        <div style="display:flex; justify-content:space-between; padding:10px 0; border-bottom:1px solid #e2e8f0;">
+            <span><i class="fas fa-check-circle" style="color:#6366f1;"></i> Acceptations</span>
+            <span id="statClicks" style="font-weight:bold;">0</span>
+        </div>
+        <div style="display:flex; justify-content:space-between; padding:10px 0;">
+            <span><i class="fas fa-percent" style="color:#6366f1;"></i> Taux</span>
+            <span id="statRate" style="font-weight:bold;">0%</span>
+        </div>
+    </div>
+    
+    <div style="display:flex; gap:10px;">
+        <button id="refreshStats" style="flex:1; background:#e2e8f0; border:none; padding:10px; border-radius:10px; cursor:pointer;">Rafraîchir</button>
+        <button id="resetStats" style="flex:1; background:#fee2e2; color:#dc2626; border:none; padding:10px; border-radius:10px; cursor:pointer;">Réinitialiser</button>
+    </div>
+    
+    <div style="text-align:center; margin-top:15px; font-size:0.8rem; color:#94a3b8;">
+        <span id="statUpdate"></span>
+    </div>
+</div>
+
+</footer>
+<style>
+.stats-dashboard {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    z-index: 9999;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.stats-toggle {
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, #6366f1, #4f46e5);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+    box-shadow: 0 5px 20px rgba(99, 102, 241, 0.4);
+    transition: all 0.3s ease;
+}
+
+.stats-toggle:hover {
+    transform: scale(1.1) rotate(90deg);
+}
+
+.stats-panel {
+    position: absolute;
+    bottom: 70px;
+    left: 0;
+    width: 280px;
+    background: white;
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+    display: none;
+    border: 1px solid rgba(99, 102, 241, 0.2);
+}
+
+.stats-panel.active {
+    display: block;
+    animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.stats-panel h4 {
+    margin: 0 0 15px 0;
+    color: #1e293b;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border-bottom: 1px solid #e2e8f0;
+    padding-bottom: 10px;
+}
+
+.stats-panel h4 i {
+    color: #6366f1;
+}
+
+.stats-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px dashed #e2e8f0;
+}
+
+.stats-item:last-child {
+    border-bottom: none;
+}
+
+.stats-label {
+    color: #64748b;
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.stats-label i {
+    width: 20px;
+    color: #6366f1;
+}
+
+.stats-value {
+    font-weight: 700;
+    font-size: 1.2rem;
+    color: #1e293b;
+}
+
+.stats-actions {
+    display: flex;
+    gap: 10px;
+    margin: 15px 0 10px;
+}
+
+.stats-btn {
+    flex: 1;
+    padding: 8px 0;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    transition: all 0.3s ease;
+}
+
+.stats-btn.refresh {
+    background: #e2e8f0;
+    color: #1e293b;
+}
+
+.stats-btn.refresh:hover {
+    background: #cbd5e1;
+}
+
+.stats-btn.reset {
+    background: #fee2e2;
+    color: #dc2626;
+}
+
+.stats-btn.reset:hover {
+    background: #fecaca;
+}
+
+.stats-footer {
+    font-size: 0.75rem;
+    color: #94a3b8;
+    text-align: center;
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid #e2e8f0;
+}
+</style>
+
+<script>
+function toggleStats() {
+    document.getElementById('statsPanel').classList.toggle('active');
+    refreshStats();
+}
+
+function refreshStats() {
+    const visitors = localStorage.getItem('luc_kat_site') || '0';
+    const clicks = localStorage.getItem('luc_kat_clicks') || '0';
+    const rate = visitors > 0 ? Math.round((clicks / visitors) * 100) : 0;
+    
+    document.getElementById('visitorCount').textContent = visitors;
+    document.getElementById('clickCount').textContent = clicks;
+    document.getElementById('acceptRate').textContent = rate + '%';
+    document.getElementById('lastUpdate').textContent = new Date().toLocaleTimeString();
+}
+
+// Rafraîchir toutes les 30 secondes
+setInterval(refreshStats, 30000);
+</script>
+    </footer>
+
+    <script src="script.js"></script>
+
+        <!-- Vos scripts existants -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script src="script.js"></script>
+    
+    <!-- SCRIPT ULTIME - SOLUTION FINALE -->
+<script>
+// ===== ATTENDRE QUE LA PAGE SOIT CHARGÉE =====
+window.onload = function() {
+    console.log('✅ Page chargée, initialisation...');
+    
+    // ===== CONFIGURATION =====
+    const SITE_KEY = 'luc_kat_site';
+    const CLICKS_KEY = 'luc_kat_clicks';
+    const CONSENT_KEY = 'luc_kat_consent';
+    const ADMIN_PWD = 'Luc2026';
+    
+    // ===== ÉLÉMENTS HTML =====
+    const overlay = document.getElementById('consentOverlay');
+    const banner = document.getElementById('consentBanner');
+    const yesBtn = document.getElementById('consentYes');
+    const noBtn = document.getElementById('consentNo');
+    const statsBtn = document.getElementById('statsButton');
+    const statsPanel = document.getElementById('statsPanel');
+    const refreshBtn = document.getElementById('refreshStats');
+    const resetBtn = document.getElementById('resetStats');
+    
+    // ===== FONCTIONS STATISTIQUES =====
+    function getVisitors() {
+        return parseInt(localStorage.getItem(SITE_KEY) || '0');
+    }
+    
+    function getClicks() {
+        return parseInt(localStorage.getItem(CLICKS_KEY) || '0');
+    }
+    
+    function updateStatsDisplay() {
+        const visitors = getVisitors();
+        const clicks = getClicks();
+        const rate = visitors > 0 ? Math.round((clicks / visitors) * 100) : 0;
+        
+        document.getElementById('statVisitors').textContent = visitors;
+        document.getElementById('statClicks').textContent = clicks;
+        document.getElementById('statRate').textContent = rate + '%';
+        document.getElementById('statUpdate').textContent = 'Dernière màj: ' + new Date().toLocaleTimeString();
+    }
+    
+    // ===== GESTION DU CONSENTEMENT =====
+    function checkConsent() {
+        const consent = localStorage.getItem(CONSENT_KEY);
+        console.log('Consentement actuel:', consent);
+        
+        if (consent === 'accepted') {
+            if (overlay) overlay.style.display = 'none';
+            if (banner) banner.style.display = 'none';
+            return;
+        }
+        
+        if (consent === 'refused') {
+            window.location.href = 'https://www.google.com';
+            return;
+        }
+        
+        // Nouveau visiteur
+        if (!consent) {
+            let visitors = getVisitors() + 1;
+            localStorage.setItem(SITE_KEY, visitors);
+            
+            if (overlay) overlay.style.display = 'block';
+            if (banner) banner.style.display = 'block';
+            
+            updateStatsDisplay();
+        }
+    }
+    
+    // ===== BOUTON STATISTIQUES =====
+    if (statsBtn) {
+        statsBtn.onclick = function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            
+            if (statsPanel.style.display === 'none' || statsPanel.style.display === '') {
+                statsPanel.style.display = 'block';
+                updateStatsDisplay();
+            } else {
+                statsPanel.style.display = 'none';
+            }
+        };
+    }
+    
+    // ===== BOUTON RAFRAÎCHIR =====
+    if (refreshBtn) {
+        refreshBtn.onclick = function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            updateStatsDisplay();
+            alert('✅ Statistiques mises à jour');
+        };
+    }
+    
+    // ===== BOUTON RÉINITIALISER =====
+    if (resetBtn) {
+        resetBtn.onclick = function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            
+            const pwd = prompt('🔐 Mot de passe administrateur:');
+            if (pwd === ADMIN_PWD) {
+                if (confirm('⚠️ Réinitialiser toutes les statistiques ?')) {
+                    localStorage.removeItem(SITE_KEY);
+                    localStorage.removeItem(CLICKS_KEY);
+                    localStorage.removeItem(CONSENT_KEY);
+                    updateStatsDisplay();
+                    alert('✅ Statistiques réinitialisées');
+                    location.reload();
+                }
+            } else if (pwd !== null) {
+                alert('❌ Mot de passe incorrect');
+            }
+        };
+    }
+    
+    // ===== FERMER LE PANEL EN CLIQUANT DEHORS =====
+    document.addEventListener('click', function(e) {
+        if (statsPanel && statsPanel.style.display === 'block') {
+            if (!statsPanel.contains(e.target) && !statsBtn.contains(e.target)) {
+                statsPanel.style.display = 'none';
+            }
+        }
+    });
+    
+    // ===== BOUTONS CONSENTEMENT =====
+    if (yesBtn) {
+        yesBtn.onclick = function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            
+            localStorage.setItem(CONSENT_KEY, 'accepted');
+            
+            let clicks = getClicks() + 1;
+            localStorage.setItem(CLICKS_KEY, clicks);
+            
+            if (overlay) overlay.style.display = 'none';
+            if (banner) banner.style.display = 'none';
+            
+            updateStatsDisplay();
+        };
+    }
+    
+    if (noBtn) {
+        noBtn.onclick = function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            
+            localStorage.setItem(CONSENT_KEY, 'refused');
+            alert('Redirection en cours...');
+            window.location.href = 'https://www.google.com';
+        };
+    }
+    
+    // ===== INITIALISATION =====
+    checkConsent();
+    updateStatsDisplay();
+    
+    console.log('✅ Système prêt !');
+};
+</script>
+</body>
+</body>
+</html>

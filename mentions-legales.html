@@ -1,0 +1,1209 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mentions Légales - Luc Katagondwa | Développeur Web</title>
+    
+    <!-- Fonts élégantes -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Source+Sans+3:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+    
+    <style>
+        /* Styles spécifiques aux pages légales */
+        :root {
+            --legal-primary: #1a2a3a;
+            --legal-secondary: #2c3e50;
+            --legal-accent: #8b5cf6;
+            --legal-bg: #f9fafc;
+            --legal-card: #ffffff;
+            --legal-border: #eef2f6;
+            --legal-text: #334155;
+            --legal-heading: #0f172a;
+            --legal-muted: #64748b;
+        }
+        
+        body {
+            font-family: 'Source Sans 3', sans-serif;
+            background: var(--legal-bg);
+            color: var(--legal-text);
+            line-height: 1.7;
+        }
+        
+        h1, h2, h3, h4, .logo {
+            font-family: 'Playfair Display', serif;
+        }
+        
+        /* Header élégant */
+        .legal-header {
+            background: linear-gradient(135deg, var(--legal-primary) 0%, var(--legal-secondary) 100%);
+            padding: 160px 0 80px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .legal-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" opacity="0.05"><path d="M10 10 L90 10 L90 90 L10 90 Z" fill="none" stroke="white" stroke-width="2"/><path d="M20 20 L80 20 L80 80 L20 80 Z" fill="none" stroke="white" stroke-width="2"/></svg>') repeat;
+            pointer-events: none;
+        }
+        
+        .legal-title {
+            font-size: clamp(2.8rem, 6vw, 4.5rem);
+            font-weight: 800;
+            color: white;
+            margin-bottom: 20px;
+            letter-spacing: -0.02em;
+            position: relative;
+            text-shadow: 0 2px 20px rgba(0,0,0,0.2);
+        }
+        
+        .legal-title .accent {
+            color: var(--legal-accent);
+            font-weight: 800;
+        }
+        
+        .legal-breadcrumb {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            color: rgba(255,255,255,0.7);
+            font-size: 1.1rem;
+            position: relative;
+        }
+        
+        .legal-breadcrumb a {
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid transparent;
+        }
+        
+        .legal-breadcrumb a:hover {
+            border-bottom-color: var(--legal-accent);
+        }
+        
+        .legal-breadcrumb i {
+            font-size: 0.8rem;
+            color: rgba(255,255,255,0.4);
+        }
+        
+        /* Contenu principal */
+        .legal-content {
+            padding: 80px 0;
+        }
+        
+        .legal-wrapper {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 30px;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.05);
+            padding: 60px;
+        }
+        
+        /* Blocs de contenu */
+        .legal-section {
+            margin-bottom: 60px;
+        }
+        
+        .legal-section:last-child {
+            margin-bottom: 0;
+        }
+        
+        .legal-section h2 {
+            font-size: 2rem;
+            color: var(--legal-heading);
+            margin-bottom: 30px;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            position: relative;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--legal-border);
+        }
+        
+        .legal-section h2::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 80px;
+            height: 2px;
+            background: var(--legal-accent);
+        }
+        
+        .legal-section h3 {
+            font-size: 1.4rem;
+            color: var(--legal-secondary);
+            margin: 30px 0 15px;
+            font-weight: 600;
+        }
+        
+        .legal-section p {
+            margin-bottom: 20px;
+            font-size: 1.05rem;
+            color: var(--legal-text);
+        }
+        
+        .legal-section p:last-child {
+            margin-bottom: 0;
+        }
+        
+        /* Cartes d'information */
+        .legal-card {
+            background: var(--legal-bg);
+            border-radius: 16px;
+            padding: 30px;
+            margin: 25px 0;
+            border-left: 4px solid var(--legal-accent);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.02);
+        }
+        
+        .legal-card p {
+            margin-bottom: 15px;
+        }
+        
+        .legal-card p:last-child {
+            margin-bottom: 0;
+        }
+        
+        /* Grille d'informations */
+        .legal-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+            margin: 30px 0;
+        }
+        
+        .legal-grid-item {
+            background: var(--legal-bg);
+            padding: 25px;
+            border-radius: 16px;
+            border: 1px solid var(--legal-border);
+        }
+        
+        .legal-grid-item strong {
+            display: block;
+            color: var(--legal-heading);
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .legal-grid-item span {
+            color: var(--legal-muted);
+        }
+        
+        /* Listes stylisées */
+        .legal-list {
+            list-style: none;
+            padding: 0;
+            margin: 25px 0;
+        }
+        
+        .legal-list li {
+            padding: 12px 0;
+            border-bottom: 1px solid var(--legal-border);
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            color: var(--legal-text);
+        }
+        
+        .legal-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .legal-list i {
+            color: var(--legal-accent);
+            font-size: 0.8rem;
+            margin-top: 8px;
+        }
+        
+        /* Tableau */
+        .legal-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 30px 0;
+            font-size: 0.95rem;
+        }
+        
+        .legal-table th {
+            background: var(--legal-primary);
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: 500;
+        }
+        
+        .legal-table td {
+            padding: 15px;
+            border-bottom: 1px solid var(--legal-border);
+            color: var(--legal-text);
+        }
+        
+        .legal-table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        /* Note légale */
+        .legal-note {
+            background: rgba(139, 92, 246, 0.05);
+            padding: 25px;
+            border-radius: 12px;
+            border: 1px dashed var(--legal-accent);
+            margin: 30px 0;
+        }
+        
+        .legal-note p {
+            margin-bottom: 10px;
+        }
+        
+        .legal-note p:last-child {
+            margin-bottom: 0;
+        }
+        
+        /* Contact */
+        .legal-contact {
+            background: linear-gradient(135deg, var(--legal-primary), var(--legal-secondary));
+            padding: 40px;
+            border-radius: 20px;
+            color: white;
+            text-align: center;
+            margin: 50px 0;
+        }
+        
+        .legal-contact p {
+            color: rgba(255,255,255,0.9);
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+        }
+        
+        .legal-contact .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 15px 40px;
+            background: white;
+            color: var(--legal-primary);
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            font-size: 1rem;
+        }
+        
+        .legal-contact .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 20px 30px rgba(0,0,0,0.2);
+            background: var(--legal-accent);
+            color: white;
+        }
+        
+        /* Mise à jour */
+        .legal-update {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            padding: 20px;
+            background: var(--legal-bg);
+            border-radius: 50px;
+            color: var(--legal-muted);
+            font-size: 0.95rem;
+            margin: 40px 0;
+        }
+        
+        .legal-update i {
+            color: var(--legal-accent);
+        }
+        
+        /* Navigation entre pages */
+        .legal-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            margin-top: 50px;
+            padding-top: 30px;
+            border-top: 2px solid var(--legal-border);
+        }
+        
+        .legal-nav .btn {
+            padding: 15px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1rem;
+        }
+        
+        .legal-nav .btn-outline {
+            border: 2px solid var(--legal-border);
+            color: var(--legal-text);
+            background: transparent;
+        }
+        
+        .legal-nav .btn-outline:hover {
+            border-color: var(--legal-accent);
+            color: var(--legal-accent);
+            transform: translateX(-5px);
+        }
+        
+        .legal-nav .btn-primary {
+            background: var(--legal-primary);
+            color: white;
+            border: 2px solid var(--legal-primary);
+        }
+        
+        .legal-nav .btn-primary:hover {
+            background: var(--legal-secondary);
+            border-color: var(--legal-secondary);
+            transform: translateX(5px);
+        }
+        
+        /* Responsive */
+        @media screen and (max-width: 768px) {
+            .legal-wrapper {
+                padding: 30px 20px;
+                border-radius: 20px;
+            }
+            
+            .legal-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .legal-nav {
+                flex-direction: column;
+            }
+            
+            .legal-nav .btn {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .legal-table {
+                font-size: 0.85rem;
+            }
+            
+            .legal-table th,
+            .legal-table td {
+                padding: 10px;
+            }
+        }
+        
+        @media screen and (max-width: 480px) {
+            .legal-title {
+                font-size: 2.2rem;
+            }
+            
+            .legal-section h2 {
+                font-size: 1.6rem;
+            }
+            
+            .legal-card {
+                padding: 20px;
+            }
+        }
+
+        /* ===== STYLES DU MENU MOBILE ===== */
+@media screen and (max-width: 768px) {
+    .navbar .container {
+        position: relative;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    
+    .menu-toggle {
+        display: flex !important;
+        flex-direction: column;
+        gap: 6px;
+        background: linear-gradient(135deg, #6366f1, #4f46e5);
+        border: none;
+        cursor: pointer;
+        padding: 12px 15px;
+        border-radius: 50px;
+        z-index: 1001;
+        box-shadow: 0 5px 15px rgba(99, 102, 241, 0.3);
+        margin-left: auto;
+        position: relative;
+        pointer-events: auto !important;
+    }
+    
+    .menu-toggle span {
+        width: 22px;
+        height: 2px;
+        background: white;
+        transition: all 0.3s ease;
+        border-radius: 2px;
+        display: block;
+    }
+    
+    .nav-links {
+        position: absolute;
+        top: 70px;
+        right: 0;
+        width: 280px;
+        background: white;
+        flex-direction: column;
+        padding: 20px 0;
+        border-radius: 16px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-20px);
+        transition: all 0.4s ease;
+        z-index: 1000;
+        list-style: none;
+        border: 1px solid rgba(99, 102, 241, 0.1);
+        pointer-events: none;
+    }
+    
+    .nav-links.active {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+        pointer-events: auto;
+    }
+    
+    .nav-links li {
+        width: 100%;
+        margin: 0;
+        opacity: 0;
+        transform: translateX(20px);
+        transition: all 0.4s ease;
+        transition-delay: calc(0.1s * var(--i, 0));
+    }
+    
+    .nav-links.active li {
+        opacity: 1;
+        transform: translateX(0);
+    }
+    
+    .nav-links li:nth-child(1) { --i: 1; }
+    .nav-links li:nth-child(2) { --i: 2; }
+    .nav-links li:nth-child(3) { --i: 3; }
+    .nav-links li:nth-child(4) { --i: 4; }
+    .nav-links li:nth-child(5) { --i: 5; }
+    
+    .nav-links a {
+        display: block;
+        padding: 15px 25px;
+        color: #1e293b;
+        text-decoration: none;
+        font-weight: 500;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+        text-align: left;
+        border-bottom: 1px solid rgba(99, 102, 241, 0.1);
+    }
+    
+    .nav-links li:last-child a {
+        border-bottom: none;
+    }
+    
+    .nav-links a:hover {
+        background: rgba(99, 102, 241, 0.05);
+        color: #6366f1;
+        padding-left: 35px;
+    }
+    
+    .nav-links::before {
+        content: '';
+        position: absolute;
+        top: -8px;
+        right: 20px;
+        width: 16px;
+        height: 16px;
+        background: white;
+        transform: rotate(45deg);
+        box-shadow: -2px -2px 10px rgba(0, 0, 0, 0.05);
+        border-left: 1px solid rgba(99, 102, 241, 0.2);
+        border-top: 1px solid rgba(99, 102, 241, 0.2);
+        border-radius: 4px;
+    }
+    
+    .menu-toggle.active span:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px);
+        width: 20px;
+    }
+    
+    .menu-toggle.active span:nth-child(2) {
+        opacity: 0;
+        transform: scale(0);
+    }
+    
+    .menu-toggle.active span:nth-child(3) {
+        transform: rotate(-45deg) translate(7px, -8px);
+        width: 20px;
+    }
+}
+    </style>
+</head>
+<body>
+    
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">Luc<span class="logo-accent">.</span>Kat</a>
+            
+            <ul class="nav-links">
+                <li><a href="index.html#accueil" class="nav-link">Accueil</a></li>
+                <li><a href="index.html#propos" class="nav-link">À Propos</a></li>
+                <li><a href="index.html#competences" class="nav-link">Compétences</a></li>
+                <li><a href="index.html#projets" class="nav-link">Projets</a></li>
+                <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+            </ul>
+            
+            <button class="menu-toggle" aria-label="Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <section class="legal-header">
+        <div class="container">
+            <h1 class="legal-title">MENTIONS <span class="accent">LÉGALES</span></h1>
+            <div class="legal-breadcrumb">
+                <a href="index.html">Accueil</a>
+                <i class="fas fa-chevron-right"></i>
+                <span>Mentions Légales</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contenu -->
+    <section class="legal-content">
+        <div class="container">
+            <div class="legal-wrapper">
+                
+                <!-- Article 1 - Éditeur -->
+                <div class="legal-section">
+                    <h2>ARTICLE 1 : ÉDITEUR DU SITE</h2>
+                    <p>Conformément aux dispositions des articles 6-III et 19 de la loi n° 2004-575 du 21 juin 2004 pour la Confiance dans l'économie numérique, dite L.C.E.N., nous informons les utilisateurs du site <strong>luckat.dev</strong> des informations suivantes :</p>
+                    
+                    <div class="legal-grid">
+                        <div class="legal-grid-item">
+                            <strong>Nom</strong>
+                            <span>Katagondwa Luc</span>
+                        </div>
+                        <div class="legal-grid-item">
+                            <strong>Statut juridique</strong>
+                            <span>Auto-entrepreneur</span>
+                        </div>
+                        <div class="legal-grid-item">
+                            <strong>SIRET</strong>
+                            <span>[Votre numéro SIRET]</span>
+                        </div>
+                        <div class="legal-grid-item">
+                            <strong>TVA intracommunautaire</strong>
+                            <span>[Votre numéro de TVA]</span>
+                        </div>
+                    </div>
+
+                    <div class="legal-card">
+                        <p><strong>Adresse professionnelle :</strong><br>
+                        [Votre adresse complète]<br>
+                        Bukavu, Sud-Kivu, République Démocratique du Congo</p>
+                        
+                        <p><strong>Email :</strong> <a href="mailto:luckatagondwa6@gmail.com">luckatagondwa6@gmail.com</a><br>
+                        <strong>Téléphone :</strong> <a href="tel:+243845759419">+243 845 759 419</a></p>
+                        
+                        <p><strong>Directeur de la publication :</strong> Luc Katagondwa<br>
+                        <strong>Responsable de rédaction :</strong> Luc Katagondwa</p>
+                        
+                        <p><strong>Activité :</strong> Développement web, création de sites internet, applications web et mobile, conseil en stratégie digitale.</p>
+                    </div>
+
+                    <p>Le site est accessible à l'adresse suivante : <strong>https://luckat.dev</strong> (ci-après "le Site"). L'utilisation du Site est régie par les présentes conditions générales. En utilisant le Site, vous reconnaissez avoir pris connaissance de ces conditions et les avoir acceptées.</p>
+                </div>
+
+                <!-- Article 2 - Hébergement -->
+                <div class="legal-section">
+                    <h2>ARTICLE 2 : HÉBERGEUR DU SITE</h2>
+                    <p>Le site <strong>luckat.dev</strong> est hébergé par :</p>
+                    
+                    <div class="legal-card">
+                        <p><strong>[Nom de l'hébergeur]</strong><br>
+                        [Adresse complète ligne 1]<br>
+                        [Adresse complète ligne 2]<br>
+                        [Code postal, Ville, Pays]</p>
+                        
+                        <p><strong>Site web :</strong> <a href="#">[URL de l'hébergeur]</a><br>
+                        <strong>Téléphone :</strong> [Téléphone de l'hébergeur]<br>
+                        <strong>Email :</strong> [Email de l'hébergeur]</p>
+                        
+                        <p>Les serveurs sont situés en [Pays], garantissant une protection optimale des données conformément au Règlement Général sur la Protection des Données (RGPD) et aux normes de sécurité internationales ISO 27001.</p>
+                    </div>
+
+                    <p>L'hébergeur assure une disponibilité du site 99.9% du temps, avec des systèmes de sauvegarde quotidienne et de reprise d'activité après sinistre (PRA) pour garantir l'intégrité et la continuité des services.</p>
+                </div>
+
+                <!-- Article 3 - Propriété intellectuelle -->
+                <div class="legal-section">
+                    <h2>ARTICLE 3 : PROPRIÉTÉ INTELLECTUELLE</h2>
+                    
+                    <h3>3.1 Protection générale</h3>
+                    <p>L'ensemble du contenu du site <strong>luckat.dev</strong> (structure, arborescence, textes, articles, photographies, illustrations, images, vidéos, logos, marques, icônes, fichiers téléchargeables, base de données, codes sources, etc.) est protégé par le droit d'auteur, le droit des marques et, plus généralement, par le code de la propriété intellectuelle, tant en France qu'à l'international.</p>
+
+                    <h3>3.2 Droits d'auteur</h3>
+                    <p>Toute reproduction, représentation, modification, publication, adaptation, traduction, ou transmission de tout ou partie des éléments du site, quel que soit le moyen ou le procédé utilisé (papier, numérique, électronique, etc.), est strictement interdite, sauf autorisation écrite et préalable de Luc Katagondwa.</p>
+
+                    <p>La violation de ces dispositions constitue un acte de contrefaçon engageant la responsabilité civile et pénale de son auteur, conformément aux articles L.335-2 et suivants du Code de la propriété intellectuelle. Les contrevenants s'exposent à des poursuites judiciaires et à des dommages et intérêts pouvant atteindre 300 000 € et 3 ans d'emprisonnement.</p>
+
+                    <h3>3.3 Liens hypertextes</h3>
+                    <p>Le site peut contenir des liens hypertextes vers d'autres sites internet ou sources. Luc Katagondwa n'exerce aucun contrôle sur ces sites et décline toute responsabilité quant à leur contenu, leurs pratiques en matière de protection des données, ou leur accessibilité.</p>
+
+                    <p>La création de liens hypertextes vers le site <strong>luckat.dev</strong> est autorisée sans autorisation préalable, à condition que :</p>
+                    <ul class="legal-list">
+                        <li><i class="fas fa-circle"></i> Le lien ne crée pas de confusion sur la propriété du site</li>
+                        <li><i class="fas fa-circle"></i> Le site cible n'a pas de contenu illicite, contraire aux bonnes mœurs ou portant atteinte aux droits des tiers</li>
+                        <li><i class="fas fa-circle"></i> Le lien s'ouvre dans une nouvelle fenêtre du navigateur</li>
+                        <li><i class="fas fa-circle"></i> La source est clairement identifiée</li>
+                    </ul>
+
+                    <h3>3.4 Crédits</h3>
+                    <div class="legal-card">
+                        <p><strong>Conception et développement :</strong> Luc Katagondwa</p>
+                        <p><strong>Photographies :</strong> [Crédits photos si nécessaires]</p>
+                        <p><strong>Icônes :</strong> Font Awesome (licence libre)</p>
+                        <p><strong>Polices :</strong> Playfair Display & Source Sans 3 (Google Fonts, licence libre)</p>
+                    </div>
+                </div>
+
+                <!-- Article 4 - Responsabilité -->
+                <div class="legal-section">
+                    <h2>ARTICLE 4 : RESPONSABILITÉ</h2>
+                    
+                    <h3>4.1 Exactitude des informations</h3>
+                    <p>Luc Katagondwa s'efforce de fournir sur ce site des informations aussi précises que possible et à jour. Toutefois, il ne pourra être tenu responsable des omissions, des inexactitudes, des erreurs ou des carences dans la mise à jour, qu'elles soient de son fait ou du fait des tiers partenaires qui lui fournissent ces informations.</p>
+
+                    <h3>4.2 Utilisation du site</h3>
+                    <p>Luc Katagondwa ne pourra être tenu responsable :</p>
+                    <ul class="legal-list">
+                        <li><i class="fas fa-circle"></i> Des dommages directs ou indirects causés au matériel de l'utilisateur lors de l'accès au site</li>
+                        <li><i class="fas fa-circle"></i> Des dommages résultant de l'utilisation du site ou de l'impossibilité d'y accéder</li>
+                        <li><i class="fas fa-circle"></i> Des virus ou autres infections informatiques pouvant endommager le système de l'utilisateur</li>
+                        <li><i class="fas fa-circle"></i> Des interruptions momentanées du site pour maintenance ou mise à jour</li>
+                        <li><i class="fas fa-circle"></i> Des conséquences d'une utilisation frauduleuse ou abusive du site par un tiers</li>
+                    </ul>
+
+                    <h3>4.3 Force majeure</h3>
+                    <p>La responsabilité de Luc Katagondwa ne pourra être engagée en cas de force majeure ou de faits indépendants de sa volonté, tels que définis par la jurisprudence des tribunaux français (grèves, catastrophes naturelles, pandémies, actes de terrorisme, perturbations des réseaux de télécommunication, etc.).</p>
+                </div>
+
+                <!-- Article 5 - Données personnelles -->
+                <div class="legal-section">
+                    <h2>ARTICLE 5 : DONNÉES PERSONNELLES</h2>
+                    
+                    <h3>5.1 Nature des données collectées</h3>
+                    <p>Dans le cadre de l'utilisation du site, nous pouvons collecter les données suivantes :</p>
+                    
+                    <table class="legal-table">
+                        <thead>
+                            <tr>
+                                <th>Type de données</th>
+                                <th>Finalité</th>
+                                <th>Base légale</th>
+                                <th>Durée de conservation</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Nom, prénom</td>
+                                <td>Identification pour réponse</td>
+                                <td>Intérêt légitime</td>
+                                <td>3 ans</td>
+                            </tr>
+                            <tr>
+                                <td>Adresse email</td>
+                                <td>Réponse aux messages / Newsletter</td>
+                                <td>Consentement / Exécution</td>
+                                <td>3 ans / Jusqu'au désabonnement</td>
+                            </tr>
+                            <tr>
+                                <td>Message</td>
+                                <td>Traitement de la demande</td>
+                                <td>Intérêt légitime</td>
+                                <td>3 ans</td>
+                            </tr>
+                            <tr>
+                                <td>Adresse IP</td>
+                                <td>Sécurité et statistiques</td>
+                                <td>Intérêt légitime</td>
+                                <td>1 an</td>
+                            </tr>
+                            <tr>
+                                <td>Cookies</td>
+                                <td>Fonctionnement et analytics</td>
+                                <td>Consentement</td>
+                                <td>13 mois max</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h3>5.2 Destinataires des données</h3>
+                    <p>Les données collectées sont exclusivement destinées à :</p>
+                    <ul class="legal-list">
+                        <li><i class="fas fa-circle"></i> <strong>Luc Katagondwa</strong> (responsable de traitement)</li>
+                        <li><i class="fas fa-circle"></i> <strong>Prestataires techniques</strong> : hébergeur, services d'envoi d'emails (EmailJS), dans le cadre strict de leurs missions et sous contrat de sous-traitance conforme au RGPD</li>
+                    </ul>
+                    <p><strong>Aucun transfert de données hors de l'Union Européenne</strong> n'est effectué sans garanties appropriées (clauses contractuelles types, Privacy Shield, etc.).</p>
+
+                    <h3>5.3 Vos droits RGPD</h3>
+                    <p>Conformément au Règlement Général sur la Protection des Donnes (RGPD) et à la loi Informatique et Libertés, vous disposez des droits suivants :</p>
+                    
+                    <div class="legal-grid" style="grid-template-columns: repeat(3, 1fr);">
+                        <div class="legal-grid-item">
+                            <strong>Droit d'accès</strong>
+                            <span>Article 15 RGPD</span>
+                        </div>
+                        <div class="legal-grid-item">
+                            <strong>Droit de rectification</strong>
+                            <span>Article 16 RGPD</span>
+                        </div>
+                        <div class="legal-grid-item">
+                            <strong>Droit à l'effacement</strong>
+                            <span>Article 17 RGPD</span>
+                        </div>
+                        <div class="legal-grid-item">
+                            <strong>Droit à la limitation</strong>
+                            <span>Article 18 RGPD</span>
+                        </div>
+                        <div class="legal-grid-item">
+                            <strong>Droit à la portabilité</strong>
+                            <span>Article 20 RGPD</span>
+                        </div>
+                        <div class="legal-grid-item">
+                            <strong>Droit d'opposition</strong>
+                            <span>Article 21 RGPD</span>
+                        </div>
+                    </div>
+
+                    <p>Pour exercer ces droits, veuillez nous contacter :</p>
+                    <div class="legal-card">
+                        <p><strong>Par email :</strong> <a href="mailto:luckatagondwa6@gmail.com">luckatagondwa6@gmail.com</a><br>
+                        <strong>Par courrier :</strong> [Votre adresse postale complète]</p>
+                        <p>Nous nous engageons à vous répondre dans un délai d'un mois maximum. En cas de réponse insatisfaisante, vous avez le droit d'introduire une réclamation auprès de la CNIL.</p>
+                    </div>
+                </div>
+
+                <!-- Article 6 - Cookies -->
+                <div class="legal-section">
+                    <h2>ARTICLE 6 : COOKIES</h2>
+                    
+                    <h3>6.1 Définition</h3>
+                    <p>Un cookie est un petit fichier texte déposé sur votre terminal (ordinateur, tablette, smartphone) lors de la visite d'un site internet. Il permet de stocker des informations relatives à votre navigation et de vous offrir une expérience personnalisée.</p>
+
+                    <h3>6.2 Types de cookies utilisés</h3>
+                    
+                    <table class="legal-table">
+                        <thead>
+                            <tr>
+                                <th>Catégorie</th>
+                                <th>Cookie</th>
+                                <th>Durée</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Essentiels</strong></td>
+                                <td>session_id</td>
+                                <td>Session</td>
+                                <td>Maintient votre session et assure le fonctionnement technique</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Analytics</strong></td>
+                                <td>_ga, _gid</td>
+                                <td>2 ans / 24h</td>
+                                <td>Mesure l'audience du site (pages visitées, durée, provenance)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Préférences</strong></td>
+                                <td>cookie_consent</td>
+                                <td>6 mois</td>
+                                <td>Mémorise votre choix sur les cookies</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h3>6.3 Gestion des cookies</h3>
+                    <p>Vous pouvez à tout moment configurer vos préférences en matière de cookies via :</p>
+                    
+                    <div class="legal-grid" style="grid-template-columns: repeat(2, 1fr);">
+                        <div class="legal-grid-item">
+                            <strong>Chrome</strong>
+                            <span>Paramètres → Confidentialité et sécurité → Cookies</span>
+                        </div>
+                        <div class="legal-grid-item">
+                            <strong>Firefox</strong>
+                            <span>Options → Vie privée → Cookies</span>
+                        </div>
+                        <div class="legal-grid-item">
+                            <strong>Safari</strong>
+                            <span>Préférences → Confidentialité → Cookies</span>
+                        </div>
+                        <div class="legal-grid-item">
+                            <strong>Edge</strong>
+                            <span>Paramètres → Cookies et autorisations</span>
+                        </div>
+                    </div>
+
+                    <div class="legal-note">
+                        <p><i class="fas fa-info-circle"></i> <strong>Note :</strong> Le refus des cookies essentiels peut entraîner un dysfonctionnement du site. Les cookies analytics peuvent être refusés sans impact sur la navigation.</p>
+                    </div>
+                </div>
+
+                <!-- Article 7 - Sécurité -->
+                <div class="legal-section">
+                    <h2>ARTICLE 7 : SÉCURITÉ</h2>
+                    
+                    <p>Luc Katagondwa met en œuvre toutes les mesures techniques et organisationnelles appropriées pour protéger vos données personnelles contre tout accès non autorisé, modification, divulgation, altération ou destruction.</p>
+
+                    <div class="legal-grid" style="grid-template-columns: repeat(4, 1fr);">
+                        <div class="legal-grid-item">
+                            <strong>HTTPS</strong>
+                            <span>Chiffrement SSL/TLS 256 bits</span>
+                        </div>
+                        <div class="legal-grid-item">
+                            <strong>Pare-feu</strong>
+                            <span>Protection contre les intrusions</span>
+                        </div>
+                        <div class="legal-grid-item">
+                            <strong>Sauvegardes</strong>
+                            <span>Quotidiennes et chiffrées</span>
+                        </div>
+                        <div class="legal-grid-item">
+                            <strong>Monitoring</strong>
+                            <span>Surveillance 24h/24</span>
+                        </div>
+                    </div>
+
+                    <p>En cas de violation de données à caractère personnel, nous nous engageons à notifier la CNIL dans les 72 heures et à informer les personnes concernées si la violation présente un risque élevé pour leurs droits et libertés.</p>
+                </div>
+
+                <!-- Article 8 - Sous-traitants -->
+                <div class="legal-section">
+                    <h2>ARTICLE 8 : SOUS-TRAITANTS</h2>
+                    
+                    <table class="legal-table">
+                        <thead>
+                            <tr>
+                                <th>Prestataire</th>
+                                <th>Service</th>
+                                <th>Localisation</th>
+                                <th>Garanties</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>[Hébergeur]</td>
+                                <td>Hébergement du site</td>
+                                <td>[Pays]</td>
+                                <td>Clauses contractuelles types</td>
+                            </tr>
+                            <tr>
+                                <td>EmailJS</td>
+                                <td>Envoi d'emails</td>
+                                <td>Union Européenne</td>
+                                <td>Conforme RGPD</td>
+                            </tr>
+                            <tr>
+                                <td>Google Analytics</td>
+                                <td>Statistiques d'audience</td>
+                                <td>UE (données pseudonymisées)</td>
+                                <td>Privacy Shield / Clauses types</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <p>Tous nos sous-traitants sont contractuellement tenus de respecter la confidentialité des données et de mettre en œuvre des mesures de sécurité conformes au RGPD.</p>
+                </div>
+
+                <!-- Article 9 - Conditions générales -->
+                <div class="legal-section">
+                    <h2>ARTICLE 9 : CONDITIONS GÉNÉRALES D'UTILISATION</h2>
+                    
+                    <h3>9.1 Accès au site</h3>
+                    <p>Le site est accessible gratuitement à tout utilisateur disposant d'un accès à internet. Tous les coûts supportés pour accéder au site (matériel, logiciels, connexion internet) sont à la charge exclusive de l'utilisateur.</p>
+
+                    <h3>9.2 Prestations</h3>
+                    <p>Les prestations proposées par Luc Katagondwa (création de sites web, développement d'applications, conseil) font l'objet de devis personnalisés et de contrats spécifiques. Les informations présentes sur le site ne constituent pas une offre contractuelle.</p>
+
+                    <h3>9.3 Modification des conditions</h3>
+                    <p>Luc Katagondwa se réserve le droit de modifier les présentes conditions à tout moment, notamment pour s'adapter aux évolutions légales, réglementaires, jurisprudentielles ou techniques. Les nouvelles conditions s'appliquent à compter de leur mise en ligne.</p>
+
+                    <h3>9.4 Droit applicable et juridiction</h3>
+                    <p>Les présentes mentions légales sont régies par le droit français. Tout litige relatif à l'interprétation, l'exécution ou la validité des présentes relèvera de la compétence exclusive des tribunaux de Paris, sauf disposition légale impérative contraire.</p>
+                </div>
+
+                <!-- Contact -->
+                <div class="legal-contact">
+                    <p><strong>Une question juridique ?</strong><br>Notre équipe est à votre disposition pour tout renseignement.</p>
+                    <a href="mailto:luckatagondwa6@gmail.com" class="btn">
+                        <i class="fas fa-envelope"></i>
+                        luckatagondwa6@gmail.com
+                    </a>
+                </div>
+
+                <!-- Mise à jour -->
+                <div class="legal-update">
+                    <i class="fas fa-calendar-check"></i>
+                    Dernière mise à jour : 14 février 2026 - Version 2.3
+                </div>
+
+                <!-- Navigation -->
+                <div class="legal-nav">
+                    <a href="index.html" class="btn btn-outline">
+                        <i class="fas fa-arrow-left"></i>
+                        Retour à l'accueil
+                    </a>
+                    <a href="confidentialite.html" class="btn btn-primary">
+                        Politique de confidentialité
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-wave">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+                <path fill="currentColor" fill-opacity="1" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,122.7C672,117,768,139,864,154.7C960,171,1056,181,1152,170.7C1248,160,1344,128,1392,112L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
+            </svg>
+        </div>
+        
+        <div class="footer-main">
+            <div class="container">
+                <div class="footer-grid">
+                    <div class="footer-col footer-about">
+                        <a href="index.html" class="footer-logo">Luc<span class="logo-accent">.</span>Kat</a>
+                        <p class="footer-description">
+                            Développeur web passionné basé à Bukavu, je transforme vos idées en expériences numériques exceptionnelles avec élégance et performance.
+                        </p>
+                        <div class="footer-social">
+                            <a href="#" class="footer-social-link" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                            <a href="#" class="footer-social-link" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#" class="footer-social-link" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        </div>
+                    </div>
+                    
+                    <div class="footer-col">
+                        <h4 class="footer-title">Navigation</h4>
+                        <ul class="footer-list">
+                            <li><a href="index.html#accueil"><i class="fas fa-chevron-right"></i> Accueil</a></li>
+                            <li><a href="index.html#propos"><i class="fas fa-chevron-right"></i> À propos</a></li>
+                            <li><a href="index.html#competences"><i class="fas fa-chevron-right"></i> Compétences</a></li>
+                            <li><a href="index.html#projets"><i class="fas fa-chevron-right"></i> Projets</a></li>
+                            <li><a href="index.html#contact"><i class="fas fa-chevron-right"></i> Contact</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-col">
+                        <h4 class="footer-title">Informations légales</h4>
+                        <ul class="footer-list">
+                            <li><a href="mentions-legales.html"><i class="fas fa-chevron-right"></i> Mentions légales</a></li>
+                            <li><a href="confidentialite.html"><i class="fas fa-chevron-right"></i> Confidentialité</a></li>
+                            <li><i class="fas fa-chevron-right"></i> © 2026 Tous droits réservés</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-col">
+                        <h4 class="footer-title">Contact</h4>
+                        <ul class="footer-list footer-contact">
+                            <li><i class="fas fa-map-marker-alt"></i> Bukavu, RD Congo</li>
+                            <li><i class="fas fa-envelope"></i> <a href="mailto:luckatagondwa6@gmail.com">luckatagondwa6@gmail.com</a></li>
+                            <li><i class="fas fa-phone"></i> <a href="tel:+243845759419">+243 845 759 419</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <div class="container">
+                <div class="footer-bottom-content">
+                    <p>&copy; 2026 Luc Katagondwa. Conçu et développé avec <i class="fas fa-heart" style="color: #ef4444;"></i> à Bukavu.</p>
+                    <div class="footer-bottom-links">
+                        <a href="mentions-legales.html">Mentions légales</a>
+                        <a href="confidentialite.html">Politique de confidentialité</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script src="script.js"></script>
+    
+    <!-- Script de navigation amélioré -->
+<script>
+    (function() {
+        console.log('🚀 Navigation script chargé');
+        
+        // Fonction d'initialisation avec vérification
+        function initMobileMenu() {
+            const menuToggle = document.querySelector('.menu-toggle');
+            const navLinks = document.querySelector('.nav-links');
+            
+            console.log('🔍 Recherche des éléments:', {
+                menuToggle: menuToggle,
+                navLinks: navLinks
+            });
+            
+            if (!menuToggle || !navLinks) {
+                console.log('❌ Éléments non trouvés, nouvelle tentative dans 500ms');
+                setTimeout(initMobileMenu, 500);
+                return;
+            }
+            
+            console.log('✅ Éléments trouvés, initialisation du menu');
+            
+            // S'assurer que le bouton est cliquable
+            menuToggle.style.pointerEvents = 'auto';
+            menuToggle.style.cursor = 'pointer';
+            
+            // Supprimer les anciens événements pour éviter les doublons
+            const newMenuToggle = menuToggle.cloneNode(true);
+            menuToggle.parentNode.replaceChild(newMenuToggle, menuToggle);
+            
+            // Réattraper les nouveaux éléments
+            const finalMenuToggle = document.querySelector('.menu-toggle');
+            const finalNavLinks = document.querySelector('.nav-links');
+            
+            // Ouvrir/fermer le menu
+            finalMenuToggle.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                
+                console.log('🟢 Clic sur hamburger');
+                
+                this.classList.toggle('active');
+                finalNavLinks.classList.toggle('active');
+                
+                // Animation des spans
+                const spans = this.querySelectorAll('span');
+                if (this.classList.contains('active')) {
+                    spans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
+                    spans[1].style.opacity = '0';
+                    spans[2].style.transform = 'rotate(-45deg) translate(7px, -7px)';
+                } else {
+                    spans[0].style.transform = 'none';
+                    spans[1].style.opacity = '1';
+                    spans[2].style.transform = 'none';
+                }
+            });
+            
+            // Fermer au clic sur les liens
+            finalNavLinks.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    console.log('🔵 Clic sur lien:', this.getAttribute('href'));
+                    
+                    finalMenuToggle.classList.remove('active');
+                    finalNavLinks.classList.remove('active');
+                    
+                    const spans = finalMenuToggle.querySelectorAll('span');
+                    spans[0].style.transform = 'none';
+                    spans[1].style.opacity = '1';
+                    spans[2].style.transform = 'none';
+                    
+                    // Redirection
+                    const href = this.getAttribute('href');
+                    if (href) {
+                        window.location.href = href;
+                    }
+                });
+            });
+            
+            // Fermer en cliquant dehors
+            document.addEventListener('click', function(e) {
+                if (finalNavLinks.classList.contains('active') && 
+                    !finalNavLinks.contains(e.target) && 
+                    !finalMenuToggle.contains(e.target)) {
+                    
+                    console.log('🔴 Clic dehors');
+                    
+                    finalMenuToggle.classList.remove('active');
+                    finalNavLinks.classList.remove('active');
+                    
+                    const spans = finalMenuToggle.querySelectorAll('span');
+                    spans[0].style.transform = 'none';
+                    spans[1].style.opacity = '1';
+                    spans[2].style.transform = 'none';
+                }
+            });
+            
+            // Empêcher la propagation du clic sur le menu
+            finalNavLinks.addEventListener('click', function(e) {
+                e.stopPropagation();
+            });
+        }
+        
+        // Attendre que le DOM soit prêt
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initMobileMenu);
+        } else {
+            initMobileMenu();
+        }
+        
+        // Fallback : si rien ne fonctionne après 3 secondes
+        setTimeout(function() {
+            const btn = document.querySelector('.menu-toggle');
+            if (btn && !btn._hasEvent) {
+                console.log('⚠️ Fallback : ajout d\'un événement simple');
+                btn._hasEvent = true;
+                
+                btn.onclick = function(e) {
+                    e.preventDefault();
+                    const menu = document.querySelector('.nav-links');
+                    if (menu) {
+                        menu.classList.toggle('active');
+                        this.classList.toggle('active');
+                        
+                        const spans = this.querySelectorAll('span');
+                        if (this.classList.contains('active')) {
+                            spans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
+                            spans[1].style.opacity = '0';
+                            spans[2].style.transform = 'rotate(-45deg) translate(7px, -7px)';
+                        } else {
+                            spans[0].style.transform = 'none';
+                            spans[1].style.opacity = '1';
+                            spans[2].style.transform = 'none';
+                        }
+                    }
+                };
+            }
+        }, 3000);
+    })();
+</script>
+
+</body>
+</html>
