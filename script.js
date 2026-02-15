@@ -190,16 +190,20 @@ function initCountingSystem() {
     const VISITOR_KEY = 'luc_kat_visitors';
     const SESSION_KEY = 'visitor_counted_' + window.location.pathname;
     
-    // 1. Initialiser le compteur si besoin
+    // 1. Initialiser le compteur si besoin (préserve TES données existantes)
     if (!localStorage.getItem(VISITOR_KEY)) {
         localStorage.setItem(VISITOR_KEY, '0');
         console.log('📊 Compteur initialisé à 0');
     }
     
-    // 2. Lire la valeur actuelle
+    // 2. Lire la valeur actuelle (TES VRAIS VISITEURS)
     let visitors = parseInt(localStorage.getItem(VISITOR_KEY) || '0');
+    console.log('📊 Valeur actuelle dans localStorage:', visitors);
     
-    // 3. Vérifier si c'est une nouvelle visite dans CETTE session
+    // 3. AFFICHER IMMÉDIATEMENT TES VRAIS VISITEURS
+    updateAllDisplays();
+    
+    // 4. Vérifier si c'est une nouvelle visite dans CETTE session
     if (!sessionStorage.getItem(SESSION_KEY)) {
         // C'est un NOUVEAU visiteur dans cette session
         visitors++;
@@ -210,15 +214,15 @@ function initCountingSystem() {
         
         // Afficher une notification dans la console
         console.log('👋 Bienvenue sur mon portfolio!');
+        
+        // 5. METTRE À JOUR L'AFFICHAGE APRÈS LE NOUVEAU VISITEUR
+        updateAllDisplays();
     } else {
         console.log('ℹ️ Visiteur déjà compté dans cette session');
     }
     
-    // 4. Mettre à jour tous les affichages
-    updateAllDisplays();
-    
-    // 5. Mettre à jour périodiquement
-    setInterval(updateAllDisplays, 2000);
+    // 6. Mettre à jour périodiquement (toutes les 1 seconde pour être plus réactif)
+    setInterval(updateAllDisplays, 1000);
 }
 
 // ===== 7. SYSTÈME DE CONSENTEMENT (SANS COMPTAGE) =====
