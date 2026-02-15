@@ -3,527 +3,736 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Luc Katagondwa - CV Développeur Web</title>
+    <title>Luc Katagondwa - CV Développeur Web Full Stack</title>
     
-    <!-- Fonts -->
+    <!-- Fonts modernes et professionnelles -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
     <!-- Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="img/writer.jpg">
+    
     <style>
+        /* ===== VARIABLES PROFESSIONNELLES ===== */
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --primary-light: #3b82f6;
+            --secondary: #7c3aed;
+            --accent: #06b6d4;
+            --dark: #0f172a;
+            --dark-soft: #1e293b;
+            --gray: #475569;
+            --gray-light: #94a3b8;
+            --light: #f8fafc;
+            --white: #ffffff;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --gradient: linear-gradient(135deg, var(--primary), var(--secondary));
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+            --shadow-lg: 0 20px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04);
+            --shadow-xl: 0 25px 50px -12px rgba(0,0,0,0.25);
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-        
+
         body {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+            font-family: 'Plus Jakarta Sans', sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
             padding: 40px 20px;
-        }
-        
-        /* Carte principale du CV */
-        .cv-card {
-            max-width: 1000px;
-            width: 100%;
-            background: white;
-            border-radius: 30px;
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
-            overflow: hidden;
+            line-height: 1.6;
+            color: var(--dark);
             position: relative;
-            animation: fadeIn 0.6s ease;
         }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        /* Bande décorative */
-        .cv-strip {
-            height: 8px;
-            background: linear-gradient(90deg, #667eea, #764ba2, #f093fb);
-        }
-        
-        /* En-tête du CV */
-        .cv-header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            padding: 40px;
-            color: white;
+
+        /* ===== BOUTON DE RETOUR CORRIGÉ ===== */
+        .back-button {
+            position: fixed;
+            top: 30px;
+            left: 30px;
+            z-index: 9999;
             display: flex;
             align-items: center;
-            gap: 40px;
+            gap: 12px;
+            background: var(--white);
+            color: var(--dark);
+            padding: 14px 28px;
+            border-radius: 60px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid rgba(37, 99, 235, 0.2);
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.95);
+            cursor: pointer; /* Ajouté */
+            pointer-events: auto; /* Ajouté */
+        }
+
+        .back-button:hover {
+            transform: translateY(-3px) translateX(-3px);
+            box-shadow: var(--shadow-xl);
+            border-color: var(--primary);
+            color: var(--primary);
+            background: var(--white);
+        }
+
+        .back-button i {
+            font-size: 1.2rem;
+            color: var(--primary);
+            transition: transform 0.3s ease;
+        }
+
+        .back-button:hover i {
+            transform: translateX(-5px);
+        }
+
+        .back-button span {
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 700;
+        }
+
+        .back-button .badge {
+            background: rgba(37, 99, 235, 0.1);
+            padding: 4px 8px;
+            border-radius: 30px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin-left: 5px;
+        }
+
+        /* Version mobile du bouton */
+        @media (max-width: 768px) {
+            .back-button {
+                top: 20px;
+                left: 20px;
+                padding: 12px 20px;
+                font-size: 0.9rem;
+            }
+            
+            .back-button span:not(.badge) {
+                display: none;
+            }
+            
+            .back-button i {
+                margin-right: 0;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .back-button {
+                padding: 10px 15px;
+            }
+            
+            .back-button .badge {
+                display: none;
+            }
+        }
+
+        /* ===== CARTE PRINCIPALE ===== */
+        .cv-card {
+            max-width: 1100px;
+            width: 100%;
+            background: var(--white);
+            border-radius: 32px;
+            box-shadow: var(--shadow-xl);
+            overflow: hidden;
+            position: relative;
+            animation: fadeInUp 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ===== BANDE DÉCORATIVE ===== */
+        .cv-strip {
+            height: 6px;
+            background: var(--gradient);
+            position: relative;
+            z-index: 2;
+        }
+
+        /* ===== EN-TÊTE MODERNE ===== */
+        .cv-header {
+            background: linear-gradient(135deg, var(--dark), var(--dark-soft));
+            padding: 45px 50px;
+            color: var(--white);
+            display: flex;
+            align-items: center;
+            gap: 45px;
             position: relative;
             overflow: hidden;
         }
-        
+
         .cv-header::before {
             content: '';
             position: absolute;
             top: -50%;
             right: -50%;
-            width: 200%;
+            width: 100%;
             height: 200%;
-            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
-            animation: rotate 20s linear infinite;
+            background: radial-gradient(circle, rgba(255,255,255,0.03) 0%, transparent 70%);
+            animation: rotate 40s linear infinite;
         }
-        
+
+        .cv-header::after {
+            content: '</>';
+            position: absolute;
+            bottom: 10px;
+            right: 30px;
+            font-size: 8rem;
+            font-weight: 800;
+            opacity: 0.03;
+            color: var(--white);
+            font-family: monospace;
+        }
+
         @keyframes rotate {
             from { transform: rotate(0deg); }
             to { transform: rotate(360deg); }
         }
-        
+
         /* Photo de profil */
         .cv-photo {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            border: 5px solid rgba(255,255,255,0.3);
+            width: 160px;
+            height: 160px;
+            border-radius: 30px;
+            border: 4px solid rgba(255,255,255,0.15);
             overflow: hidden;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+            box-shadow: var(--shadow-lg);
             position: relative;
             z-index: 2;
             flex-shrink: 0;
+            transition: transform 0.3s ease;
         }
-        
+
+        .cv-photo:hover {
+            transform: scale(1.02);
+        }
+
         .cv-photo img {
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
-        
+
         /* Informations header */
         .cv-header-info {
             position: relative;
             z-index: 2;
+            flex: 1;
         }
-        
+
         .cv-header-info h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: 3rem;
+            font-size: 3.2rem;
             font-weight: 800;
-            margin-bottom: 5px;
+            margin-bottom: 8px;
             letter-spacing: -0.02em;
+            line-height: 1.2;
+            background: linear-gradient(135deg, var(--white), #e2e8f0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
-        
+
         .cv-header-info .title {
             font-size: 1.2rem;
             opacity: 0.9;
             display: flex;
             align-items: center;
-            gap: 10px;
-            margin-bottom: 15px;
+            gap: 12px;
+            margin-bottom: 20px;
+            font-weight: 400;
         }
-        
+
         .cv-header-info .title i {
-            font-size: 1rem;
+            color: var(--accent);
+            font-size: 1.2rem;
         }
-        
+
+        .cv-header-info .badge {
+            background: rgba(255,255,255,0.1);
+            padding: 6px 12px;
+            border-radius: 100px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
         .cv-header-contact {
             display: flex;
             flex-wrap: wrap;
-            gap: 20px;
-            font-size: 0.9rem;
-            opacity: 0.8;
+            gap: 25px;
+            font-size: 0.95rem;
         }
-        
+
         .cv-header-contact span {
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
+            color: var(--gray-light);
+            transition: color 0.3s ease;
         }
-        
+
+        .cv-header-contact span:hover {
+            color: var(--white);
+        }
+
         .cv-header-contact i {
-            width: 16px;
+            width: 18px;
+            color: var(--accent);
         }
-        
-        /* Contenu principal */
+
+        /* ===== CONTENU PRINCIPAL ===== */
         .cv-main {
             display: grid;
-            grid-template-columns: 1fr 2fr;
+            grid-template-columns: 320px 1fr;
             gap: 0;
-            background: white;
+            background: var(--white);
         }
-        
-        /* Colonne gauche */
+
+        /* ===== COLONNE GAUCHE ===== */
         .cv-left {
-            background: #f8fafc;
-            padding: 30px;
-            border-right: 1px solid #e2e8f0;
+            background: var(--light);
+            padding: 40px 30px;
+            border-right: 1px solid rgba(37, 99, 235, 0.1);
         }
-        
+
         .cv-section {
-            margin-bottom: 30px;
+            margin-bottom: 35px;
         }
-        
+
         .cv-section-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             font-weight: 700;
-            color: #1e293b;
-            margin-bottom: 15px;
+            color: var(--dark);
+            margin-bottom: 20px;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
             position: relative;
-            padding-bottom: 8px;
+            padding-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
-        
+
         .cv-section-title::after {
             content: '';
             position: absolute;
             bottom: 0;
             left: 0;
-            width: 50px;
+            width: 40px;
             height: 3px;
-            background: linear-gradient(90deg, #667eea, #764ba2);
-            border-radius: 2px;
+            background: var(--gradient);
+            border-radius: 4px;
         }
-        
+
         .cv-section-title i {
-            color: #667eea;
+            color: var(--primary);
             font-size: 1.1rem;
         }
-        
+
         /* Contact items */
         .cv-contact-item {
             display: flex;
             align-items: center;
-            gap: 12px;
-            margin-bottom: 12px;
-            color: #475569;
+            gap: 14px;
+            margin-bottom: 15px;
+            color: var(--gray);
             font-size: 0.95rem;
+            transition: transform 0.3s ease;
         }
-        
+
+        .cv-contact-item:hover {
+            transform: translateX(5px);
+        }
+
         .cv-contact-item i {
             width: 20px;
-            color: #667eea;
+            color: var(--primary);
             font-size: 1rem;
         }
-        
+
         .cv-contact-item a {
-            color: #475569;
+            color: var(--gray);
             text-decoration: none;
             transition: color 0.3s ease;
         }
-        
+
         .cv-contact-item a:hover {
-            color: #667eea;
+            color: var(--primary);
         }
-        
+
         /* Compétences */
         .cv-skill {
-            margin-bottom: 15px;
+            margin-bottom: 18px;
         }
-        
+
         .cv-skill-header {
             display: flex;
             justify-content: space-between;
-            margin-bottom: 5px;
+            margin-bottom: 8px;
             font-size: 0.9rem;
         }
-        
+
         .cv-skill-name {
             font-weight: 600;
-            color: #1e293b;
+            color: var(--dark);
         }
-        
+
         .cv-skill-level {
-            color: #667eea;
-            font-weight: 600;
+            color: var(--primary);
+            font-weight: 700;
+            background: rgba(37, 99, 235, 0.1);
+            padding: 2px 8px;
+            border-radius: 20px;
+            font-size: 0.8rem;
         }
-        
+
         .cv-skill-bar {
             width: 100%;
             height: 6px;
             background: #e2e8f0;
-            border-radius: 3px;
+            border-radius: 10px;
             overflow: hidden;
         }
-        
+
         .cv-skill-progress {
             height: 100%;
-            background: linear-gradient(90deg, #667eea, #764ba2);
-            border-radius: 3px;
+            background: var(--gradient);
+            border-radius: 10px;
+            transition: width 1s ease;
+            position: relative;
         }
-        
+
         /* Langues */
         .cv-language {
             display: flex;
             justify-content: space-between;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
             font-size: 0.95rem;
+            padding: 8px 12px;
+            background: var(--white);
+            border-radius: 10px;
+            border: 1px solid #e2e8f0;
+            transition: all 0.3s ease;
         }
-        
+
+        .cv-language:hover {
+            border-color: var(--primary);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-sm);
+        }
+
         .cv-language-name {
             font-weight: 600;
-            color: #1e293b;
+            color: var(--dark);
         }
-        
+
         .cv-language-level {
-            color: #667eea;
+            color: var(--primary);
+            font-size: 0.9rem;
         }
-        
+
         /* Centres d'intérêt */
         .cv-interests {
             display: flex;
             flex-wrap: wrap;
             gap: 10px;
         }
-        
+
         .cv-interest-item {
-            background: white;
-            padding: 8px 15px;
-            border-radius: 50px;
+            background: var(--white);
+            padding: 10px 16px;
+            border-radius: 100px;
             font-size: 0.85rem;
-            color: #1e293b;
+            color: var(--gray);
             border: 1px solid #e2e8f0;
             display: flex;
             align-items: center;
             gap: 8px;
             transition: all 0.3s ease;
+            cursor: default;
         }
-        
+
         .cv-interest-item:hover {
-            border-color: #667eea;
+            border-color: var(--primary);
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.2);
+            box-shadow: var(--shadow-sm);
+            color: var(--primary);
         }
-        
+
         .cv-interest-item i {
-            color: #667eea;
+            color: var(--primary);
+            font-size: 0.9rem;
         }
-        
-        /* Colonne droite */
+
+        /* ===== COLONNE DROITE ===== */
         .cv-right {
-            padding: 30px;
-            background: white;
+            padding: 40px;
+            background: var(--white);
         }
-        
+
         /* Profil */
         .cv-profile {
-            background: linear-gradient(135deg, #f8fafc 0%, #ffffff 100%);
-            padding: 25px;
-            border-radius: 15px;
-            margin-bottom: 30px;
+            background: linear-gradient(135deg, var(--light) 0%, var(--white) 100%);
+            padding: 30px;
+            border-radius: 20px;
+            margin-bottom: 35px;
             border: 1px solid #e2e8f0;
             position: relative;
             overflow: hidden;
         }
-        
+
         .cv-profile::before {
             content: '“';
             position: absolute;
-            top: -20px;
+            top: -30px;
             right: 10px;
-            font-size: 8rem;
-            color: rgba(102, 126, 234, 0.1);
+            font-size: 10rem;
+            color: rgba(37, 99, 235, 0.05);
             font-family: serif;
         }
-        
+
         .cv-profile p {
-            color: #475569;
+            color: var(--gray);
             line-height: 1.8;
             font-size: 1rem;
             position: relative;
             z-index: 1;
         }
-        
+
         /* Expériences */
         .cv-experience-item {
-            margin-bottom: 25px;
-            padding-bottom: 20px;
+            margin-bottom: 30px;
+            padding-bottom: 25px;
             border-bottom: 1px dashed #e2e8f0;
         }
-        
+
         .cv-experience-item:last-child {
             border-bottom: none;
             margin-bottom: 0;
             padding-bottom: 0;
         }
-        
+
         .cv-experience-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 8px;
+            margin-bottom: 10px;
+            flex-wrap: wrap;
+            gap: 10px;
         }
-        
+
         .cv-experience-title {
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             font-weight: 700;
-            color: #1e293b;
+            color: var(--dark);
         }
-        
+
         .cv-experience-date {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
-            padding: 4px 12px;
-            border-radius: 50px;
+            background: var(--gradient);
+            color: var(--white);
+            padding: 5px 15px;
+            border-radius: 100px;
             font-size: 0.75rem;
             font-weight: 600;
+            letter-spacing: 0.5px;
         }
-        
+
         .cv-experience-company {
-            color: #667eea;
-            font-size: 0.9rem;
-            margin-bottom: 10px;
+            color: var(--primary);
+            font-size: 0.95rem;
+            margin-bottom: 12px;
             display: flex;
             align-items: center;
             gap: 8px;
+            font-weight: 500;
         }
-        
+
         .cv-experience-company i {
             font-size: 0.8rem;
+            opacity: 0.8;
         }
-        
+
         .cv-experience-description {
-            color: #475569;
+            color: var(--gray);
             font-size: 0.95rem;
-            line-height: 1.6;
+            line-height: 1.7;
             margin-left: 20px;
         }
-        
+
         .cv-experience-description li {
-            margin-bottom: 5px;
+            margin-bottom: 8px;
         }
-        
+
         /* Formation */
         .cv-education-item {
             margin-bottom: 20px;
+            padding: 15px;
+            background: var(--light);
+            border-radius: 16px;
+            transition: all 0.3s ease;
         }
-        
+
+        .cv-education-item:hover {
+            transform: translateX(5px);
+            box-shadow: var(--shadow-sm);
+        }
+
         .cv-education-title {
             font-size: 1rem;
             font-weight: 700;
-            color: #1e293b;
+            color: var(--dark);
+            margin-bottom: 5px;
         }
-        
+
         .cv-education-school {
-            color: #667eea;
+            color: var(--primary);
             font-size: 0.9rem;
-            margin-bottom: 3px;
+            margin-bottom: 5px;
+            font-weight: 500;
         }
-        
+
         .cv-education-date {
-            color: #94a3b8;
+            color: var(--gray-light);
             font-size: 0.85rem;
             display: flex;
             align-items: center;
             gap: 5px;
         }
-        
+
         /* Projets */
         .cv-projects-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
+            gap: 20px;
         }
-        
+
         .cv-project-card {
-            background: #f8fafc;
+            background: var(--light);
             padding: 20px;
-            border-radius: 15px;
+            border-radius: 16px;
             transition: all 0.3s ease;
             border: 1px solid #e2e8f0;
+            height: 100%;
         }
-        
+
         .cv-project-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.2);
-            border-color: #667eea;
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary);
         }
-        
+
         .cv-project-title {
-            font-size: 1rem;
+            font-size: 1.1rem;
             font-weight: 700;
-            color: #1e293b;
-            margin-bottom: 8px;
+            color: var(--dark);
+            margin-bottom: 12px;
         }
-        
+
         .cv-project-tech {
             display: flex;
             flex-wrap: wrap;
-            gap: 5px;
-            margin: 10px 0;
+            gap: 6px;
+            margin-bottom: 12px;
         }
-        
+
         .cv-project-tech span {
-            background: white;
-            padding: 3px 8px;
-            border-radius: 30px;
+            background: var(--white);
+            padding: 4px 10px;
+            border-radius: 100px;
             font-size: 0.7rem;
-            color: #667eea;
+            color: var(--primary);
             border: 1px solid #e2e8f0;
+            font-weight: 600;
         }
-        
+
         .cv-project-description {
-            color: #475569;
+            color: var(--gray);
             font-size: 0.85rem;
-            line-height: 1.5;
+            line-height: 1.6;
         }
-        
-        /* Footer */
+
+        /* Bouton contact */
+        .cv-contact-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--gradient);
+            color: var(--white);
+            padding: 12px 28px;
+            border-radius: 100px;
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            box-shadow: var(--shadow-md);
+        }
+
+        .cv-contact-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .cv-contact-btn i {
+            font-size: 1rem;
+        }
+
+        /* ===== FOOTER ===== */
         .cv-footer {
-            background: #1e293b;
-            padding: 20px 30px;
+            background: var(--dark);
+            padding: 25px 30px;
             text-align: center;
-            color: #94a3b8;
+            color: var(--gray-light);
             font-size: 0.9rem;
             border-top: 1px solid #334155;
         }
-        
+
         .cv-footer .signature {
-            font-family: 'Playfair Display', serif;
-            color: white;
-            font-weight: 600;
-            letter-spacing: 1px;
+            font-weight: 700;
+            color: var(--white);
+            letter-spacing: 0.5px;
+            background: linear-gradient(135deg, var(--white), var(--gray-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
-        
+
         .cv-footer i {
-            color: #ef4444;
-            margin: 0 3px;
+            color: var(--accent);
+            margin: 0 5px;
         }
-        
-        /* Bouton contact */
-        .cv-contact-btn {
-            display: inline-block;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
-            padding: 8px 20px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-size: 0.9rem;
-            font-weight: 500;
-            margin-top: 20px;
-            transition: all 0.3s ease;
-        }
-        
-        .cv-contact-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.4);
-        }
-        
-        /* Responsive */
-        @media (max-width: 768px) {
-            .cv-header {
-                flex-direction: column;
-                text-align: center;
-                padding: 30px;
-            }
-            
-            .cv-header-contact {
-                justify-content: center;
-            }
-            
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 900px) {
             .cv-main {
                 grid-template-columns: 1fr;
             }
@@ -537,25 +746,88 @@
                 grid-template-columns: 1fr;
             }
         }
+
+        @media (max-width: 700px) {
+            .cv-header {
+                flex-direction: column;
+                text-align: center;
+                padding: 35px 25px;
+            }
+            
+            .cv-header-contact {
+                justify-content: center;
+            }
+            
+            .cv-header-info h1 {
+                font-size: 2.5rem;
+            }
+            
+            .cv-experience-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 20px 10px;
+            }
+            
+            .cv-left, .cv-right {
+                padding: 25px 20px;
+            }
+            
+            .cv-section-title {
+                font-size: 1rem;
+            }
+        }
+
+        /* ===== UTILITAIRES ===== */
+        .text-primary {
+            color: var(--primary);
+        }
+        
+        .text-gradient {
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .badge {
+            background: rgba(37, 99, 235, 0.1);
+            color: var(--primary);
+            padding: 4px 12px;
+            border-radius: 100px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
     </style>
 </head>
 <body>
+    <!-- BOUTON DE RETOUR CORRIGÉ - Retour à l'accueil section À Propos -->
+    <a href="index.html#propos" class="back-button" title="Retour à l'accueil - Section À Propos">
+        <i class="fas fa-arrow-left"></i>
+        <span>Retour à l'accueil</span>
+        <span class="badge">CV</span>
+    </a>
+
     <div class="cv-card">
         <div class="cv-strip"></div>
         
-        <!-- En-tête -->
+        <!-- En-tête modernisé -->
         <div class="cv-header">
             <div class="cv-photo">
-                <img src="img/koko.jpg" alt="Luc Katagondwa" onerror="this.src='https://via.placeholder.com/150x150?text=Luc'">
+                <img src="img/koko.jpg" alt="Luc Katagondwa" onerror="this.src='https://via.placeholder.com/160x160?text=Luc'">
             </div>
             <div class="cv-header-info">
                 <h1>LUC KATAGONDWA</h1>
                 <div class="title">
                     <i class="fas fa-code"></i>
                     Développeur Web Full Stack
+                    <span class="badge">Disponible</span>
                 </div>
                 <div class="cv-header-contact">
-                    <span><i class="fas fa-phone"></i> +243 845 759 419</span>
+                    <span><i class="fas fa-phone-alt"></i> +243 845 759 419</span>
                     <span><i class="fas fa-envelope"></i> luckatagondwa6@gmail.com</span>
                     <span><i class="fas fa-map-marker-alt"></i> Bukavu, RD Congo</span>
                 </div>
@@ -574,28 +846,23 @@
                     </div>
                     
                     <div class="cv-contact-item">
-                        <i class="fas fa-phone-alt"></i>
-                        <a href="tel:+243845759419">+243 845 759 419</a>
-                    </div>
-                    
-                    <div class="cv-contact-item">
-                        <i class="fas fa-envelope"></i>
-                        <a href="mailto:luckatagondwa6@gmail.com">luckatagondwa6@gmail.com</a>
-                    </div>
-                    
-                    <div class="cv-contact-item">
-                        <i class="fas fa-map-marker-alt"></i>
-                        <span>Bukavu, Sud-Kivu, RD Congo</span>
-                    </div>
-                    
-                    <div class="cv-contact-item">
                         <i class="fab fa-github"></i>
-                        <a href="#">github.com/luckat</a>
+                        <a href="https://github.com/Luckat-dev">github.com/luckat-dev</a>
                     </div>
                     
                     <div class="cv-contact-item">
                         <i class="fab fa-linkedin"></i>
-                        <a href="#">linkedin.com/in/luckat</a>
+                        <a href="https://www.linkedin.com/in/luc-katagondwa-558083388/">linkedin.com/in/luckat</a>
+                    </div>
+                    
+                    <div class="cv-contact-item">
+                        <i class="fab fa-twitter"></i>
+                        <a href="https://x.com/Luckat83">@Luckat83</a>
+                    </div>
+                    
+                    <div class="cv-contact-item">
+                        <i class="fab fa-instagram"></i>
+                        <a href="https://www.instagram.com/luckatagondwa/">@luckatagondwa</a>
                     </div>
                 </div>
                 
@@ -628,7 +895,7 @@
                     
                     <div class="cv-skill">
                         <div class="cv-skill-header">
-                            <span class="cv-skill-name">React.js</span>
+                            <span class="cv-skill-name">React.js / Next.js</span>
                             <span class="cv-skill-level">80%</span>
                         </div>
                         <div class="cv-skill-bar">
@@ -675,18 +942,18 @@
                     </div>
                     
                     <div class="cv-language">
-                        <span class="cv-language-name">Français</span>
-                        <span class="cv-language-level">Natif</span>
-                    </div>
-                    
-                    <div class="cv-language">
-                        <span class="cv-language-name">Anglais</span>
-                        <span class="cv-language-level">Professionnel</span>
-                    </div>
-                    
-                    <div class="cv-language">
-                        <span class="cv-language-name">Swahili</span>
+                        <span class="cv-language-name">🇫🇷 Français</span>
                         <span class="cv-language-level">Courant</span>
+                    </div>
+                    
+                    <div class="cv-language">
+                        <span class="cv-language-name">🇬🇧 Anglais</span>
+                        <span class="cv-language-level">Intermédiaire</span>
+                    </div>
+                    
+                    <div class="cv-language">
+                        <span class="cv-language-name">🇨🇩 Swahili</span>
+                        <span class="cv-language-level">Natif</span>
                     </div>
                 </div>
                 
@@ -698,12 +965,12 @@
                     </div>
                     
                     <div class="cv-interests">
-                        <span class="cv-interest-item"><i class="fas fa-book"></i> Lecture</span>
-                        <span class="cv-interest-item"><i class="fas fa-code"></i> Open Source</span>
-                        <span class="cv-interest-item"><i class="fas fa-music"></i> Musique</span>
-                        <span class="cv-interest-item"><i class="fas fa-chess"></i> Échecs</span>
-                        <span class="cv-interest-item"><i class="fas fa-plane"></i> Voyages</span>
-                        <span class="cv-interest-item"><i class="fas fa-camera"></i> Photo</span>
+                        <span class="cv-interest-item"><i class="fas fa-book-open"></i> Lecture tech</span>
+                        <span class="cv-interest-item"><i class="fas fa-code-branch"></i> Open Source</span>
+                        <span class="cv-interest-item"><i class="fas fa-headphones"></i> Musique</span>
+                        <span class="cv-interest-item"><i class="fas fa-chess-king"></i> Échecs</span>
+                        <span class="cv-interest-item"><i class="fas fa-globe-africa"></i> Voyages</span>
+                        <span class="cv-interest-item"><i class="fas fa-camera-retro"></i> Photographie</span>
                     </div>
                 </div>
             </div>
@@ -713,7 +980,7 @@
                 <!-- Profil -->
                 <div class="cv-profile">
                     <p>
-                        Développeur web passionné avec plus de 2 ans d'expérience dans la création d'applications web modernes et responsives. Spécialisé en React.js et Node.js, je combine créativité et expertise technique pour offrir des solutions innovantes adaptées aux besoins des clients. Rigoureux, autonome et toujours à l'affût des nouvelles technologies.
+                        Développeur web passionné avec <strong>+2 ans d'expérience</strong> dans la création d'applications web modernes et responsives. Spécialisé en <strong>React.js</strong> et <strong>Node.js</strong>, je combine créativité et expertise technique pour offrir des solutions innovantes. Rigoureux, autonome et toujours à l'affût des nouvelles technologies.
                     </p>
                 </div>
                 
@@ -730,12 +997,12 @@
                             <span class="cv-experience-date">2024 - Présent</span>
                         </div>
                         <div class="cv-experience-company">
-                            <i class="fas fa-building"></i> Freelance · Bukavu, RD Congo
+                            <i class="fas fa-laptop-code"></i> Freelance · Bukavu
                         </div>
                         <ul class="cv-experience-description">
                             <li>Création de sites web vitrines et e-commerce sur mesure</li>
                             <li>Développement d'applications web avec React et Node.js</li>
-                            <li>Optimisation SEO et performances des sites</li>
+                            <li>Optimisation SEO et performances (Lighthouse > 90)</li>
                             <li>Maintenance et mise à jour de sites existants</li>
                         </ul>
                     </div>
@@ -751,8 +1018,8 @@
                         <ul class="cv-experience-description">
                             <li>Intégration de maquettes responsive (HTML/CSS/JavaScript)</li>
                             <li>Création de composants réutilisables avec React</li>
-                            <li>Collaboration avec les designers et développeurs back-end</li>
-                            <li>Optimisation des performances et accessibilité</li>
+                            <li>Collaboration avec designers et développeurs back-end</li>
+                            <li>Optimisation des performances et accessibilité (WCAG)</li>
                         </ul>
                     </div>
                 </div>
@@ -766,25 +1033,25 @@
                     
                     <div class="cv-education-item">
                         <div class="cv-education-title">Licence en Informatique</div>
-                        <div class="cv-education-school">Université de Bukavu</div>
+                        <div class="cv-education-school">Université Officielle de Bukavu</div>
                         <div class="cv-education-date">
-                            <i class="fas fa-calendar"></i> 2021 - 2024
+                            <i class="far fa-calendar-alt"></i> 2023 - présent
                         </div>
                     </div>
                     
                     <div class="cv-education-item">
                         <div class="cv-education-title">Développement Web Full Stack</div>
-                        <div class="cv-education-school">OpenClassrooms / Udemy</div>
+                        <div class="cv-education-school">OpenClassrooms · Certification</div>
                         <div class="cv-education-date">
-                            <i class="fas fa-calendar"></i> 2023
+                            <i class="far fa-calendar-alt"></i> 2024
                         </div>
                     </div>
                     
                     <div class="cv-education-item">
                         <div class="cv-education-title">Certifications en ligne</div>
-                        <div class="cv-education-school">FreeCodeCamp, Coursera</div>
+                        <div class="cv-education-school">FreeCodeCamp, Coursera, Udemy</div>
                         <div class="cv-education-date">
-                            <i class="fas fa-calendar"></i> 2022 - 2024
+                            <i class="far fa-calendar-alt"></i> 2024 - 2026
                         </div>
                     </div>
                 </div>
@@ -798,34 +1065,35 @@
                     
                     <div class="cv-projects-grid">
                         <div class="cv-project-card">
-                            <div class="cv-project-title">Arbre généalogique</div>
+                            <div class="cv-project-title">Arbre Généalogique</div>
                             <div class="cv-project-tech">
                                 <span>React</span>
                                 <span>Node.js</span>
                                 <span>MongoDB</span>
                             </div>
                             <p class="cv-project-description">
-                                Application web permettant de créer et visualiser un arbre généalogique interactif.
+                                Application interactive pour créer et visualiser des arbres généalogiques avec relations complexes.
                             </p>
                         </div>
                         
                         <div class="cv-project-card">
-                            <div class="cv-project-title">Plateforme écrivain</div>
+                            <div class="cv-project-title">Plateforme Écrivain</div>
                             <div class="cv-project-tech">
                                 <span>PHP</span>
                                 <span>MySQL</span>
                                 <span>JavaScript</span>
                             </div>
                             <p class="cv-project-description">
-                                Site professionnel avec espace admin pour gérer articles et publications.
+                                Site professionnel avec espace admin pour gérer articles, publications et abonnés.
                             </p>
                         </div>
                         
                         <div class="cv-project-card">
-                            <div class="cv-project-title">Application de tâches</div>
+                            <div class="cv-project-title">TaskFlow App</div>
                             <div class="cv-project-tech">
                                 <span>React Native</span>
                                 <span>Firebase</span>
+                                <span>Expo</span>
                             </div>
                             <p class="cv-project-description">
                                 Application mobile cross-platform pour la gestion de projets en équipe.
@@ -833,26 +1101,26 @@
                         </div>
                         
                         <div class="cv-project-card">
-                            <div class="cv-project-title">Portfolio moderne</div>
+                            <div class="cv-project-title">Portfolio Pro</div>
                             <div class="cv-project-tech">
                                 <span>HTML5</span>
                                 <span>CSS3</span>
                                 <span>JavaScript</span>
                             </div>
                             <p class="cv-project-description">
-                                Site portfolio responsive avec animations et formulaire de contact.
+                                Site portfolio responsive avec animations, formulaire de contact et statistiques.
                             </p>
                         </div>
                     </div>
                 </div>
                 
-                <!-- Contact pour obtenir le CV -->
-                <div style="text-align: center; margin-top: 30px;">
-                    <p style="color: #475569; margin-bottom: 10px;">
-                        <i class="fas fa-info-circle" style="color: #667eea;"></i>
-                        Pour obtenir ce CV en format PDF, contactez-moi :
+                <!-- Contact CTA -->
+                <div style="text-align: center; margin-top: 40px;">
+                    <p style="color: var(--gray); margin-bottom: 15px;">
+                        <i class="fas fa-download" style="color: var(--primary);"></i>
+                        Téléchargez ce CV ou contactez-moi :
                     </p>
-                    <a href="mailto:luckatagondwa6@gmail.com?subject=Demande%20de%20CV" class="cv-contact-btn">
+                    <a href="mailto:luckatagondwa6@gmail.com?subject=Demande%20de%20CV%20-%20Luc%20Katagondwa" class="cv-contact-btn">
                         <i class="fas fa-envelope"></i>
                         luckatagondwa6@gmail.com
                     </a>
@@ -863,14 +1131,31 @@
         <!-- Footer -->
         <div class="cv-footer">
             <p>
-                <span class="signature">Designed by Luc Kat</span> 
-                <i class="fas fa-heart"></i> 
-                <span>Bukavu, 2026</span>
+                <span class="signature">Luc Katagondwa</span> 
+                <i class="fas fa-code"></i> 
+                <span>Développeur Web Full Stack</span>
             </p>
-            <p style="font-size: 0.8rem; margin-top: 5px;">
-                <i class="fas fa-copyright"></i> Tous droits réservés
+            <p style="font-size: 0.8rem; margin-top: 8px; opacity: 0.7;">
+                <i class="far fa-copyright"></i> 2026 · Bukavu, RD Congo · Tous droits réservés
             </p>
         </div>
     </div>
+
+    <!-- Script pour assurer que le bouton est cliquable -->
+    <script>
+        // Vérifier que le bouton est bien cliquable
+        document.addEventListener('DOMContentLoaded', function() {
+            const backButton = document.querySelector('.back-button');
+            
+            if (backButton) {
+                // S'assurer que le bouton est cliquable
+                backButton.style.pointerEvents = 'auto';
+                backButton.style.cursor = 'pointer';
+                backButton.style.zIndex = '99999';
+                
+                console.log('✅ Bouton de retour prêt :', backButton.href);
+            }
+        });
+    </script>
 </body>
 </html>
