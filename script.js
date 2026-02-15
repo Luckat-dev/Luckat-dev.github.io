@@ -1,9 +1,11 @@
 // ============================================
-// PORTFOLIO LUC KAT - SCRIPT UNIQUE ET OPTIMISÉ
+// PORTFOLIO LUC KAT - VERSION FINALE CORRIGÉE
 // ============================================
 
 // ===== INITIALISATION GÉNÉRALE =====
 document.addEventListener('DOMContentLoaded', function() {
+    console.log('🚀 Initialisation du site...');
+    
     // Initialisation de toutes les fonctionnalités
     initNavigation();
     initSmoothScroll();
@@ -12,24 +14,29 @@ document.addEventListener('DOMContentLoaded', function() {
     initHeroStatsCounter();
     initContactForm();
     initFooterNewsletter();
-    initConsentSystem();      // Système de consentement avec comptage
     initScrollAnimations();
     initHeaderScroll();
+    
+    // SYSTÈME DE COMPTAGE - PRIORITAIRE
+    initCountingSystem();
+    
+    // SYSTÈME DE CONSENTEMENT
+    initConsentSystem();
     
     // Initialiser EmailJS
     if (typeof emailjs !== 'undefined') {
         emailjs.init('I6EsZTDdzkv_VfLbE');
+        console.log('📧 EmailJS initialisé');
     }
 });
 
-// ===== 1. MENU HAMBURGER (OPTIMISÉ MOBILE) =====
+// ===== 1. MENU HAMBURGER =====
 function initNavigation() {
     const menuToggle = document.querySelector('.menu-toggle');
     const navLinks = document.querySelector('.nav-links');
     
     if (!menuToggle || !navLinks) return;
     
-    // Ouvrir/fermer le menu
     menuToggle.addEventListener('click', function(e) {
         e.stopPropagation();
         this.classList.toggle('active');
@@ -37,7 +44,6 @@ function initNavigation() {
         document.body.style.overflow = navLinks.classList.contains('active') ? 'hidden' : '';
     });
     
-    // Fermer quand on clique sur un lien
     navLinks.querySelectorAll('a').forEach(link => {
         link.addEventListener('click', function(e) {
             e.preventDefault();
@@ -60,7 +66,6 @@ function initNavigation() {
         });
     });
     
-    // Fermer en cliquant ailleurs
     document.addEventListener('click', function(e) {
         if (!menuToggle.contains(e.target) && !navLinks.contains(e.target)) {
             menuToggle.classList.remove('active');
@@ -135,7 +140,7 @@ function initSkillBars() {
     };
     
     window.addEventListener('scroll', animateSkillBars);
-    animateSkillBars(); // Vérifier au chargement
+    animateSkillBars();
 }
 
 // ===== 5. COMPTEUR DES STATS DU HERO =====
@@ -175,69 +180,94 @@ function initHeroStatsCounter() {
     };
     
     window.addEventListener('scroll', countStats);
-    countStats(); // Vérifier au chargement
+    countStats();
 }
 
-// ===== 6. SYSTÈME DE CONSENTEMENT AVEC COMPTAGE =====
-function initConsentSystem() {
-    const CONSENT_KEY = 'luc_kat_consent';
-    const VISITOR_KEY = 'luc_kat_visitors';
-    const ACCEPT_KEY = 'luc_kat_accepts';
+// ===== 6. SYSTÈME DE COMPTAGE CORRIGÉ =====
+function initCountingSystem() {
+    console.log('🔍 Initialisation du compteur...');
     
-    // Initialiser les compteurs
+    const VISITOR_KEY = 'luc_kat_visitors';
+    const SESSION_KEY = 'visitor_counted_' + window.location.pathname;
+    
+    // 1. Initialiser le compteur si besoin
     if (!localStorage.getItem(VISITOR_KEY)) {
         localStorage.setItem(VISITOR_KEY, '0');
+        console.log('📊 Compteur initialisé à 0');
     }
+    
+    // 2. Lire la valeur actuelle
+    let visitors = parseInt(localStorage.getItem(VISITOR_KEY) || '0');
+    
+    // 3. Vérifier si c'est une nouvelle visite dans CETTE session
+    if (!sessionStorage.getItem(SESSION_KEY)) {
+        // C'est un NOUVEAU visiteur dans cette session
+        visitors++;
+        localStorage.setItem(VISITOR_KEY, visitors.toString());
+        sessionStorage.setItem(SESSION_KEY, 'true');
+        
+        console.log('✅ NOUVEAU VISITEUR COMPTÉ! Total:', visitors);
+        
+        // Afficher une notification dans la console
+        console.log('👋 Bienvenue sur mon portfolio!');
+    } else {
+        console.log('ℹ️ Visiteur déjà compté dans cette session');
+    }
+    
+    // 4. Mettre à jour tous les affichages
+    updateAllDisplays();
+    
+    // 5. Mettre à jour périodiquement
+    setInterval(updateAllDisplays, 2000);
+}
+
+// ===== 7. SYSTÈME DE CONSENTEMENT (SANS COMPTAGE) =====
+function initConsentSystem() {
+    const CONSENT_KEY = 'luc_kat_consent';
+    const ACCEPT_KEY = 'luc_kat_accepts';
+    
+    // Initialiser le compteur d'acceptations
     if (!localStorage.getItem(ACCEPT_KEY)) {
         localStorage.setItem(ACCEPT_KEY, '0');
     }
     
-    // === SYSTÈME DE COMPTAGE INTELLIGENT ===
-    // Ne compte le visiteur QUE si :
-    // 1. Pas encore de consentement (nouveau visiteur)
-    // 2. Pas déjà compté dans cette session
-    const consent = localStorage.getItem(CONSENT_KEY);
-    const isCounted = sessionStorage.getItem('visitor_counted');
-    
-    if (!consent && !isCounted) {
-        // Incrémenter le compteur de visiteurs
-        let visitors = parseInt(localStorage.getItem(VISITOR_KEY) || '0');
-        visitors++;
-        localStorage.setItem(VISITOR_KEY, visitors.toString());
-        
-        // Marquer comme compté pour cette session
-        sessionStorage.setItem('visitor_counted', 'true');
-        
-        console.log('✅ Nouveau visiteur compté! Total:', visitors);
-    }
-    
-    // === GESTION DE LA BANNIÈRE ===
+    // Récupérer les éléments
     const overlay = document.getElementById('consentOverlay');
     const banner = document.getElementById('consentBanner');
     const yesBtn = document.getElementById('consentYes');
     const noBtn = document.getElementById('consentNo');
     
-    if (!overlay || !banner || !yesBtn || !noBtn) return;
+    if (!overlay || !banner || !yesBtn || !noBtn) {
+        console.log('⚠️ Éléments de consentement non trouvés');
+        return;
+    }
     
-    // Afficher ou non la bannière selon le consentement
+    const consent = localStorage.getItem(CONSENT_KEY);
+    
+    // Afficher ou non la bannière
     if (consent === 'accepted') {
         overlay.style.display = 'none';
         banner.style.display = 'none';
+        console.log('🔓 Consentement déjà accepté');
     }
     else if (consent === 'refused') {
+        console.log('🔒 Consentement refusé');
         // Redirection vers Google
         window.location.href = 'https://www.google.com';
     }
     else {
-        // Afficher la bannière après 1 seconde
+        // Afficher la bannière après 2 secondes
+        console.log('🕐 Affichage de la bannière dans 2s...');
         setTimeout(() => {
             overlay.style.display = 'block';
             banner.style.display = 'block';
-        }, 1000);
+            console.log('🟢 Bannière affichée');
+        }, 2000);
     }
     
     // Bouton OUI
     yesBtn.addEventListener('click', function() {
+        console.log('👍 Clic sur OUI');
         localStorage.setItem(CONSENT_KEY, 'accepted');
         
         // Incrémenter les acceptations
@@ -250,45 +280,47 @@ function initConsentSystem() {
         banner.style.display = 'none';
         
         // Mettre à jour l'affichage
-        updateStatsDisplay();
+        updateAllDisplays();
         
-        console.log('👍 Consentement accepté! Total acceptations:', accepts);
+        console.log('✅ Consentement accepté! Total acceptations:', accepts);
     });
     
     // Bouton NON
     noBtn.addEventListener('click', function() {
+        console.log('👎 Clic sur NON - Redirection');
         localStorage.setItem(CONSENT_KEY, 'refused');
         window.location.href = 'https://www.google.com';
     });
     
-    // Mettre à jour l'affichage des stats
-    updateStatsDisplay();
-    
-    // Mise à jour périodique du badge
-    setInterval(updateStatsDisplay, 2000);
+    // Mettre à jour l'affichage
+    updateAllDisplays();
 }
 
-// ===== 7. PANNEAU STATISTIQUE =====
-function updateStatsDisplay() {
+// ===== 8. MISE À JOUR DE TOUS LES AFFICHAGES =====
+function updateAllDisplays() {
     const visitors = parseInt(localStorage.getItem('luc_kat_visitors') || '0');
     const accepts = parseInt(localStorage.getItem('luc_kat_accepts') || '0');
     const rate = visitors > 0 ? Math.round((accepts / visitors) * 100) : 0;
+    
+    // Mettre à jour le badge en bas à gauche
+    const liveCount = document.getElementById('liveCount');
+    if (liveCount) {
+        liveCount.textContent = visitors;
+    }
     
     // Mettre à jour le panneau
     const statVisitors = document.getElementById('statVisitors');
     const statAccepts = document.getElementById('statAccepts');
     const statRate = document.getElementById('statRate');
     const statUpdate = document.getElementById('statUpdate');
-    const liveCount = document.getElementById('liveCount');
     
     if (statVisitors) statVisitors.textContent = visitors;
     if (statAccepts) statAccepts.textContent = accepts;
     if (statRate) statRate.textContent = rate + '%';
     if (statUpdate) statUpdate.textContent = new Date().toLocaleTimeString('fr-FR');
-    if (liveCount) liveCount.textContent = visitors;
 }
 
-// Fonctions globales pour le panneau
+// ===== 9. FONCTIONS GLOBALES POUR LE PANNEAU =====
 window.toggleStatsPanel = function() {
     const panel = document.getElementById('statsPanel');
     if (panel) {
@@ -307,7 +339,7 @@ window.closeStatsPanel = function() {
 };
 
 window.refreshStats = function() {
-    updateStatsDisplay();
+    updateAllDisplays();
     
     // Animation du bouton
     const refreshBtn = document.querySelector('.stats-btn.refresh i');
@@ -325,23 +357,23 @@ window.resetStats = function() {
         localStorage.setItem('luc_kat_visitors', '0');
         localStorage.setItem('luc_kat_accepts', '0');
         localStorage.removeItem('luc_kat_consent');
-        sessionStorage.removeItem('visitor_counted');
-        updateStatsDisplay();
+        sessionStorage.clear();
+        updateAllDisplays();
         alert('✅ Statistiques réinitialisées!');
+        console.log('🔄 Compteur remis à zéro');
         location.reload();
     } else if (pwd !== null) {
         alert('❌ Mot de passe incorrect!');
     }
 };
 
-// ===== 8. FORMULAIRE DE CONTACT =====
+// ===== 10. FORMULAIRE DE CONTACT =====
 function initContactForm() {
     const form = document.getElementById('contactForm');
     if (!form) return;
     
     const submitBtn = document.getElementById('submitBtn');
     
-    // Créer le conteneur de message s'il n'existe pas
     let formMessage = document.getElementById('formMessage');
     if (!formMessage) {
         formMessage = document.createElement('div');
@@ -358,19 +390,16 @@ function initContactForm() {
             return;
         }
         
-        // Désactiver le bouton
         if (submitBtn) {
             submitBtn.disabled = true;
             submitBtn.innerHTML = '<span>Envoi...</span> <i class="fas fa-spinner fa-spin"></i>';
         }
         
-        // Récupérer les données
         const name = form.querySelector('[name="name"]')?.value || '';
         const email = form.querySelector('[name="email"]')?.value || '';
         const subject = form.querySelector('[name="subject"]')?.value || 'Message du portfolio';
         const message = form.querySelector('[name="message"]')?.value || '';
         
-        // Validation
         if (!name || !email || !message) {
             showFormMessage(formMessage, 'Veuillez remplir tous les champs obligatoires', 'error');
             resetSubmitButton(submitBtn);
@@ -383,7 +412,6 @@ function initContactForm() {
             return;
         }
         
-        // Envoyer
         try {
             const response = await emailjs.send(
                 'service_4xba3js',
@@ -412,7 +440,7 @@ function initContactForm() {
     });
 }
 
-// ===== 9. NEWSLETTER =====
+// ===== 11. NEWSLETTER =====
 function initFooterNewsletter() {
     const newsletterForm = document.getElementById('footerNewsletter');
     if (!newsletterForm) return;
@@ -460,7 +488,7 @@ function initFooterNewsletter() {
     });
 }
 
-// ===== 10. ANIMATIONS AU SCROLL =====
+// ===== 12. ANIMATIONS AU SCROLL =====
 function initScrollAnimations() {
     const animatedElements = document.querySelectorAll('.skill-card, .project-card, .contact-item');
     
@@ -488,7 +516,7 @@ function initScrollAnimations() {
     });
 }
 
-// ===== 11. EFFET DE SCROLL SUR LA NAVBAR =====
+// ===== 13. EFFET DE SCROLL SUR LA NAVBAR =====
 function initHeaderScroll() {
     const navbar = document.querySelector('.navbar');
     if (!navbar) return;
@@ -504,13 +532,12 @@ function initHeaderScroll() {
     });
 }
 
-// ===== 12. FONCTIONS UTILITAIRES =====
+// ===== 14. FONCTIONS UTILITAIRES =====
 function showFormMessage(element, text, type) {
     if (!element) return;
     element.className = 'form-message ' + type;
     element.innerHTML = '<i class="fas fa-' + (type === 'success' ? 'check-circle' : 'exclamation-circle') + '"></i> ' + text;
     
-    // Auto-effacer après 5 secondes
     setTimeout(() => {
         element.innerHTML = '';
         element.className = 'form-message';
@@ -528,7 +555,7 @@ function isValidEmail(email) {
     return re.test(email);
 }
 
-// ===== 13. COMMANDE CONSOLE POUR DÉBOGUER =====
+// ===== 15. COMMANDE CONSOLE POUR DÉBOGUER =====
 window.showStats = function() {
     const visitors = localStorage.getItem('luc_kat_visitors') || '0';
     const accepts = localStorage.getItem('luc_kat_accepts') || '0';
@@ -537,8 +564,14 @@ window.showStats = function() {
     const rate = v > 0 ? Math.round((a / v) * 100) : 0;
     
     console.log('📊 STATISTIQUES DU SITE:');
-    console.log(`   👥 Visiteurs: ${visitors}`);
+    console.log(`   👥 Visiteurs: ${visitors}`);s
     console.log(`   ✅ Acceptations: ${accepts}`);
     console.log(`   📈 Taux: ${rate}%`);
     console.log(`   🍪 Consentement: ${localStorage.getItem('luc_kat_consent') || 'pas encore'}`);
 };
+
+// Initialisation supplémentaire au chargement complet
+window.addEventListener('load', function() {
+    console.log('✅ Site complètement chargé');
+    console.log('📊 Visiteurs actuels:', localStorage.getItem('luc_kat_visitors') || '0');
+});

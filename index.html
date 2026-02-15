@@ -907,7 +907,7 @@
         </div>
     </footer>
 
-    <!-- BOUTON STATISTIQUE (UN SEUL !) -->
+    <!-- BOUTON STATISTIQUE -->
     <div style="position: fixed; bottom: 20px; left: 20px; z-index: 99999;">
         <button onclick="toggleStatsPanel()" class="stats-button">
             <i class="fas fa-chart-line"></i>
@@ -953,32 +953,106 @@
         </div>
     </div>
 
-    <!-- Scripts (UN SEUL appel à script.js) -->
+    <!-- Script principal -->
     <script src="script.js"></script>
     
+    <!-- Script de secours pour le comptage (indépendant) -->
     <script>
-        // Fonctions pour le panneau statistique
-        function toggleStatsPanel() {
-            const panel = document.getElementById('statsPanel');
-            if (panel.style.display === 'none' || panel.style.display === '') {
-                panel.style.display = 'block';
-                if (typeof refreshStats === 'function') refreshStats();
+        // SYSTÈME DE COMPTAGE ULTRA SIMPLE ET FIABLE
+        (function() {
+            console.log('🔍 Initialisation du compteur...');
+            
+            // Clés de stockage
+            const VISITOR_KEY = 'luc_kat_visiteurs_total';
+            const SESSION_KEY = 'visiteur_compte';
+            
+            // Initialiser le compteur
+            let visiteurs = localStorage.getItem(VISITOR_KEY);
+            if (visiteurs === null) {
+                visiteurs = 0;
+                localStorage.setItem(VISITOR_KEY, '0');
+                console.log('📊 Compteur initialisé à 0');
             } else {
-                panel.style.display = 'none';
+                visiteurs = parseInt(visiteurs);
+                console.log('📊 Compteur existant:', visiteurs);
             }
-        }
-
-        function closeStatsPanel() {
-            document.getElementById('statsPanel').style.display = 'none';
-        }
-
-        // Mise à jour automatique du badge
-        setInterval(function() {
-            const badge = document.getElementById('liveCount');
-            if (badge) {
-                badge.textContent = localStorage.getItem('luc_kat_visitors') || '0';
+            
+            // Vérifier si c'est une nouvelle visite dans CETTE session
+            if (!sessionStorage.getItem(SESSION_KEY)) {
+                // NOUVEAU VISITEUR !
+                visiteurs++;
+                localStorage.setItem(VISITOR_KEY, visiteurs.toString());
+                sessionStorage.setItem(SESSION_KEY, 'true');
+                
+                console.log('✅ NOUVEAU VISITEUR COMPTÉ! Total:', visiteurs);
+            } else {
+                console.log('ℹ️ Visiteur déjà compté dans cette session');
             }
-        }, 1000);
+            
+            // Fonction pour mettre à jour tous les affichages
+            function mettreAJourAffichage() {
+                const liveCount = document.getElementById('liveCount');
+                const statVisitors = document.getElementById('statVisitors');
+                const statAccepts = document.getElementById('statAccepts');
+                const statRate = document.getElementById('statRate');
+                const statUpdate = document.getElementById('statUpdate');
+                
+                const total = parseInt(localStorage.getItem(VISITOR_KEY) || '0');
+                const accepts = parseInt(localStorage.getItem('luc_kat_accepts') || '0');
+                const taux = total > 0 ? Math.round((accepts / total) * 100) : 0;
+                
+                if (liveCount) liveCount.textContent = total;
+                if (statVisitors) statVisitors.textContent = total;
+                if (statAccepts) statAccepts.textContent = accepts;
+                if (statRate) statRate.textContent = taux + '%';
+                if (statUpdate) statUpdate.textContent = new Date().toLocaleTimeString('fr-FR');
+            }
+            
+            // Mettre à jour immédiatement
+            mettreAJourAffichage();
+            
+            // Mettre à jour toutes les 2 secondes
+            setInterval(mettreAJourAffichage, 2000);
+            
+            // Exposer les fonctions globales
+            window.refreshStats = function() {
+                mettreAJourAffichage();
+                console.log('🔄 Statistiques actualisées');
+            };
+            
+            window.resetStats = function() {
+                const pwd = prompt('🔐 Mot de passe pour réinitialiser:');
+                if (pwd === 'LucKat2026') {
+                    localStorage.setItem(VISITOR_KEY, '0');
+                    localStorage.setItem('luc_kat_accepts', '0');
+                    sessionStorage.removeItem(SESSION_KEY);
+                    mettreAJourAffichage();
+                    alert('✅ Statistiques réinitialisées!');
+                    console.log('🔄 Compteur remis à zéro');
+                } else if (pwd !== null) {
+                    alert('❌ Mot de passe incorrect!');
+                }
+            };
+            
+            window.toggleStatsPanel = function() {
+                const panel = document.getElementById('statsPanel');
+                if (panel) {
+                    if (panel.style.display === 'none' || panel.style.display === '') {
+                        panel.style.display = 'block';
+                        mettreAJourAffichage();
+                    } else {
+                        panel.style.display = 'none';
+                    }
+                }
+            };
+            
+            window.closeStatsPanel = function() {
+                const panel = document.getElementById('statsPanel');
+                if (panel) panel.style.display = 'none';
+            };
+            
+            console.log('✅ Système de comptage prêt! Visiteurs actuels:', visiteurs);
+        })();
     </script>
 </body>
 </html>
