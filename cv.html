@@ -17,13 +17,13 @@
     <link rel="icon" type="image/png" href="img/writer.jpg">
     
     <style>
-        /* ===== VARIABLES PROFESSIONNELLES ===== */
+        /* ===== VARIABLES AVEC ORANGE ===== */
         :root {
-            --primary: #2563eb;
-            --primary-dark: #1d4ed8;
-            --primary-light: #3b82f6;
-            --secondary: #7c3aed;
-            --accent: #06b6d4;
+            --primary: #f97316;        /* Orange vif */
+            --primary-dark: #ea580c;    /* Orange foncé */
+            --primary-light: #fb923c;   /* Orange clair */
+            --secondary: #f59e0b;       /* Ambre */
+            --accent: #f97316;           /* Orange */
             --dark: #0f172a;
             --dark-soft: #1e293b;
             --gray: #475569;
@@ -32,11 +32,13 @@
             --white: #ffffff;
             --success: #10b981;
             --warning: #f59e0b;
-            --gradient: linear-gradient(135deg, var(--primary), var(--secondary));
+            --gradient: linear-gradient(135deg, var(--primary), #f59e0b);
+            --gradient-orange: linear-gradient(135deg, #f97316, #f59e0b);
             --shadow-sm: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
             --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
             --shadow-lg: 0 20px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04);
             --shadow-xl: 0 25px 50px -12px rgba(0,0,0,0.25);
+            --shadow-orange: 0 10px 25px -5px rgba(249, 115, 22, 0.3);
         }
 
         * {
@@ -46,7 +48,7 @@
         }
 
         body {
-            background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+            background: linear-gradient(135deg, #f9731615 0%, #f59e0b15 100%);
             font-family: 'Plus Jakarta Sans', sans-serif;
             display: flex;
             justify-content: center;
@@ -58,7 +60,7 @@
             position: relative;
         }
 
-        /* ===== BOUTON DE RETOUR CORRIGÉ ===== */
+        /* ===== BOUTON DE RETOUR AVEC ORANGE ===== */
         .back-button {
             position: fixed;
             top: 30px;
@@ -75,12 +77,12 @@
             font-weight: 600;
             font-size: 1rem;
             box-shadow: var(--shadow-lg);
-            border: 1px solid rgba(37, 99, 235, 0.2);
+            border: 1px solid rgba(249, 115, 22, 0.2);
             transition: all 0.3s ease;
             backdrop-filter: blur(10px);
             background: rgba(255, 255, 255, 0.95);
-            cursor: pointer; /* Ajouté */
-            pointer-events: auto; /* Ajouté */
+            cursor: pointer;
+            pointer-events: auto;
         }
 
         .back-button:hover {
@@ -102,7 +104,7 @@
         }
 
         .back-button span {
-            background: var(--gradient);
+            background: var(--gradient-orange);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -110,7 +112,7 @@
         }
 
         .back-button .badge {
-            background: rgba(37, 99, 235, 0.1);
+            background: rgba(249, 115, 22, 0.1);
             padding: 4px 8px;
             border-radius: 30px;
             font-size: 0.7rem;
@@ -170,10 +172,10 @@
             }
         }
 
-        /* ===== BANDE DÉCORATIVE ===== */
+        /* ===== BANDE DÉCORATIVE ORANGE ===== */
         .cv-strip {
             height: 6px;
-            background: var(--gradient);
+            background: var(--gradient-orange);
             position: relative;
             z-index: 2;
         }
@@ -197,7 +199,7 @@
             right: -50%;
             width: 100%;
             height: 200%;
-            background: radial-gradient(circle, rgba(255,255,255,0.03) 0%, transparent 70%);
+            background: radial-gradient(circle, rgba(249,115,22,0.03) 0%, transparent 70%);
             animation: rotate 40s linear infinite;
         }
 
@@ -223,7 +225,7 @@
             width: 160px;
             height: 160px;
             border-radius: 30px;
-            border: 4px solid rgba(255,255,255,0.15);
+            border: 4px solid rgba(249,115,22,0.2);
             overflow: hidden;
             box-shadow: var(--shadow-lg);
             position: relative;
@@ -272,18 +274,19 @@
         }
 
         .cv-header-info .title i {
-            color: var(--accent);
+            color: var(--primary);
             font-size: 1.2rem;
         }
 
         .cv-header-info .badge {
-            background: rgba(255,255,255,0.1);
+            background: rgba(249,115,22,0.2);
             padding: 6px 12px;
             border-radius: 100px;
             font-size: 0.75rem;
             font-weight: 600;
             letter-spacing: 0.5px;
-            border: 1px solid rgba(255,255,255,0.2);
+            border: 1px solid rgba(249,115,22,0.3);
+            color: var(--primary-light);
         }
 
         .cv-header-contact {
@@ -307,7 +310,7 @@
 
         .cv-header-contact i {
             width: 18px;
-            color: var(--accent);
+            color: var(--primary);
         }
 
         /* ===== CONTENU PRINCIPAL ===== */
@@ -322,7 +325,7 @@
         .cv-left {
             background: var(--light);
             padding: 40px 30px;
-            border-right: 1px solid rgba(37, 99, 235, 0.1);
+            border-right: 1px solid rgba(249, 115, 22, 0.1);
         }
 
         .cv-section {
@@ -350,7 +353,7 @@
             left: 0;
             width: 40px;
             height: 3px;
-            background: var(--gradient);
+            background: var(--gradient-orange);
             border-radius: 4px;
         }
 
@@ -410,7 +413,7 @@
         .cv-skill-level {
             color: var(--primary);
             font-weight: 700;
-            background: rgba(37, 99, 235, 0.1);
+            background: rgba(249, 115, 22, 0.1);
             padding: 2px 8px;
             border-radius: 20px;
             font-size: 0.8rem;
@@ -426,7 +429,7 @@
 
         .cv-skill-progress {
             height: 100%;
-            background: var(--gradient);
+            background: var(--gradient-orange);
             border-radius: 10px;
             transition: width 1s ease;
             position: relative;
@@ -448,7 +451,7 @@
         .cv-language:hover {
             border-color: var(--primary);
             transform: translateY(-2px);
-            box-shadow: var(--shadow-sm);
+            box-shadow: var(--shadow-orange);
         }
 
         .cv-language-name {
@@ -485,7 +488,7 @@
         .cv-interest-item:hover {
             border-color: var(--primary);
             transform: translateY(-2px);
-            box-shadow: var(--shadow-sm);
+            box-shadow: var(--shadow-orange);
             color: var(--primary);
         }
 
@@ -502,11 +505,11 @@
 
         /* Profil */
         .cv-profile {
-            background: linear-gradient(135deg, var(--light) 0%, var(--white) 100%);
+            background: linear-gradient(135deg, rgba(249,115,22,0.03) 0%, var(--white) 100%);
             padding: 30px;
             border-radius: 20px;
             margin-bottom: 35px;
-            border: 1px solid #e2e8f0;
+            border: 1px solid rgba(249,115,22,0.1);
             position: relative;
             overflow: hidden;
         }
@@ -517,7 +520,7 @@
             top: -30px;
             right: 10px;
             font-size: 10rem;
-            color: rgba(37, 99, 235, 0.05);
+            color: rgba(249,115,22,0.05);
             font-family: serif;
         }
 
@@ -533,7 +536,7 @@
         .cv-experience-item {
             margin-bottom: 30px;
             padding-bottom: 25px;
-            border-bottom: 1px dashed #e2e8f0;
+            border-bottom: 1px dashed rgba(249,115,22,0.2);
         }
 
         .cv-experience-item:last-child {
@@ -558,7 +561,7 @@
         }
 
         .cv-experience-date {
-            background: var(--gradient);
+            background: var(--gradient-orange);
             color: var(--white);
             padding: 5px 15px;
             border-radius: 100px;
@@ -597,14 +600,16 @@
         .cv-education-item {
             margin-bottom: 20px;
             padding: 15px;
-            background: var(--light);
+            background: rgba(249,115,22,0.02);
             border-radius: 16px;
             transition: all 0.3s ease;
+            border: 1px solid rgba(249,115,22,0.1);
         }
 
         .cv-education-item:hover {
             transform: translateX(5px);
-            box-shadow: var(--shadow-sm);
+            box-shadow: var(--shadow-orange);
+            border-color: var(--primary);
         }
 
         .cv-education-title {
@@ -637,17 +642,17 @@
         }
 
         .cv-project-card {
-            background: var(--light);
+            background: rgba(249,115,22,0.02);
             padding: 20px;
             border-radius: 16px;
             transition: all 0.3s ease;
-            border: 1px solid #e2e8f0;
+            border: 1px solid rgba(249,115,22,0.1);
             height: 100%;
         }
 
         .cv-project-card:hover {
             transform: translateY(-5px);
-            box-shadow: var(--shadow-lg);
+            box-shadow: var(--shadow-orange);
             border-color: var(--primary);
         }
 
@@ -671,7 +676,7 @@
             border-radius: 100px;
             font-size: 0.7rem;
             color: var(--primary);
-            border: 1px solid #e2e8f0;
+            border: 1px solid rgba(249,115,22,0.2);
             font-weight: 600;
         }
 
@@ -686,7 +691,7 @@
             display: inline-flex;
             align-items: center;
             gap: 10px;
-            background: var(--gradient);
+            background: var(--gradient-orange);
             color: var(--white);
             padding: 12px 28px;
             border-radius: 100px;
@@ -695,7 +700,7 @@
             font-weight: 600;
             transition: all 0.3s ease;
             border: none;
-            box-shadow: var(--shadow-md);
+            box-shadow: var(--shadow-orange);
         }
 
         .cv-contact-btn:hover {
@@ -721,13 +726,13 @@
             font-weight: 700;
             color: var(--white);
             letter-spacing: 0.5px;
-            background: linear-gradient(135deg, var(--white), var(--gray-light));
+            background: var(--gradient-orange);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
         .cv-footer i {
-            color: var(--accent);
+            color: var(--primary);
             margin: 0 5px;
         }
 
@@ -739,7 +744,7 @@
             
             .cv-left {
                 border-right: none;
-                border-bottom: 1px solid #e2e8f0;
+                border-bottom: 1px solid rgba(249,115,22,0.1);
             }
             
             .cv-projects-grid {
@@ -788,13 +793,13 @@
         }
         
         .text-gradient {
-            background: var(--gradient);
+            background: var(--gradient-orange);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
         
         .badge {
-            background: rgba(37, 99, 235, 0.1);
+            background: rgba(249, 115, 22, 0.1);
             color: var(--primary);
             padding: 4px 12px;
             border-radius: 100px;
@@ -1141,21 +1146,39 @@
         </div>
     </div>
 
-    <!-- Script pour assurer que le bouton est cliquable -->
+    <!-- Script amélioré pour le stockage -->
     <script>
-        // Vérifier que le bouton est bien cliquable
-        document.addEventListener('DOMContentLoaded', function() {
-            const backButton = document.querySelector('.back-button');
+        // ===== SYSTÈME DE STOCKAGE AMÉLIORÉ =====
+        (function() {
+            console.log('🔍 Initialisation du stockage...');
             
+            // Clé unique pour tout le site
+            const SITE_VISIT_KEY = 'luc_kat_site_visited';
+            const VISIT_TIME_KEY = 'luc_kat_visit_time';
+            
+            // Vérifier si l'utilisateur a déjà visité le site aujourd'hui
+            const lastVisit = localStorage.getItem(SITE_VISIT_KEY);
+            const lastTime = localStorage.getItem(VISIT_TIME_KEY);
+            const now = Date.now();
+            
+            // Si pas de visite OU visite il y a plus de 24h
+            if (!lastVisit || !lastTime || (now - parseInt(lastTime) > 24 * 60 * 60 * 1000)) {
+                console.log('🕐 Première visite du jour ou nouvelle visite');
+                localStorage.setItem(SITE_VISIT_KEY, 'visited');
+                localStorage.setItem(VISIT_TIME_KEY, now.toString());
+            } else {
+                console.log('ℹ️ Déjà visité aujourd'hui');
+            }
+            
+            // Vérifier que le bouton de retour est cliquable
+            const backButton = document.querySelector('.back-button');
             if (backButton) {
-                // S'assurer que le bouton est cliquable
                 backButton.style.pointerEvents = 'auto';
                 backButton.style.cursor = 'pointer';
                 backButton.style.zIndex = '99999';
-                
-                console.log('✅ Bouton de retour prêt :', backButton.href);
+                console.log('✅ Bouton de retour prêt');
             }
-        });
+        })();
     </script>
 </body>
 </html>

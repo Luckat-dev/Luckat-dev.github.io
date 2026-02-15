@@ -295,161 +295,43 @@
         .footer-social-link:hover i {
             transform: scale(1.1);
         }
-        
-        /* Styles pour le bouton statistique */
-        .stats-button {
-            background: linear-gradient(135deg, #6366f1, #8b5cf6);
-            color: white;
-            border: none;
-            border-radius: 60px;
-            padding: 12px 25px;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            box-shadow: 0 10px 25px rgba(99, 102, 241, 0.4);
+
+        /* Style pour Flag Counter (amélioré pour footer noir) */
+        .flag-counter-container {
+            text-align: center;
+            margin: 30px auto 20px;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
             transition: all 0.3s ease;
-            border: 2px solid rgba(255, 255, 255, 0.2);
-            position: fixed;
-            bottom: 20px;
-            left: 20px;
-            z-index: 99999;
         }
-
-        .stats-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 35px rgba(99, 102, 241, 0.6);
+        
+        .flag-counter-container:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(99, 102, 241, 0.3);
         }
-
-        .stats-badge {
-            background: #ef4444;
-            color: white;
-            border-radius: 30px;
-            padding: 3px 10px;
-            font-size: 12px;
-            font-weight: 700;
-            animation: pulse 2s infinite;
+        
+        .flag-counter-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
         }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.6; }
-        }
-
-        .stats-panel {
-            position: fixed;
-            bottom: 90px;
-            left: 20px;
-            width: 320px;
-            background: white;
-            border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
-            z-index: 99999;
-            display: none;
-            overflow: hidden;
-            border: 1px solid #e2e8f0;
-        }
-
-        .stats-header {
-            background: linear-gradient(135deg, #1e293b, #0f172a);
-            color: white;
-            padding: 15px 20px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .stats-header i {
-            color: #fbbf24;
-            font-size: 1.3rem;
-        }
-
-        .stats-header h3 {
-            flex: 1;
-            margin: 0;
-            font-size: 1.1rem;
-        }
-
-        .stats-close {
-            background: none;
-            border: none;
-            color: white;
-            font-size: 1.8rem;
-            cursor: pointer;
-            line-height: 1;
-        }
-
-        .stats-content {
-            padding: 20px;
-        }
-
-        .stats-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 12px 0;
-            border-bottom: 1px solid #e2e8f0;
-        }
-
-        .stats-row:last-child {
-            border-bottom: none;
-        }
-
-        .stats-row i {
-            width: 20px;
-            color: #6366f1;
-        }
-
-        .stats-value {
-            font-weight: 700;
-            font-size: 1.3rem;
-            color: #1e293b;
-            background: #f1f5f9;
-            padding: 4px 12px;
-            border-radius: 30px;
-        }
-
-        .stats-actions {
-            display: flex;
-            gap: 10px;
-            padding: 20px;
-            background: #f8fafc;
-            border-top: 1px solid #e2e8f0;
-        }
-
-        .stats-btn {
-            flex: 1;
-            padding: 10px;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
-            font-size: 0.9rem;
+        
+        .flag-counter-label {
+            color: #94a3b8;
+            font-size: 0.8rem;
+            margin-top: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 5px;
-            font-weight: 500;
+            gap: 8px;
         }
-
-        .stats-btn.refresh {
-            background: #e2e8f0;
-            color: #1e293b;
-        }
-
-        .stats-btn.reset {
-            background: #fee2e2;
-            color: #dc2626;
-        }
-
-        .stats-footer {
-            padding: 15px;
-            background: #f1f5f9;
-            text-align: center;
-            font-size: 0.8rem;
-            color: #64748b;
-            border-top: 1px solid #e2e8f0;
+        
+        .flag-counter-label i {
+            color: #6366f1;
+            font-size: 0.9rem;
         }
     </style>
 </head>
@@ -885,6 +767,16 @@
                         </div>
                     </div>
                 </div>
+                
+                <!-- FLAG COUNTER AMÉLIORÉ (fond noir, texte gris) -->
+                <div class="flag-counter-container">
+                    <a href="http://s05.flagcounter.com/more/tn0X" target="_blank">
+                        <img src="https://s05.flagcounter.com/count2/tn0X/bg_2E2E2E/txt_6CCF21/border_76CC14/columns_5/maxflags_12/viewers_0/labels_1/pageviews_0/flags_0/percent_0/" alt="Flag Counter" border="0"></a>
+                    <div class="flag-counter-label">
+                        <i class="fas fa-globe"></i>
+                        <span>Visiteurs depuis 2026</span>
+                    </div>
+                </div>
             </div>
         </div>
         
@@ -907,151 +799,59 @@
         </div>
     </footer>
 
-    <!-- BOUTON STATISTIQUE -->
-    <div style="position: fixed; bottom: 20px; left: 20px; z-index: 99999;">
-        <button onclick="toggleStatsPanel()" class="stats-button">
-            <i class="fas fa-chart-line"></i>
-            <span>Stats</span>
-            <span class="stats-badge" id="liveCount">0</span>
-        </button>
-    </div>
-
-    <!-- PANEL STATISTIQUE -->
-    <div id="statsPanel" class="stats-panel">
-        <div class="stats-header">
-            <i class="fas fa-crown"></i>
-            <h3>Statistiques du site</h3>
-            <button onclick="closeStatsPanel()" class="stats-close">&times;</button>
-        </div>
-        
-        <div class="stats-content">
-            <div class="stats-row">
-                <span><i class="fas fa-users"></i> Visiteurs uniques</span>
-                <span class="stats-value" id="statVisitors">0</span>
-            </div>
-            <div class="stats-row">
-                <span><i class="fas fa-check-circle" style="color:#10b981;"></i> Ont accepté</span>
-                <span class="stats-value" id="statAccepts">0</span>
-            </div>
-            <div class="stats-row">
-                <span><i class="fas fa-percent"></i> Taux d'acceptation</span>
-                <span class="stats-value" id="statRate">0%</span>
-            </div>
-        </div>
-        
-        <div class="stats-actions">
-            <button onclick="refreshStats()" class="stats-btn refresh">
-                <i class="fas fa-sync-alt"></i> Actualiser
-            </button>
-            <button onclick="resetStats()" class="stats-btn reset">
-                <i class="fas fa-trash"></i> Réinitialiser
-            </button>
-        </div>
-        
-        <div class="stats-footer">
-            <i class="fas fa-clock"></i> Dernière mise à jour: <span id="statUpdate"></span>
-        </div>
-    </div>
-
-    <!-- Script principal -->
+    <!-- Scripts -->
     <script src="script.js"></script>
     
-    <!-- Script de secours pour le comptage (indépendant) -->
     <script>
-        // SYSTÈME DE COMPTAGE ULTRA SIMPLE ET FIABLE
+        // ===== SYSTÈME DE CONSENTEMENT AVEC STOCKAGE =====
         (function() {
-            console.log('🔍 Initialisation du compteur...');
+            console.log('🔍 Initialisation du consentement...');
             
-            // Clés de stockage
-            const VISITOR_KEY = 'luc_kat_visiteurs_total';
-            const SESSION_KEY = 'visiteur_compte';
+            const overlay = document.getElementById('consentOverlay');
+            const banner = document.getElementById('consentBanner');
+            const yesBtn = document.getElementById('consentYes');
+            const noBtn = document.getElementById('consentNo');
             
-            // Initialiser le compteur
-            let visiteurs = localStorage.getItem(VISITOR_KEY);
-            if (visiteurs === null) {
-                visiteurs = 0;
-                localStorage.setItem(VISITOR_KEY, '0');
-                console.log('📊 Compteur initialisé à 0');
-            } else {
-                visiteurs = parseInt(visiteurs);
-                console.log('📊 Compteur existant:', visiteurs);
+            if (!overlay || !banner || !yesBtn || !noBtn) {
+                console.log('⚠️ Éléments de consentement non trouvés');
+                return;
             }
             
-            // Vérifier si c'est une nouvelle visite dans CETTE session
-            if (!sessionStorage.getItem(SESSION_KEY)) {
-                // NOUVEAU VISITEUR !
-                visiteurs++;
-                localStorage.setItem(VISITOR_KEY, visiteurs.toString());
-                sessionStorage.setItem(SESSION_KEY, 'true');
-                
-                console.log('✅ NOUVEAU VISITEUR COMPTÉ! Total:', visiteurs);
-            } else {
-                console.log('ℹ️ Visiteur déjà compté dans cette session');
+            // 🇫🇷 VÉRIFIER SI L'UTILISATEUR A DÉJÀ ACCEPTÉ AUJOURD'HUI
+            const CONSENT_KEY = 'luc_kat_consent_date';
+            const lastConsent = localStorage.getItem(CONSENT_KEY);
+            const today = new Date().toDateString();
+            
+            if (lastConsent === today) {
+                // Déjà accepté aujourd'hui → on ne fait rien
+                console.log('ℹ️ Consentement déjà donné aujourd\'hui');
+                overlay.style.display = 'none';
+                banner.style.display = 'none';
+                return;
             }
             
-            // Fonction pour mettre à jour tous les affichages
-            function mettreAJourAffichage() {
-                const liveCount = document.getElementById('liveCount');
-                const statVisitors = document.getElementById('statVisitors');
-                const statAccepts = document.getElementById('statAccepts');
-                const statRate = document.getElementById('statRate');
-                const statUpdate = document.getElementById('statUpdate');
-                
-                const total = parseInt(localStorage.getItem(VISITOR_KEY) || '0');
-                const accepts = parseInt(localStorage.getItem('luc_kat_accepts') || '0');
-                const taux = total > 0 ? Math.round((accepts / total) * 100) : 0;
-                
-                if (liveCount) liveCount.textContent = total;
-                if (statVisitors) statVisitors.textContent = total;
-                if (statAccepts) statAccepts.textContent = accepts;
-                if (statRate) statRate.textContent = taux + '%';
-                if (statUpdate) statUpdate.textContent = new Date().toLocaleTimeString('fr-FR');
-            }
+            // Sinon, on affiche la bannière
+            console.log('🕐 Affichage de la bannière dans 1 seconde...');
             
-            // Mettre à jour immédiatement
-            mettreAJourAffichage();
+            setTimeout(() => {
+                overlay.style.display = 'block';
+                banner.style.display = 'block';
+                console.log('🟢 Bannière affichée');
+            }, 1000);
             
-            // Mettre à jour toutes les 2 secondes
-            setInterval(mettreAJourAffichage, 2000);
+            // Bouton OUI - on stocke la date et on ferme
+            yesBtn.addEventListener('click', function() {
+                console.log('👍 Clic sur OUI');
+                localStorage.setItem(CONSENT_KEY, today);
+                overlay.style.display = 'none';
+                banner.style.display = 'none';
+            });
             
-            // Exposer les fonctions globales
-            window.refreshStats = function() {
-                mettreAJourAffichage();
-                console.log('🔄 Statistiques actualisées');
-            };
-            
-            window.resetStats = function() {
-                const pwd = prompt('🔐 Mot de passe pour réinitialiser:');
-                if (pwd === 'LucKat2026') {
-                    localStorage.setItem(VISITOR_KEY, '0');
-                    localStorage.setItem('luc_kat_accepts', '0');
-                    sessionStorage.removeItem(SESSION_KEY);
-                    mettreAJourAffichage();
-                    alert('✅ Statistiques réinitialisées!');
-                    console.log('🔄 Compteur remis à zéro');
-                } else if (pwd !== null) {
-                    alert('❌ Mot de passe incorrect!');
-                }
-            };
-            
-            window.toggleStatsPanel = function() {
-                const panel = document.getElementById('statsPanel');
-                if (panel) {
-                    if (panel.style.display === 'none' || panel.style.display === '') {
-                        panel.style.display = 'block';
-                        mettreAJourAffichage();
-                    } else {
-                        panel.style.display = 'none';
-                    }
-                }
-            };
-            
-            window.closeStatsPanel = function() {
-                const panel = document.getElementById('statsPanel');
-                if (panel) panel.style.display = 'none';
-            };
-            
-            console.log('✅ Système de comptage prêt! Visiteurs actuels:', visiteurs);
+            // Bouton NON - redirection vers Google
+            noBtn.addEventListener('click', function() {
+                console.log('👎 Clic sur NON - Redirection');
+                window.location.href = 'https://www.google.com';
+            });
         })();
     </script>
 </body>
